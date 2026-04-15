@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -224,10 +224,9 @@
         .hero-image-wrapper {
             position: absolute;
             right: 5%;
-            top: 50%;
-            transform: translateY(-50%);
+            top: 25%;
             width: 45%;
-            height: 70vh;
+            height: 65vh;
             z-index: 2;
             border-radius: 20px;
             overflow: hidden;
@@ -238,6 +237,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            object-position: center 20%;
             transition: transform 0.5s ease-out;
         }
 
@@ -374,13 +374,19 @@
         }
 
         .review-card {
-            min-width: 350px;
+            min-width: 450px;
+            max-width: 500px;
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
-            padding: 30px;
+            padding: 35px;
             border-radius: var(--radius);
             border: 1px solid rgba(255, 255, 255, 0.1);
             flex-shrink: 0;
+            transition: transform 0.3s ease;
+        }
+        
+        .review-card:hover {
+            transform: scale(1.02);
         }
 
         .stars {
@@ -520,6 +526,340 @@
             
             /* Mobile Menu Toggle would go here, kept simple for Single Page request */
         }
+
+        /* =====================
+           STORE SECTIONS
+        ===================== */
+        .section-badge {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 5px 18px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 18px;
+        }
+
+        /* COLCHONES */
+        .colchones-section { background: var(--bg-light); padding: 100px 0; }
+
+        .colchones-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 70px;
+            align-items: center;
+        }
+
+        .colchones-photos {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            grid-template-rows: 300px 200px;
+            gap: 15px;
+        }
+
+        .photo-main { grid-row: span 2; }
+
+        .photo-card {
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .photo-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .photo-card:hover img { transform: scale(1.06); }
+
+        .store-list {
+            list-style: none;
+            margin: 25px 0 35px;
+        }
+
+        .store-list li {
+            padding: 10px 0;
+            color: var(--text-light);
+            font-size: 0.95rem;
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .store-list li::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--accent);
+            flex-shrink: 0;
+        }
+
+        .store-list li:last-child { border-bottom: none; }
+
+        /* JELLYCAT */
+        .jellycat-section {
+            background: linear-gradient(135deg, #FFF5F9 0%, #FEF0F8 50%, #F0F4FF 100%);
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .jellycat-section::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: rgba(233, 30, 140, 0.04);
+            top: -100px;
+            right: -100px;
+            pointer-events: none;
+        }
+
+        .jellycat-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 70px;
+            align-items: center;
+        }
+
+        .jellycat-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #E91E8C, #C2185B);
+            color: white;
+            padding: 5px 18px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 18px;
+            box-shadow: 0 4px 15px rgba(233, 30, 140, 0.3);
+        }
+
+        .jellycat-photos {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 220px 220px;
+            gap: 15px;
+        }
+
+        .jellycat-photos .photo-card:first-child {
+            grid-row: span 2;
+        }
+
+        .jellycat-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 25px 0 35px;
+        }
+
+        .jellycat-feature-item {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(233,30,140,0.07);
+            border: 1px solid rgba(233,30,140,0.08);
+        }
+
+        .jellycat-feature-item .emoji { font-size: 1.8rem; margin-bottom: 8px; }
+        .jellycat-feature-item h4 { font-size: 0.95rem; color: #3D1C5E; margin-bottom: 4px; }
+        .jellycat-feature-item p { font-size: 0.82rem; color: #8B6B99; }
+
+        /* CATEGORY GRID */
+        .categories-section { background: var(--bg-white); padding: 100px 0; }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: 360px 280px;
+            gap: 20px;
+            margin-top: 60px;
+        }
+
+        .category-card {
+            border-radius: var(--radius);
+            overflow: hidden;
+            position: relative;
+            box-shadow: var(--shadow);
+            cursor: pointer;
+        }
+
+        .category-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .category-card:hover img { transform: scale(1.08); }
+
+        .category-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(10,20,40,0.85) 0%, rgba(10,20,40,0.2) 60%, transparent 100%);
+            padding: 35px 25px 28px;
+            color: white;
+            transition: var(--transition);
+        }
+
+        .category-card:hover .category-overlay { padding-bottom: 35px; }
+
+        .category-overlay .cat-badge {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+
+        .category-overlay h3 {
+            font-size: 1.5rem;
+            color: white;
+            margin-bottom: 6px;
+        }
+
+        .category-overlay p {
+            font-size: 0.88rem;
+            opacity: 0.8;
+            line-height: 1.5;
+        }
+
+        .cat-vitrina { grid-column: span 2; }
+        .cat-libros { grid-column: span 1; }
+
+        /* DARK COLCHONES VARIANT */
+        .colchones-text h2 { font-size: 2.6rem; margin-bottom: 18px; }
+        .colchones-text p { color: var(--text-light); font-size: 1.05rem; line-height: 1.7; }
+
+        /* FEATURES SECTION ENHANCEMENTS */
+        .features { background: linear-gradient(135deg, #E6F7FB 0%, #D0EFF7 100%); }
+        .feature-card { 
+            background: white;
+            border: 1px solid rgba(0,202,236,0.15);
+            transition: all 0.4s ease;
+        }
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(0,202,236,0.25);
+            border-color: rgb(0,202,236);
+        }
+        .icon-box {
+            background: linear-gradient(135deg, rgba(0,202,236,0.12) 0%, rgba(0,180,216,0.08) 100%);
+            color: rgb(0,160,200);
+            transition: all 0.4s ease;
+        }
+        .feature-card:hover .icon-box {
+            background: linear-gradient(135deg, rgba(0,202,236,0.18) 0%, rgba(0,180,216,0.14) 100%);
+            transform: scale(1.08);
+            box-shadow: 0 6px 20px rgba(0,202,236,0.15);
+        }
+        .feature-card h3 { color: var(--primary); font-weight: 700; }
+        .feature-card p { color: var(--text-light); line-height: 1.7; }
+
+        /* JELLYCAT IMAGE ROTATION */
+        .jellycat-rotating img {
+            transition: opacity 1.5s ease-in-out;
+        }
+        .jellycat-rotating img.fade-out {
+            opacity: 0;
+        }
+
+        /* TESTIMONIALS FIX */
+        .review-card {
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            hyphens: auto;
+        }
+        .review-text {
+            white-space: normal;
+            word-break: break-word;
+        }
+
+        /* MOBILE RESPONSIVENESS */
+        @media (max-width: 968px) {
+            .hero {
+                flex-direction: column;
+                padding-top: 120px;
+                height: auto;
+                text-align: center;
+            }
+
+            .hero-content {
+                margin-bottom: 50px;
+                padding: 0 20px;
+            }
+
+            .hero-image-wrapper {
+                position: relative;
+                width: 90%;
+                height: 300px;
+                right: auto;
+                top: auto;
+                transform: none;
+                margin: 0 auto 50px;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
+            }
+
+            .g-1, .g-2, .g-3 {
+                grid-column: span 1;
+                grid-row: auto;
+                height: 300px;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .colchones-layout,
+            .jellycat-layout {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .colchones-photos {
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: 200px 160px;
+            }
+
+            .photo-main { grid-row: span 1; }
+
+            .jellycat-photos {
+                grid-template-rows: 180px 180px;
+            }
+
+            .jellycat-photos .photo-card:first-child { grid-row: span 1; }
+
+            .jellycat-features { grid-template-columns: 1fr 1fr; }
+
+            .categories-grid {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
+            }
+
+            .category-card { height: 260px; }
+            .cat-vitrina { grid-column: span 1; }
+        }
     </style>
 </head>
 <body>
@@ -531,8 +871,9 @@
                 <div class="logo">Paz Marés</div>
                 <div class="nav-links">
                     <a href="#inicio">Inicio</a>
-                    <a href="#servicios">Servicios</a>
-                    <a href="#galeria">Galería</a>
+                    <a href="#colchones">Colchones</a>
+                    <a href="#peluches">Jellycat</a>
+                    <a href="#tienda">Tienda</a>
                     <a href="#testimonios">Opiniones</a>
                     <a href="#contacto">Contacto</a>
                 </div>
@@ -560,7 +901,70 @@
 
         <!-- Using provided image 1 -->
         <div class="hero-image-wrapper reveal" style="transition-delay: 0.2s;">
-            <img src="https://autonear.replit.app/api/photo/AWn5SU49sMhAdRG6Lx4_RRxABXrerigI_r5zQ8Ugflk5Q8M1_j_lGSaJJ06pPrpSjzGB6uV226qPQ08kuAj64ZcLIGkceIpTlf7XMI434HLRpQ-7UIGtF5tLxpfpCwX7Eplz0WgzQp7u-UfZva8FbzidlSD2okIaC_VCBSNrShrIwRsLnlh9jovzRLNdNrwYWBHtTKzENKlN7EzchNK8vzxoBQghYenM7XQIn-JR4yfYPl1paukipnsvt1humMtwDjwr9kF5VRUeFzfd-I8BlAaOk5vklhUylhfuy-JnFmUnZNMvmlcBPjUnxa6k-jxr4An0U4oA89FkLRpe6xm2pYGmygnvb5TFcANouCEMZdZLdJJ-g9Kkshb-KZRP52THybVplUoXddMlF-K5LnnJMG9bw4J-itbzQ8IYz-Xy9i0AEF7S3A" class="hero-image" id="heroImg">
+            <img src="public/photos_webp/Seccion Vitrina/IMG_5063.webp" class="hero-image" id="heroImg" alt="Tienda Paz Mares Barcelona colchones y puericultura">
+        </div>
+    </section>
+
+    <!-- ===========================
+         COLCHONES SECTION
+    =========================== -->
+    <section id="colchones" class="colchones-section">
+        <div class="container">
+            <div class="colchones-layout">
+
+                <!-- FOTOS: foto vertical grande + 2 horizontales -->
+                <div class="colchones-photos reveal">
+                    <div class="photo-card photo-main">
+                        <img src="public/photos_webp/Seccion Colchones/karibian-sonpura.webp"
+                             alt="Colchones Karibian y Sonpura en Paz Marés Barcelona" loading="lazy">
+                    </div>
+                    <div class="photo-card">
+                        <img src="public/photos_webp/Seccion Colchones/karibian.webp"
+                             alt="Colchón Karibian - Paz Marés" loading="lazy">
+                    </div>
+                    <div class="photo-card">
+                        <img src="public/photos_webp/Seccion Colchones/sonpura.webp"
+                             alt="Colchón Sonpura - Paz Marés" loading="lazy">
+                    </div>
+                </div>
+
+                <!-- TEXTO -->
+                <div class="colchones-text reveal" style="transition-delay:0.15s;">
+                    <span class="section-badge">Descanso Premium</span>
+                    <h2>Karibian & Sonpura<br><span style="font-size:0.7em; color:var(--text-light); font-weight:400;">Las Mejores Marcas de Colchones</span></h2>
+                    <p>Trabajamos con <strong>Karibian</strong> y <strong>Sonpura</strong>, dos marcas españolas de referencia en descanso de calidad. Muelles ensacados, viscoelástica de alta densidad y materiales certificados para que duermas como nunca.</p>
+                    <ul class="store-list">
+                        <li><strong>Karibian:</strong> Tecnología y confort desde 1988</li>
+                        <li><strong>Sonpura:</strong> Innovación en descanso saludable</li>
+                        <li>Bases tapizadas, canapés y cabeceros a medida</li>
+                        <li>Desde 300€ hasta colchones de alta gama</li>
+                        <li>Entrega e instalación en Barcelona</li>
+                    </ul>
+                    <a href="tel:609428878" class="cta-btn">Consultar Modelos</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- VERTICALES STRIP -->
+    <section style="background: var(--primary); padding: 80px 0; overflow: hidden;">
+        <div class="container">
+            <div style="display: grid; grid-template-columns: 1.5fr 1.5fr 1.5fr 2fr; gap: 20px; height: 420px; align-items: stretch;">
+                <div class="photo-card reveal">
+                    <img src="public/photos_webp/Seccion Colchones/Verticales/karibian.webp" alt="Vista colchon Paz Mares Barcelona" loading="lazy">
+                </div>
+                <div class="photo-card reveal" style="transition-delay:0.1s; margin-top:40px; height:calc(100% - 40px);">
+                    <img src="public/photos_webp/Seccion Colchones/Verticales/sonpura.webp" alt="Detalle colchon de calidad Barcelona" loading="lazy">
+                </div>
+                <div class="photo-card reveal" style="transition-delay:0.2s;">
+                    <img src="public/photos_webp/Seccion Colchones/Verticales/vista-general-2.webp" alt="Colchon premium Paz Mares Sarria" loading="lazy">
+                </div>
+                <div class="reveal" style="transition-delay:0.3s; display:flex; flex-direction:column; justify-content:center; padding:30px 25px;">
+                    <p style="color:var(--accent); font-size:0.8rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; margin-bottom:18px;">Nuestra Selección</p>
+                    <h3 style="color:white; font-size:2.2rem; line-height:1.25; margin-bottom:22px; font-weight:700;">Cada colchón,<br>una historia<br>de descanso</h3>
+                    <p style="color:rgba(255,255,255,0.75); line-height:1.8; font-size:1rem;">Probamos personalmente cada modelo. Solo vendemos lo que nosotros mismos dormiríamos.</p>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -568,8 +972,8 @@
     <section id="servicios" class="section-padding features">
         <div class="container">
             <div class="section-header reveal">
-                <h2>Por qué elegir Paz Marés</h2>
-                <p>La diferencia está en el trato personal y la calidad del producto.</p>
+                <h2>La Diferencia Paz Marés</h2>
+                <p>Cuatro décadas de compromiso con el descanso de calidad en Barcelona.</p>
             </div>
 
             <div class="features-grid">
@@ -579,8 +983,8 @@
                         <!-- SVG Icon Star -->
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
                     </div>
-                    <h3>Asesoramiento Experto</h3>
-                    <p>"Realmente conocen su producto". Te aconsejamos honestamente para encontrar la cama, el colchón o el mueble perfecto para ti y tu presupuesto.</p>
+                    <h3>Asesoramiento Personalizado</h3>
+                    <p>Cada cliente es único. Dedicamos el tiempo necesario para entender tus necesidades reales y encontrar la solución perfecta para tu descanso.</p>
                 </div>
 
                 <!-- Feature 2 -->
@@ -589,8 +993,8 @@
                         <!-- SVG Icon Smile -->
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="15" y1="9" x2="15.01" y2="9"></line></svg>
                     </div>
-                    <h3>Servicio A+++</h3>
-                    <p>Hacemos lo imposible para que tu compra sea fácil. Desde recomendaciones personalizadas hasta ayuda con la instalación.</p>
+                    <h3>Servicio Integral</h3>
+                    <p>Desde el asesoramiento inicial hasta la entrega e instalación en tu hogar. Un acompañamiento completo que no termina con la compra.</p>
                 </div>
 
                 <!-- Feature 3 -->
@@ -599,78 +1003,152 @@
                         <!-- SVG Icon Tag -->
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
                     </div>
-                    <h3>Precios Honestos</h3>
-                    <p>Calidad superior sin precios ridículos. Encuentra grandes colchones y muebles ajustados a tu presupuesto real.</p>
+                    <h3>Selección Rigurosa</h3>
+                    <p>Solo trabajamos con marcas que cumplen nuestros estándares de calidad. Karibian, Sonpura, Jellycat... cada producto está probado y validado por nosotros.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- GALLERY SECTION -->
-    <section id="galeria" class="section-padding gallery-section">
+    <!-- TESTIMONIOS -->
+    <section id="testimonios" class="section-padding testimonials">
         <div class="container">
             <div class="section-header reveal">
-                <h2>Nuestros Espacios</h2>
-                <p>Una pequeña muestra de nuestra tienda y productos.</p>
+                <h2>Lo que dicen nuestros clientes</h2>
+                <p class="intro">Valoracion media de 4.8 estrellas en Google</p>
             </div>
-
-            <div class="gallery-grid">
-                <!-- Using Photo 4 (Large) -->
-                <div class="gallery-item g-1 reveal">
-                    <img src="https://autonear.replit.app/api/photo/AWn5SU77DnHJSTt1Bbfkl4aTJ5D2RBxXSbd5o4Karp4cU-LE_eDr7M2dtQ_PVvB17xgy67IIjp85e7ZLEsWBc69ocIWVyMiHh2lPpjW-duOcPCm7Dibv17jOylF9lTorBd_vI9vEqIzqWrepB_vQ7I4A9jhMW49n9TlCp4GngGcVhpUeCOjRABFtnDVwtrrlxVAYP6v2gVbT7lTOutVQuryXOa0IzfKW_yqHqnmvW8KxM33tIr8f7-hMcgF0E2ZFt_Btxoka6JI5QPuT_NqnVjWE-6GAc63S4G72TRpdn9eXja5eUjtaTNPC8ZfqhjP6OauLH-ZMEVcdby-blExLB6M6sip7WmpRPZU5CXkzvZpnZBKoVqDScdMswGsQSlClRXJH1ZYzoII2JzuMvsh2yOXpyuCN2NTCPiJPjmopJqdkxFqmFQ" alt="Mobiliario Dormitorio Paz Marés">
+            <div class="reviews-container reveal">
+                <div class="review-card">
+                    <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p class="review-text">"Los propietarios son muy conocedores y serviciales; hacen todo lo posible para que la compra de un colchon y un sofa sea tan facil que parece un sueno. Servicio al cliente excelente, A+++!"</p>
+                    <p class="reviewer">A.</p>
                 </div>
-                <!-- Using Photo 2 -->
-                <div class="gallery-item g-2 reveal" style="transition-delay: 0.1s;">
-                    <img src="https://autonear.replit.app/api/photo/AWn5SU4Vq6V3S1uHJzm3YDAtIQPrPZwLY1bSw6xBH20Asnf60AUF0cCI6diBX-esUuCGb4eCroSQofYSb2VHdkBWMlAd4d7cmtDVy3O4Gp8YF2ivv8gdQ50ceLOBLaexKl1pFk4UTz-0RhFsU4GSrmtDd5x6ZGlJPk4h0sOVuLfyWF7jjs7ylB2LTQ_l37K58jjglmjGhWEXBfpwkmsyJsrWmN6xCiql3R5rNabiMXsRkKRRCsqm79glFopV92inFZwQMoLBsyxwcSTRQVKbBgb7aSwMBQ6I7WgNi4qb2sQyw94dAap0ppJXG9mMLfuZBl__jIoJ8cap4lBEim4g1Pr1sNZqKkRlpwHz2_Po4oj9pYEQgPrGzHWuJNq2kUVfk7qWNP6e4BmSKD8jkdhg0yLwClKet8ojsyhl0SyUoQDLuIQP8A" alt="Detalle Tienda">
+                <div class="review-card">
+                    <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p class="review-text">"Excelente lugar para comprar una cama o colchon. Miramos muchas tiendas. Vinimos aqui y el dueno fue muy amable; encontramos un gran colchon por menos de 400 euros. Servicio fantastico."</p>
+                    <p class="reviewer">Tahnee</p>
                 </div>
-                <!-- Using Photo 3 -->
-                <div class="gallery-item g-3 reveal" style="transition-delay: 0.2s;">
-                    <img src="https://autonear.replit.app/api/photo/AWn5SU49sMhAdRG6Lx4_RRxABXrerigI_r5zQ8Ugflk5Q8M1_j_lGSaJJ06pPrpSjzGB6uV226qPQ08kuAj64ZcLIGkceIpTlf7XMI434HLRpQ-7UIGtF5tLxpfpCwX7Eplz0WgzQp7u-UfZva8FbzidlSD2okIaC_VCBSNrShrIwRsLnlh9jovzRLNdNrwYWBHtTKzENKlN7EzchNK8vzxoBQghYenM7XQIn-JR4yfYPl1paukipnsvt1humMtwDjwr9kF5VRUeFzfd-I8BlAaOk5vklhUylhfuy-JnFmUnZNMvmlcBPjUnxa6k-jxr4An0U4oA89FkLRpe6xm2pYGmygnvb5TFcANouCEMZdZLdJJ-g9Kkshb-KZRP52THybVplUoXddMlF-K5LnnJMG9bw4J-itbzQ8IYz-Xy9i0AEF7S3A" alt="Colchones y Camas">
+                <div class="review-card">
+                    <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p class="review-text">"Servicio excelente; realmente conocen sus productos. Te asesoran y hacen mas de lo necesario para ayudarte a acertar. Ademas, tienen colchones, muebles y juguetes para todos los presupuestos."</p>
+                    <p class="reviewer">Lola</p>
+                </div>
+                <div class="review-card">
+                    <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p class="review-text">"Compramos un canape, un colchon y un cabecero. No podria haber ido mejor. Productos de calidad y maxima flexibilidad para adaptarse a nuestra reforma. Lo recomiendo a cualquiera."</p>
+                    <p class="reviewer">Manuel</p>
                 </div>
             </div>
         </div>
     </section>
 
-<!-- TESTIMONIOS -->
-<section id="testimonios" class="section-padding testimonials">
-    <div class="container">
-        <div class="section-header reveal">
-            <h2>Lo que dicen nuestros clientes</h2>
-            <p class="intro">Valoración media de 4.8 estrellas en Google</p>
+    <!-- JELLYCAT / PELUCHES -->
+    <section id="peluches" class="jellycat-section">
+        <div class="container">
+            <div class="jellycat-layout">
+                <div class="reveal">
+                    <span class="jellycat-badge">Distribuidor Oficial Jellycat</span>
+                    <h2 style="font-size:2.8rem; color:#3D1C5E; line-height:1.15; margin-bottom:18px;">
+                        Los Peluches<br>mas Mimosos<br><em style="font-style:italic; color:#E91E8C;">del Mundo</em>
+                    </h2>
+                    <p style="color:#6B4C7A; font-size:1.05rem; line-height:1.75; margin-bottom:25px;">
+                        Somos distribuidores oficiales de <strong>Jellycat</strong>, la marca de peluches
+                        mas adorada y coleccionada. Cada pieza es unica, increiblemente suave
+                        y pensada para durar toda la vida.
+                    </p>
+                    <div class="jellycat-features">
+                        <div class="jellycat-feature-item">
+                            <div class="emoji">&#x1F430;</div>
+                            <h4>Bunnies Clasicos</h4>
+                            <p>El icono eterno, en todos los tamanos</p>
+                        </div>
+                        <div class="jellycat-feature-item">
+                            <div class="emoji">&#x1F338;</div>
+                            <h4>Ediciones Especiales</h4>
+                            <p>Colecciones exclusivas de temporada</p>
+                        </div>
+                        <div class="jellycat-feature-item">
+                            <div class="emoji">&#x1F381;</div>
+                            <h4>Regalo Perfecto</h4>
+                            <p>Para bebes, ninos y coleccionistas</p>
+                        </div>
+                        <div class="jellycat-feature-item">
+                            <div class="emoji">&#x2728;</div>
+                            <h4>Stock Renovado</h4>
+                            <p>Siempre hay novedades en tienda</p>
+                        </div>
+                    </div>
+                    <a href="tel:609428878" class="cta-btn" style="background:linear-gradient(135deg,#E91E8C,#C2185B); box-shadow:0 4px 20px rgba(233,30,140,0.35);">Ver Stock Disponible</a>
+                </div>
+                <div class="jellycat-photos reveal" style="transition-delay:0.15s;">
+                    <div class="photo-card">
+                        <img src="public/photos_webp/Seecion Peluches/Vertical/Jellycat.webp" alt="Peluches Jellycat en tienda Paz Mares Barcelona" loading="lazy">
+                    </div>
+                    <div class="photo-card jellycat-rotating" data-images='["public/photos_webp/Seecion Peluches/IMG_5040.webp","public/photos_webp/Seecion Peluches/IMG_5047.webp","public/photos_webp/Seecion Peluches/IMG_5048.webp","public/photos_webp/Seecion Peluches/IMG_5049.webp"]'>
+                        <img src="public/photos_webp/Seecion Peluches/IMG_5040.webp" alt="Coleccion Jellycat disponible en Paz Mares" loading="lazy">
+                    </div>
+                    <div class="photo-card jellycat-rotating" data-images='["public/photos_webp/Seecion Peluches/IMG_5044.webp","public/photos_webp/Seecion Peluches/IMG_5050.webp","public/photos_webp/Seecion Peluches/IMG_5051.webp","public/photos_webp/Seecion Peluches/IMG_5052.webp"]'>
+                        <img src="public/photos_webp/Seecion Peluches/IMG_5044.webp" alt="Peluche Jellycat premium suave" loading="lazy">
+                    </div>
+                    <div class="photo-card jellycat-rotating" data-images='["public/photos_webp/Seecion Peluches/IMG_5014.webp","public/photos_webp/Seecion Peluches/IMG_5043.webp","public/photos_webp/Seecion Peluches/IMG_5053.webp"]'>
+                        <img src="public/photos_webp/Seecion Peluches/IMG_5014.webp" alt="Surtido peluches Jellycat Sarria Barcelona" loading="lazy">
+                    </div>
+                </div>
+            </div>
         </div>
+    </section>
 
-        <div class="reviews-container reveal">
-            <!-- Reseña 1 -->
-            <div class="review-card">
-                <div class="stars">★★★★★</div>
-                <p class="review-text">"Los propietarios son muy conocedores y serviciales; hacen todo lo posible para que la compra de un colchón y un sofá sea tan fácil que parece un sueño. ¡Servicio al cliente excelente, A+++!"</p>
-                <p class="reviewer">— A LyP</p>
+    <!-- CATEGORIES GRID -->
+    <section id="tienda" class="categories-section">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2>Todo lo que Necesitas</h2>
+                <p>Descubre cada rincon de nuestra tienda, llena de productos seleccionados con mimo y criterio.</p>
             </div>
-
-            <!-- Reseña 2 -->
-            <div class="review-card">
-                <div class="stars">★★★★★</div>
-                <p class="review-text">"Excelente lugar para comprar una cama o colchón. Miramos MUCHAS tiendas… Vinimos aquí y el dueño fue muy amable; encontramos un gran colchón por menos de 400 euros. Servicio fantástico."</p>
-                <p class="reviewer">— Tahnee Nicholson</p>
-            </div>
-
-            <!-- Reseña 3 -->
-            <div class="review-card">
-                <div class="stars">★★★★★</div>
-                <p class="review-text">"Servicio excelente; realmente conocen sus productos. Te asesoran y hacen más de lo necesario para ayudarte a acertar. Además, tienen colchones, muebles y juguetes para todos los presupuestos."</p>
-                <p class="reviewer">— Lola Ribalta</p>
-            </div>
-
-            <!-- Reseña 4 -->
-            <div class="review-card">
-                <div class="stars">★★★★★</div>
-                <p class="review-text">"Compramos un canapé, un colchón y un cabecero. No podría haber ido mejor. Productos de calidad y máxima flexibilidad para adaptarse a nuestra reforma. Lo recomiendo a cualquiera."</p>
-                <p class="reviewer">— Manuel Moreno Ortega</p>
+            <div class="categories-grid">
+                <div class="category-card reveal">
+                    <img src="public/photos_webp/Seccion Cojines/foto-bonita-cojines.webp" alt="Cojines decorativos y textil hogar Paz Mares Barcelona" loading="lazy">
+                    <div class="category-overlay">
+                        <span class="cat-badge">Textil</span>
+                        <h3>Cojines &amp; Textil</h3>
+                        <p>El toque calido y definitivo para tu dormitorio perfecto</p>
+                    </div>
+                </div>
+                <div class="category-card reveal" style="transition-delay:0.1s;">
+                    <img src="public/photos_webp/Seccion Juguetes/Juguetes-1.webp" alt="Juguetes seleccionados puericultura Paz Mares Barcelona" loading="lazy">
+                    <div class="category-overlay">
+                        <span class="cat-badge">Puericultura</span>
+                        <h3>Juguetes</h3>
+                        <p>Los mejores juguetes, elegidos con criterio para los mas pequenos</p>
+                    </div>
+                </div>
+                <div class="category-card reveal" style="transition-delay:0.2s;">
+                    <img src="public/photos_webp/Seccion Libros/IMG_5058.webp" alt="Libros infantiles y cuentos tienda Paz Mares" loading="lazy">
+                    <div class="category-overlay">
+                        <span class="cat-badge">Literatura</span>
+                        <h3>Libros</h3>
+                        <p>Cuentos, albumes ilustrados e historias para todas las edades</p>
+                    </div>
+                </div>
+                <div class="category-card cat-vitrina reveal" style="transition-delay:0.1s;">
+                    <img src="public/photos_webp/Seccion Vitrina/IMG_5062.webp" alt="Vitrina de productos especiales y novedades Paz Mares" loading="lazy">
+                    <div class="category-overlay">
+                        <span class="cat-badge">Descubrelo</span>
+                        <h3>La Vitrina</h3>
+                        <p>Productos especiales y novedades - siempre hay algo de lo que enamorarse</p>
+                    </div>
+                </div>
+                <div class="category-card cat-libros reveal" style="transition-delay:0.2s;">
+                    <img src="public/photos_webp/Seecion Peluches/IMG_5043.webp" alt="Mas peluches Jellycat y otros en tienda Paz Mares" loading="lazy">
+                    <div class="category-overlay">
+                        <span class="cat-badge">Jellycat y Mas</span>
+                        <h3>Peluches</h3>
+                        <p>La mayor seleccion de peluches premium de Barcelona</p>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</section>
-
+    </section>
 
     <!-- CONTACT & MAP -->
     <section id="contacto" class="section-padding contact-section">
@@ -785,7 +1263,56 @@
                 });
             }
 
-            // 3. Smooth Scrolling for Anchor Links
+            // 3. Jellycat Image Rotation
+            const rotatingCards = document.querySelectorAll('.jellycat-rotating');
+            rotatingCards.forEach(card => {
+                const images = JSON.parse(card.getAttribute('data-images'));
+                const img = card.querySelector('img');
+                let currentIndex = 0;
+                
+                setInterval(() => {
+                    img.classList.add('fade-out');
+                    setTimeout(() => {
+                        currentIndex = (currentIndex + 1) % images.length;
+                        img.src = images[currentIndex];
+                        img.classList.remove('fade-out');
+                    }, 750);
+                }, 8000 + Math.random() * 3000); // Random interval between 8-11 seconds
+            });
+
+            // 4. Auto-scroll Testimonials with Pause on Hover
+            const reviewsContainer = document.querySelector('.reviews-container');
+            if (reviewsContainer) {
+                let scrollInterval;
+                let isScrolling = true;
+                
+                function startAutoScroll() {
+                    scrollInterval = setInterval(() => {
+                        if (isScrolling) {
+                            const scrollAmount = reviewsContainer.scrollLeft + 1;
+                            const maxScroll = reviewsContainer.scrollWidth - reviewsContainer.clientWidth;
+                            
+                            if (scrollAmount >= maxScroll) {
+                                reviewsContainer.scrollLeft = 0;
+                            } else {
+                                reviewsContainer.scrollLeft = scrollAmount;
+                            }
+                        }
+                    }, 20);
+                }
+                
+                reviewsContainer.addEventListener('mouseenter', () => {
+                    isScrolling = false;
+                });
+                
+                reviewsContainer.addEventListener('mouseleave', () => {
+                    isScrolling = true;
+                });
+                
+                startAutoScroll();
+            }
+
+            // 5. Smooth Scrolling for Anchor Links
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     e.preventDefault();
