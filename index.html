@@ -4,14 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Paz Marés - Especialistas en descanso y mobiliario en Barcelona. Colchones, camas y servicio personalizado.">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
     <title>Paz Marés | Descanso y Mobiliario en Barcelona</title>
     <style>
         /* RESET & BASE STYLES */
         :root {
             --primary: #1A365D; /* Deep Navy - Trust, Sleep, Night */
             --primary-light: #2C5282;
-            --accent: #D69E2E; /* Muted Gold - Quality, Premium */
-            --accent-hover: #B7791F;
+            --accent: #0bc0df; /* Celeste Intenso */
+            --accent-hover: #09a8c2;
             --bg-light: #F7FAFC; /* Soft cloud white */
             --bg-white: #FFFFFF;
             --text-main: #2D3748;
@@ -95,9 +96,8 @@
             left: 0;
             width: 100%;
             z-index: 1000;
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            background: #ffffff;
+            backdrop-filter: none;
             border-bottom: 1px solid rgba(0,0,0,0.05);
             transition: var(--transition);
         }
@@ -110,11 +110,19 @@
         }
 
         .logo {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--primary);
-            letter-spacing: -0.5px;
+            display: inline-block;
+            background: #13C1E1;
+            color: #ffffff;
+            /* Tipografía y peso exacto */
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.0rem; /* Ajusta este valor al tamaño que necesites */
+            font-weight:300;
+            letter-spacing: 0.28em; /* Es más ancho que 5px */
+    
             text-transform: uppercase;
+            padding: 8px 18px;
+            border-radius: 6px;
+            line-height: 1;
         }
 
         .nav-links {
@@ -151,94 +159,132 @@
             border-radius: 50px;
             font-weight: 600;
             transition: var(--transition);
-            box-shadow: 0 4px 14px rgba(214, 158, 46, 0.4);
+            box-shadow: 0 4px 14px rgba(11, 192, 223, 0.4);
         }
 
         .cta-btn:hover {
             background-color: var(--accent-hover);
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(214, 158, 46, 0.6);
+            box-shadow: 0 6px 20px rgba(11, 192, 223, 0.6);
         }
 
-        /* HERO SECTION */
+        /* HERO SECTION — foto de fondo full-width, texto encima */
         .hero {
             position: relative;
-            height: 100vh;
-            min-height: 600px;
+            height: 85vh;
+            min-height: 560px;
             display: flex;
             align-items: center;
             overflow: hidden;
-            background: var(--bg-light);
+            padding-top: 80px; /* altura de la navbar fija */
         }
 
-        /* Interactive Background Elements */
-        .mouse-shape {
+        /* Foto de fondo */
+        .hero-bg {
             position: absolute;
-            border-radius: 50%;
-            filter: blur(60px);
-            opacity: 0.6;
-            z-index: 1;
-            transition: transform 0.1s linear; /* Smooth follow */
+            inset: 0;
+            z-index: 0;
         }
 
-        .shape-1 {
-            width: 400px;
-            height: 400px;
-            background: #EBF4FF;
-            top: -100px;
-            right: -100px;
+        .hero-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 30%;
         }
 
-        .shape-2 {
-            width: 300px;
-            height: 300px;
-            background: #FEFCBF;
-            bottom: 10%;
-            left: 5%;
+        /* Overlay degradado: oscuro abajo-izquierda, transparente arriba-derecha */
+        .hero-bg::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                105deg,
+                rgba(11,32,72,0.75) 0%,
+                rgba(11,32,72,0.45) 50%,
+                rgba(11,32,72,0.15) 100%
+            );
         }
+
+        /* Shapes decorativos (mantenemos para no romper JS) */
+        .mouse-shape { display: none; }
+        .shape-1, .shape-2 { display: none; }
 
         .hero-content {
             position: relative;
             z-index: 2;
-            max-width: 600px;
+            max-width: 640px;
         }
 
         .hero h1 {
-            font-size: 3.5rem;
+            font-size: 3.8rem;
             margin-bottom: 20px;
-            line-height: 1.1;
-            color: var(--primary);
+            line-height: 1.08;
+            color: white;
+            text-shadow: 0 2px 20px rgba(0,0,0,0.25);
         }
 
         .hero h1 span {
-            color: var(--accent);
+            color: #0bc0df;
         }
 
         .hero p {
-            font-size: 1.2rem;
-            color: var(--text-light);
+            font-size: 1.15rem;
+            color: rgba(255,255,255,0.85);
             margin-bottom: 40px;
-            max-width: 480px;
+            max-width: 500px;
         }
 
-        .hero-image-wrapper {
+        /* El wrapper de la imagen antigua ya no se usa visualmente */
+        .hero-image-wrapper { display: none; }
+        .hero-image { display: none; }
+
+        /* Flecha de scroll animada */
+        .hero-scroll {
             position: absolute;
-            right: 5%;
-            top: 25%;
-            width: 45%;
-            height: 65vh;
-            z-index: 2;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: var(--shadow-hover);
+            bottom: 28px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            text-decoration: none;
         }
 
-        .hero-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center 20%;
-            transition: transform 0.5s ease-out;
+        .hero-scroll span {
+            font-size: 0.68rem;
+            font-weight: 600;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.7);
+        }
+
+        .hero-scroll-arrow {
+            width: 36px;
+            height: 36px;
+            border: 2px solid rgba(255,255,255,0.4);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: bounceDown 1.8s ease-in-out infinite;
+        }
+
+        .hero-scroll-arrow svg {
+            stroke: rgba(255,255,255,0.8);
+        }
+
+        @keyframes bounceDown {
+            0%, 100% { transform: translateY(0); }
+            50%       { transform: translateY(7px); }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.4rem; }
+            .hero p { font-size: 1rem; }
         }
 
         /* FEATURES / INFO */
@@ -351,62 +397,103 @@
             overflow: hidden;
         }
 
-        .testimonials h2 {
-            color: var(--text-white);
-        }
-
-        .testimonials p.intro {
-            color: rgba(255, 255, 255, 0.7);
-        }
+        .testimonials h2 { color: var(--text-white); }
+        .testimonials p.intro { color: rgba(255,255,255,0.7); }
 
         .reviews-container {
-            display: flex;
-            gap: 30px;
-            overflow-x: auto;
-            padding-bottom: 40px;
-            scroll-behavior: smooth;
-            -ms-overflow-style: none;  /* IE and Edge */
-            scrollbar-width: none;  /* Firefox */
-        }
-
-        .reviews-container::-webkit-scrollbar {
-            display: none;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            margin-top: 40px;
         }
 
         .review-card {
-            min-width: 450px;
-            max-width: 500px;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            padding: 35px;
-            border-radius: var(--radius);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            flex-shrink: 0;
-            transition: transform 0.3s ease;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.12);
+            padding: 32px;
+            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            transition: transform 0.3s ease, background 0.3s ease;
         }
-        
+
         .review-card:hover {
-            transform: scale(1.02);
+            transform: translateY(-4px);
+            background: rgba(255,255,255,0.13);
         }
 
         .stars {
-            color: var(--accent);
-            margin-bottom: 15px;
-            font-size: 1.2rem;
+            color: #fbbf24;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
         }
 
         .review-text {
             font-size: 1rem;
             font-style: italic;
-            margin-bottom: 20px;
-            line-height: 1.6;
-            opacity: 0.9;
+            line-height: 1.7;
+            color: rgba(255,255,255,0.88);
+            flex: 1;
         }
 
         .reviewer {
-            font-weight: 600;
-            font-size: 0.9rem;
+            font-weight: 700;
+            font-size: 0.88rem;
+            color: #0bc0df;
+            letter-spacing: 0.5px;
+        }
+
+        @media (max-width: 768px) {
+            .reviews-container { grid-template-columns: 1fr; }
+        }
+
+        .ilustracion-descanso {
+            display: flex;
+            justify-content: center;
+            align-items: center;
             opacity: 0.8;
+            margin: 0 auto;
+        }
+
+        /* MOBILIARIO HIGHLIGHTS */
+        .mobiliario-highlights {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin: 24px 0 32px;
+        }
+
+        .mobiliario-hl-item {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+
+        .mobiliario-hl-icon {
+            flex-shrink: 0;
+            width: 44px;
+            height: 44px;
+            background: rgba(11,192,223,0.12);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0bc0df;
+        }
+
+        .mobiliario-hl-item strong {
+            display: block;
+            color: var(--primary);
+            font-size: 0.95rem;
+            margin-bottom: 4px;
+        }
+
+        .mobiliario-hl-item p {
+            margin: 0;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            line-height: 1.55;
         }
 
         /* CONTACT & MAP */
@@ -769,12 +856,1073 @@
         .feature-card h3 { color: var(--primary); font-weight: 700; }
         .feature-card p { color: var(--text-light); line-height: 1.7; }
 
-        /* JELLYCAT IMAGE ROTATION */
+        /* ========================
+           MEGA MENU
+        ======================== */
+        .nav-item {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-item > a {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+        }
+
+        .chevron {
+            width: 12px;
+            height: 12px;
+            transition: transform 0.2s ease;
+            flex-shrink: 0;
+        }
+
+        .nav-item:hover > a .chevron {
+            transform: rotate(180deg);
+        }
+
+        .dropdown {
+            position: absolute;
+            top: calc(100% + 22px);
+            left: 50%;
+            transform: translateX(-50%);
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.12), 0 0 0 1px rgba(0,0,0,0.05);
+            padding: 22px 26px;
+            min-width: 240px;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity 0.22s ease, top 0.22s ease, visibility 0s linear 0.22s;
+            z-index: 500;
+        }
+
+        .nav-item:hover .dropdown {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            top: calc(100% + 6px);
+            transition: opacity 0.22s ease, top 0.22s ease;
+        }
+
+        .dropdown.multi-col {
+            min-width: 360px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0 24px;
+        }
+
+        .dropdown-col h5 {
+            font-size: 0.67rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: #0bc0df;
+            margin: 0 0 8px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid rgba(11,192,223,0.2);
+        }
+
+        .dropdown-col ul + h5,
+        .dropdown-col h5 ~ h5 {
+            margin-top: 12px;
+        }
+
+        .dropdown-col ul {
+            margin-bottom: 2px;
+        }
+
+        .dropdown-col ul li a {
+            display: block;
+            padding: 4px 0;
+            font-size: 0.875rem;
+            color: var(--text-main);
+            font-weight: 400;
+            transition: color 0.18s, padding-left 0.18s;
+        }
+
+        .dropdown-col ul li a:hover {
+            color: #0bc0df;
+            padding-left: 5px;
+        }
+
+        .dropdown-col ul li a::after { display: none !important; }
+
+        /* ========================
+           QUIÉNES SOMOS
+        ======================== */
+        .quienes-section {
+            background: var(--bg-white);
+            border-bottom: 1px solid rgba(11,192,223,0.12);
+        }
+
+        /* Layout 2 columnas: foto izq + texto der */
+        .quienes-layout {
+            display: grid;
+            grid-template-columns: 420px 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .quienes-photo {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.13);
+            height: 520px;
+        }
+
+        .quienes-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .quienes-inner {
+            text-align: left;
+        }
+
+        @media (max-width: 968px) {
+            .quienes-layout { grid-template-columns: 1fr; gap: 36px; }
+            .quienes-photo { height: 280px; }
+            .quienes-inner { text-align: center; }
+        }
+
+        .quienes-inner h2 {
+            font-size: 2.3rem;
+            margin: 14px 0 20px;
+            color: var(--primary);
+        }
+
+        .quienes-divider {
+            width: 54px;
+            height: 3px;
+            background: #0bc0df;
+            border-radius: 2px;
+            margin: 0 auto 28px;
+        }
+
+        .quienes-inner > p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            line-height: 1.9;
+        }
+
+        .quienes-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 52px;
+        }
+
+        .quienes-stat {
+            padding: 32px 20px;
+            border-radius: var(--radius);
+            background: var(--bg-light);
+            border: 1px solid rgba(11,192,223,0.12);
+            transition: var(--transition);
+        }
+
+        .quienes-stat:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 35px rgba(11,192,223,0.12);
+            border-color: rgba(11,192,223,0.3);
+        }
+
+        .quienes-stat .stat-number {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: #0bc0df;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .quienes-stat .stat-label {
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+        }
+
+        .quienes-stat .stat-desc {
+            font-size: 0.82rem;
+            color: var(--text-light);
+            line-height: 1.5;
+        }
+
+        @media (max-width: 968px) {
+            .quienes-stats { grid-template-columns: 1fr; gap: 16px; }
+        }
+
+        /* ========================
+           MOBILIARIO
+        ======================== */
+        .mobiliario-section {
+            background: var(--bg-white);
+            padding: 100px 0;
+        }
+
+        /* ========================
+           DESCANSO (renamed from colchones)
+        ======================== */
+        .descanso-section { background: var(--bg-light); padding: 100px 0; }
+
+        /* ========================
+           DESCANSO EXTRA CARDS
+        ======================== */
+        .descanso-extra-section {
+            background: var(--bg-white);
+            padding: 80px 0;
+        }
+
+        .descanso-extra-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 28px;
+            margin-top: 48px;
+        }
+
+        .descanso-extra-card {
+            background: var(--bg-light);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(0,0,0,0.06);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .descanso-extra-card:hover {
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-5px);
+        }
+
+        .dcard-img {
+            height: 210px;
+            overflow: hidden;
+        }
+
+        .dcard-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .descanso-extra-card:hover .dcard-img img { transform: scale(1.06); }
+
+        .dcard-body {
+            padding: 26px 28px 30px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .dcard-tag {
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: #0bc0df;
+            margin-bottom: 8px;
+        }
+
+        .dcard-body h3 {
+            font-size: 1.25rem;
+            color: var(--primary);
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .dcard-body p {
+            font-size: 0.875rem;
+            color: var(--text-light);
+            line-height: 1.85;
+            flex: 1;
+        }
+
+        .dcard-link {
+            margin-top: 18px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #0bc0df;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: gap 0.2s;
+        }
+
+        .dcard-link:hover { gap: 9px; }
+        .dcard-link::after { display: none !important; }
+
+        /* ========================
+           COMPLEMENTOS SECTION
+        ======================== */
+        .complementos-section {
+            background: var(--bg-light);
+            padding: 80px 0;
+            border-top: 1px solid rgba(11,192,223,0.1);
+        }
+
+        .complementos-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            margin-top: 48px;
+        }
+
+        .complemento-card {
+            background: var(--bg-white);
+            border-radius: 16px;
+            padding: 36px 32px;
+            border: 1px solid rgba(11,192,223,0.1);
+            transition: var(--transition);
+        }
+
+        .complemento-card:hover {
+            box-shadow: 0 15px 40px rgba(11,192,223,0.1);
+            border-color: rgba(11,192,223,0.3);
+            transform: translateY(-4px);
+        }
+
+        .complemento-icon {
+            width: 54px;
+            height: 54px;
+            background: rgba(11,192,223,0.1);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+        }
+
+        .complemento-card h3 {
+            font-size: 1.15rem;
+            color: var(--primary);
+            font-weight: 700;
+            margin-bottom: 14px;
+        }
+
+        .complemento-card p {
+            font-size: 0.875rem;
+            color: var(--text-light);
+            line-height: 1.9;
+        }
+
+        .complemento-card ul {
+            margin-top: 12px;
+            list-style: none;
+        }
+
+        .complemento-card ul li {
+            font-size: 0.875rem;
+            color: var(--text-light);
+            padding: 4px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .complemento-card ul li::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: #0bc0df;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        /* ========================
+           JUGUETES EXTRA CATEGORIES
+        ======================== */
+        .juguetes-extra-section {
+            background: var(--bg-light);
+            padding: 80px 0;
+            border-top: 1px solid rgba(0,0,0,0.06);
+        }
+
+        .juguetes-extra-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 48px;
+        }
+
+        .juguete-cat-card {
+            background: var(--bg-white);
+            border-radius: 16px;
+            padding: 36px 28px;
+            border: 1px solid rgba(61,28,94,0.08);
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .juguete-cat-card:hover {
+            box-shadow: 0 15px 40px rgba(233,30,140,0.1);
+            border-color: rgba(233,30,140,0.2);
+            transform: translateY(-5px);
+        }
+
+        .jcat-emoji {
+            font-size: 2.8rem;
+            margin-bottom: 18px;
+            display: block;
+        }
+
+        .juguete-cat-card h3 {
+            font-size: 1.15rem;
+            color: var(--primary);
+            font-weight: 700;
+            margin-bottom: 14px;
+        }
+
+        .juguete-cat-card p {
+            font-size: 0.875rem;
+            color: var(--text-light);
+            line-height: 1.85;
+        }
+
+        /* ========================
+           DESCANSO INTRO HORIZONTAL
+        ======================== */
+        .descanso-section.descanso-intro { padding: 70px 0 60px; }
+
+        .descanso-intro-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 60px;
+        }
+
+        .descanso-intro-left { flex: 1; }
+
+        .descanso-intro-left h2 {
+            font-size: 2.4rem;
+            color: var(--primary);
+            line-height: 1.2;
+            margin: 12px 0 16px;
+        }
+
+        .descanso-intro-left p {
+            font-size: 1rem;
+            color: var(--text-light);
+            line-height: 1.8;
+            max-width: 520px;
+        }
+
+        .descanso-intro-pills {
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            min-width: 220px;
+        }
+
+        .descanso-pill {
+            padding: 12px 24px;
+            border-radius: 50px;
+            border: 1.5px solid rgba(11,192,223,0.35);
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.88rem;
+            transition: var(--transition);
+            text-align: center;
+            background: transparent;
+        }
+
+        .descanso-pill:hover {
+            background: #0bc0df;
+            color: white;
+            border-color: #0bc0df;
+            transform: translateX(5px);
+        }
+
+        .descanso-pill::after { display: none !important; }
+
+        /* ========================
+           PACKS PROMO BANNER
+        ======================== */
+        .packs-promo {
+            background: var(--bg-light);
+            padding: 56px 0;
+            overflow: hidden;
+        }
+
+        .packs-promo-card {
+            background: linear-gradient(135deg, var(--primary) 0%, #1e2d5a 100%);
+            border-radius: 24px 0 0 24px;   /* recorte: solo curvo en el lado izquierdo */
+            margin-left: calc((100vw - 1100px) / 2);  /* arranca desde el borde del container */
+            padding: 56px 64px 56px 56px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* decoración sutil: círculo difuso en esquina */
+        .packs-promo-card::before {
+            content: '';
+            position: absolute;
+            top: -80px; right: -80px;
+            width: 320px; height: 320px;
+            border-radius: 50%;
+            background: rgba(11,192,223,0.08);
+            pointer-events: none;
+        }
+
+        .packs-promo-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 48px;
+            position: relative; /* encima del ::before */
+        }
+
+        .packs-promo-label {
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .packs-promo-inner h3 {
+            font-size: 2.1rem;
+            color: white;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 12px;
+        }
+
+        .packs-promo-inner > div > p {
+            color: rgba(255,255,255,0.72);
+            font-size: 0.97rem;
+            line-height: 1.75;
+            max-width: 520px;
+        }
+
+        .packs-promo-cta { flex-shrink: 0; text-align: center; }
+
+        .packs-promo-cta small {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.45);
+        }
+
+        @media (max-width: 1140px) {
+            .packs-promo-card {
+                margin-left: 24px;
+                border-radius: 20px 0 0 20px;
+                padding: 44px 36px 44px 44px;
+            }
+        }
+
+        /* ========================
+           COMPLEMENTO CARD CON FOTO
+        ======================== */
+        .complemento-card--photo { padding: 0; overflow: hidden; }
+
+        .complemento-photo {
+            width: 100%;
+            height: 180px;
+            overflow: hidden;
+        }
+
+        .complemento-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.45s ease;
+        }
+
+        .complemento-card--photo:hover .complemento-photo img { transform: scale(1.06); }
+
+        .complemento-card--photo h3,
+        .complemento-card--photo p,
+        .complemento-card--photo ul { padding: 0 22px; }
+        .complemento-card--photo h3 { padding-top: 18px; }
+        .complemento-card--photo ul  { padding-bottom: 18px; }
+        .complemento-card--photo p:last-child { padding-bottom: 18px; }
+
+        /* ========================
+           JUGUETES HERO SLIDESHOW
+        ======================== */
+        .juguetes-hero-section {
+            position: relative;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .juguetes-slides {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+        }
+
+        .juguetes-slide {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.2s ease;
+        }
+
+        .juguetes-slide.active { opacity: 1; }
+
+        .juguetes-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(11,32,72,0.82) 0%, rgba(11,32,72,0.55) 100%);
+            z-index: 1;
+        }
+
+        .juguetes-hero-inner {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 80px 0;
+        }
+
+        .juguetes-hero-inner h2 {
+            font-size: 3rem;
+            color: white;
+            line-height: 1.15;
+            margin: 16px 0 20px;
+        }
+
+        .juguetes-hero-inner h2 em {
+            font-style: italic;
+            color: #0bc0df;
+        }
+
+        .juguetes-hero-inner p {
+            color: rgba(255,255,255,0.78);
+            font-size: 1.05rem;
+            line-height: 1.75;
+            max-width: 620px;
+            margin: 0 auto 28px;
+        }
+
+        .juguetes-hero-tags {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 32px;
+        }
+
+        .juguetes-hero-tags span {
+            background: rgba(255,255,255,0.12);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+            padding: 7px 18px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            backdrop-filter: blur(4px);
+        }
+
+        .juguetes-dots {
+            position: absolute;
+            bottom: 22px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 3;
+        }
+
+        .juguetes-dot {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.35);
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .juguetes-dot.active {
+            background: #0bc0df;
+            transform: scale(1.3);
+        }
+
+        @media (max-width: 768px) {
+            .juguetes-hero-section { min-height: 500px; }
+            .juguetes-hero-inner h2 { font-size: 2rem; }
+            .juguetes-hero-inner { padding: 60px 0; }
+        }
+
+        /* ========================
+           SECCIÓN HISTORIA (CADA COLCHÓN)
+        ======================== */
+        .historia-section {
+            background-color: var(--primary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .historia-section::before {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(11,192,223,0.08) 0%, rgba(26,54,93,0) 70%);
+            top: -200px;
+            left: -200px;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .historia-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .historia-gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            padding: 20px 0;
+        }
+
+        .historia-img {
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            transition: transform 0.4s ease;
+        }
+
+        .historia-img:hover {
+            transform: scale(1.03) translateY(-5px) !important;
+            z-index: 2;
+        }
+
+        .historia-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            aspect-ratio: 4/7;
+        }
+
+        .historia-img.img-up  { transform: translateY(-25px); }
+        .historia-img.img-down { transform: translateY(25px); }
+
+        .historia-text { padding-left: 20px; }
+
+        .historia-text h2 {
+            color: var(--text-white);
+            font-size: 3rem;
+            line-height: 1.15;
+            margin: 15px 0 20px;
+        }
+
+        .historia-divider {
+            width: 60px;
+            height: 3px;
+            background: var(--accent);
+            margin-bottom: 25px;
+            border-radius: 2px;
+        }
+
+        .historia-text p {
+            color: rgba(255,255,255,0.8);
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+
+        .historia-text strong { color: white; }
+
+        @media (max-width: 968px) {
+            .historia-layout { grid-template-columns: 1fr; gap: 40px; }
+            .historia-text { padding-left: 0; text-align: center; }
+            .historia-divider { margin: 0 auto 25px; }
+            .historia-gallery { gap: 10px; }
+            .historia-img.img-up, .historia-img.img-down { transform: translateY(0); }
+            .historia-img:nth-child(2) { transform: translateY(-15px); }
+            .historia-text h2 { font-size: 2.2rem; }
+        }
+
+        /* ========================
+           FEATURES COMPACT STRIP
+        ======================== */
+        .features-compact-section {
+            background: var(--bg-white);
+            padding: 52px 0;
+            border-top: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .features-compact-header {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        .features-compact-header h2 {
+            font-size: 1.4rem;
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .features-compact-header p {
+            font-size: 0.875rem;
+            color: var(--text-light);
+            margin-top: 5px;
+        }
+
+        .features-compact-strip {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(0,0,0,0.07);
+        }
+
+        .fci-item {
+            padding: 26px 24px;
+            background: var(--bg-light);
+            border-right: 1px solid rgba(0,0,0,0.07);
+            transition: background 0.3s;
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+        }
+
+        .fci-item:last-child { border-right: none; }
+        .fci-item:hover { background: var(--bg-white); }
+
+        .fci-icon { color: #0bc0df; flex-shrink: 0; margin-top: 2px; }
+
+        .fci-text h4 {
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 4px;
+        }
+
+        .fci-text p {
+            font-size: 0.775rem;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .descanso-extra-grid,
+            .complementos-grid { grid-template-columns: 1fr; }
+            .juguetes-extra-grid { grid-template-columns: 1fr; }
+            .descanso-intro-inner { flex-direction: column; gap: 36px; }
+            .descanso-intro-pills { flex-direction: row; flex-wrap: wrap; min-width: unset; justify-content: center; }
+            .packs-promo-card { margin-left: 16px; border-radius: 20px 0 0 20px; padding: 36px 24px 36px 28px; }
+            .packs-promo-inner { flex-direction: column; text-align: center; }
+            .features-compact-strip { grid-template-columns: 1fr; border-radius: 16px; }
+            .fci-item { border-right: none; border-bottom: 1px solid rgba(0,0,0,0.07); }
+            .fci-item:last-child { border-bottom: none; }
+        }
+
+        /* JELLYCAT IMAGE ROTATION — kept for legacy */
         .jellycat-rotating img {
             transition: opacity 1.5s ease-in-out;
         }
         .jellycat-rotating img.fade-out {
             opacity: 0;
+        }
+
+        /* ========================
+           FLOATING OFFER CARD
+        ======================== */
+        .offer-card {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 290px;
+            background: #ffffff;
+            border-radius: 18px;
+            box-shadow: 0 16px 48px rgba(0,0,0,0.18);
+            overflow: hidden;
+            z-index: 9998;
+            transform: translateY(120px);
+            opacity: 0;
+            transition: transform 0.5s cubic-bezier(0.175,0.885,0.32,1.1), opacity 0.5s ease;
+            pointer-events: none;
+        }
+
+        .offer-card.visible {
+            transform: translateY(0);
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .offer-card.dismissed {
+            transform: translateY(120px);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .offer-card-header {
+            background: linear-gradient(135deg, #1A365D 0%, #0bc0df 100%);
+            padding: 14px 18px 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .offer-card-header span {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.85);
+        }
+
+        .offer-card-close {
+            background: none;
+            border: none;
+            color: rgba(255,255,255,0.7);
+            cursor: pointer;
+            padding: 0;
+            line-height: 1;
+            transition: color 0.2s;
+        }
+
+        .offer-card-close:hover { color: white; }
+
+        .offer-card-body {
+            padding: 18px 20px 20px;
+        }
+
+        .offer-card-body h4 {
+            font-size: 1rem;
+            color: var(--primary);
+            margin-bottom: 6px;
+            line-height: 1.3;
+        }
+
+        .offer-card-body p {
+            font-size: 0.82rem;
+            color: var(--text-light);
+            line-height: 1.5;
+            margin-bottom: 14px;
+        }
+
+        .offer-price-row {
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .offer-price-new {
+            font-size: 1.9rem;
+            font-weight: 800;
+            color: #0bc0df;
+            line-height: 1;
+        }
+
+        .offer-price-old {
+            font-size: 1rem;
+            color: var(--text-light);
+            text-decoration: line-through;
+        }
+
+        .offer-badge {
+            background: #fee2e2;
+            color: #dc2626;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 50px;
+            letter-spacing: 0.5px;
+        }
+
+        .offer-card-cta {
+            display: block;
+            text-align: center;
+            background: #1A365D;
+            color: white;
+            padding: 11px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 0.88rem;
+            transition: background 0.2s;
+        }
+
+        .offer-card-cta:hover { background: #0bc0df; }
+
+        .offer-card-fine {
+            font-size: 0.72rem;
+            color: var(--text-light);
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        /* ========================
+           FLOATING CONTACT MENU
+        ======================== */
+        .floating-menu-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            z-index: 9999;
+        }
+
+        .float-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .main-btn {
+            background-color: #13C1E1;
+            z-index: 2;
+        }
+
+        .main-btn:hover { transform: scale(1.05); }
+
+        .floating-items {
+            display: flex;
+            gap: 15px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateX(40px);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            pointer-events: none;
+        }
+
+        .floating-menu-container:hover .floating-items {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(0);
+            pointer-events: auto;
+        }
+
+        .whatsapp-btn { background-color: #25D366; }
+        .phone-btn    { background-color: #1A365D; }
+        .email-btn    { background-color: #ff5722; }
+
+        .floating-items .float-btn:hover {
+            transform: scale(1.1) translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
         }
 
         /* TESTIMONIALS FIX */
@@ -868,12 +2016,87 @@
     <header id="navbar">
         <div class="container">
             <nav>
-                <div class="logo">Paz Marés</div>
+                <a href="#inicio" class="logo">
+                    <img src="public/logo/logo.png" alt="Paz Marés" style="height:16px; display:block;">
+                </a>
                 <div class="nav-links">
                     <a href="#inicio">Inicio</a>
-                    <a href="#colchones">Colchones</a>
-                    <a href="#peluches">Jellycat</a>
-                    <a href="#tienda">Tienda</a>
+
+                    <!-- DESCANSO MEGA MENU -->
+                    <div class="nav-item">
+                        <a href="#descanso">Descanso
+                            <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </a>
+                        <div class="dropdown multi-col">
+                            <div class="dropdown-col">
+                                <h5>Colchones</h5>
+                                <ul>
+                                    <li><a href="#colchones">Muelles Ensacados</a></li>
+                                    <li><a href="#colchones">Tecnología HR</a></li>
+                                    <li><a href="#colchones">Látex</a></li>
+                                </ul>
+                                <h5>Sillones y Sofás Cama</h5>
+                                <ul><li><a href="#colchones">Ver modelos</a></li></ul>
+                                <h5>Canapés / Bases</h5>
+                                <ul><li><a href="#colchones">Ver modelos</a></li></ul>
+                                <h5>Cabeceros</h5>
+                                <ul><li><a href="#colchones">Ver colección</a></li></ul>
+                                <h5>Packs</h5>
+                                <ul><li><a href="#packs">Base + Colchón</a></li></ul>
+                            </div>
+                            <div class="dropdown-col">
+                                <h5>Complementos</h5>
+                                <ul>
+                                    <li><a href="#complementos">Almohadas</a></li>
+                                    <li><a href="#complementos">Protectores de colchón (Velfont)</a></li>
+                                    <li><a href="#complementos">Nórdicos</a></li>
+                                </ul>
+                                <h5>Ropa de Cama</h5>
+                                <ul>
+                                    <li><a href="#complementos">Sábanas 300 hilos blancas</a></li>
+                                    <li><a href="#complementos">Fundas almohada 300 hilos</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- MOBILIARIO DROPDOWN -->
+                    <div class="nav-item">
+                        <a href="#mobiliario">Mobiliario
+                            <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </a>
+                        <div class="dropdown">
+                            <div class="dropdown-col">
+                                <h5>Dormitorios Juveniles</h5>
+                                <ul>
+                                    <li><a href="#mobiliario">Marca ANTAIX</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- JUGUETES DROPDOWN -->
+                    <div class="nav-item">
+                        <a href="#juguetes">Juguetes
+                            <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </a>
+                        <div class="dropdown">
+                            <div class="dropdown-col">
+                                <h5>Peluches</h5>
+                                <ul>
+                                    <li><a href="#juguetes">Jellycat</a></li>
+                                    <li><a href="#juguetes">Bon Ton Toys</a></li>
+                                </ul>
+                                <h5>Más categorías</h5>
+                                <ul>
+                                    <li><a href="#juguetes">Educativos</a></li>
+                                    <li><a href="#juguetes">Imitación</a></li>
+                                    <li><a href="#juguetes">Libros</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
                     <a href="#testimonios">Opiniones</a>
                     <a href="#contacto">Contacto</a>
                 </div>
@@ -884,128 +2107,425 @@
 
     <!-- HERO SECTION -->
     <section id="inicio" class="hero">
-        <!-- Decorative Mouse Moving Elements -->
-        <div class="mouse-shape shape-1" data-speed="2"></div>
-        <div class="mouse-shape shape-2" data-speed="-1.5"></div>
+        <!-- Foto de fondo full-width -->
+        <div class="hero-bg">
+            <img src="public/photos_ai/vista-general-hero.png" id="heroImg" alt="Tienda Paz Marés Barcelona">
+        </div>
 
         <div class="container">
             <div class="hero-content reveal">
                 <h1>Calidad y Confort <br><span>Para tu Descanso</span></h1>
-                <p>Expertos en colchones, muebles y servicio personalizado en el corazón de Sarrià-Sant Gervasi. Más de 40 años creando hogares.</p>
-                <div style="display: flex; gap: 15px; flex-wrap: wrap; justify-content: center;">
+                <p>Especialistas en descanso, mobiliario juvenil y juguetes en el corazón de Sarrià-Sant Gervasi. Más de 56 años cuidando a las familias de Barcelona.</p>
+                <div style="display: flex; gap: 15px; flex-wrap: wrap;">
                     <a href="#contacto" class="cta-btn">Visítanos</a>
-                    <a href="#galeria" style="padding: 12px 24px; border: 1px solid var(--primary); border-radius: 50px; color: var(--primary); font-weight: 600;">Ver Productos</a>
+                    <a href="#descanso" style="padding: 12px 24px; border: 1px solid rgba(255,255,255,0.6); border-radius: 50px; color: white; font-weight: 600;">Ver Productos</a>
                 </div>
             </div>
         </div>
+        <!-- Scroll indicator -->
+        <a href="#quienes-somos" class="hero-scroll">
+            <span>Descubrir</span>
+            <div class="hero-scroll-arrow">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </div>
+        </a>
+    </section>
 
-        <!-- Using provided image 1 -->
-        <div class="hero-image-wrapper reveal" style="transition-delay: 0.2s;">
-            <img src="public/photos_webp/Seccion Vitrina/IMG_5063.webp" class="hero-image" id="heroImg" alt="Tienda Paz Mares Barcelona colchones y puericultura">
+    <!-- ===========================
+         QUIÉNES SOMOS
+    =========================== -->
+    <section id="quienes-somos" class="quienes-section" style="padding: 48px 0 80px;">
+        <div class="container">
+            <div class="quienes-layout reveal">
+                <!-- Foto izquierda -->
+                <div class="quienes-photo">
+                    <img src="public/photos_ai/vitrina-peluchesc-cuidando-tu-descanso.jfif" alt="Tienda Paz Marés Barcelona - Cuidando tu descanso" loading="lazy">
+                </div>
+                <!-- Texto derecha -->
+                <div class="quienes-inner">
+                <span class="section-badge">Familia · Segunda Generación · Desde 1970</span>
+                <h2>Cuidando tu descanso,<br>tu hogar y tu familia<br>desde 1970</h2>
+                <div class="quienes-divider"></div>
+                <p>Hace más de 56 años abrimos nuestras puertas con un objetivo claro: mejorar el bienestar de tu familia. Hoy, en nuestra segunda generación, seguimos con la misma ilusión del primer día. Hemos crecido y adaptado nuestro espacio, ofreciéndote no solo las mejores marcas en <strong>descanso</strong>, sino también una cuidada selección de <strong>mobiliario juvenil</strong> y <strong>juguetes</strong> para toda la familia. En Paz Marés, tu bienestar empieza aquí.</p>
+
+                <div class="quienes-stats">
+                    <div class="quienes-stat reveal" style="transition-delay:0.1s;">
+                        <div class="stat-number">1970</div>
+                        <div class="stat-label">Año de apertura</div>
+                        <div class="stat-desc">Más de 56 años al lado de las familias de Barcelona</div>
+                    </div>
+                    <div class="quienes-stat reveal" style="transition-delay:0.2s;">
+                        <div class="stat-number">2ª</div>
+                        <div class="stat-label">Generación familiar</div>
+                        <div class="stat-desc">La misma ilusión del primer día, con el conocimiento de décadas</div>
+                    </div>
+                    <div class="quienes-stat reveal" style="transition-delay:0.3s;">
+                        <div class="stat-number">3</div>
+                        <div class="stat-label">Pilares</div>
+                        <div class="stat-desc">Descanso · Mobiliario Juvenil · Juguetes y Peluches</div>
+                    </div>
+                </div>
+            </div>
+            </div>
         </div>
     </section>
 
     <!-- ===========================
-         COLCHONES SECTION
+         DESCANSO SECTION
     =========================== -->
-    <section id="colchones" class="colchones-section">
+    <section id="descanso" class="descanso-section descanso-intro">
+        <div class="container">
+            <div class="descanso-intro-inner reveal">
+                <div class="descanso-intro-left">
+                    <span class="section-badge">Descanso</span>
+                    <h2>Tu descanso,<br>nuestra especialidad</h2>
+                    <p>Más de 56 años ayudando a las familias de Barcelona a dormir mejor. Colchones, canapés, cabeceros, sillones y todos los complementos que necesitas, en un mismo espacio.</p>
+                </div>
+                <div class="ilustracion-descanso">
+                    <svg viewBox="0 0 100 100" width="180" height="180">
+                        <g stroke="#D0E3F0" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M45,20 C30,20 20,35 25,50 C30,65 45,70 55,60 C45,60 35,50 35,40 C35,30 40,25 45,20 Z" fill="#F7FCFF" />
+                            <path d="M25,65 C20,65 15,60 15,55 C15,50 20,45 25,45 C27,45 29,46 30,47 C32,40 38,35 45,35 C52,35 58,40 60,47 C61,46 63,45 65,45 C70,45 75,50 75,55 C75,60 70,65 65,65 L25,65 Z" fill="#ffffff"/>
+                            <path d="M75,25 L75,15 M70,20 L80,20" stroke="#13C1E1" stroke-width="1.5"/>
+                            <path d="M20,25 L20,35 M15,30 L25,30" stroke="#D0E3F0" stroke-width="1.5"/>
+                            <path d="M85,45 L85,40 M82.5,42.5 L87.5,42.5" stroke="#D0E3F0" stroke-width="1"/>
+                            <circle cx="65" cy="25" r="1" fill="#13C1E1" stroke="none"/>
+                            <circle cx="30" cy="15" r="1.5" fill="#D0E3F0" stroke="none"/>
+                        </g>
+                    </svg>
+                </div>
+
+                <div class="descanso-intro-pills">
+                    <a href="#colchones" class="descanso-pill">Colchones</a>
+                    <a href="#colchones" class="descanso-pill">Canapés / Bases</a>
+                    <a href="#colchones" class="descanso-pill">Cabeceros</a>
+                    <a href="#complementos" class="descanso-pill">Complementos</a>
+                    <a href="#colchones" class="descanso-pill">Sillones y Sofás Cama</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===========================
+         DESCANSO EXTRA: Colchones, Canapés, Cabeceros, Sillones
+    =========================== -->
+    <section id="colchones" class="descanso-extra-section">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-badge">Todo para tu dormitorio</span>
+                <h2 style="margin-top:12px;">Nuestra selección de descanso</h2>
+                <p>Colchones, canapés, cabeceros y sillones: todo lo que necesitas para tu dormitorio ideal.</p>
+            </div>
+            <div class="descanso-extra-grid">
+
+                <!-- Colchones -->
+                <div class="descanso-extra-card reveal">
+                    <div class="dcard-img">
+                        <img src="https://www.sonpura.es/img/cms/Titan_shooting.jpg" alt="Colchones en Paz Marés Barcelona" loading="lazy">
+                    </div>
+                    <div class="dcard-body">
+                        <span class="dcard-tag">Descanso</span>
+                        <h3>Colchones</h3>
+                        <p>Extensa colección de colchones de muelles ensacados y tecnología HR que te harán disfrutar como nunca de tu descanso, incluyendo las principales marcas del mercado y opciones en Látex.</p>
+                        <a href="#colchones" class="dcard-link">Ver sección →</a>
+                    </div>
+                </div>
+
+                <!-- Canapés / Bases -->
+                <div class="descanso-extra-card reveal" style="transition-delay:0.1s;">
+                    <div class="dcard-img">
+                        <img src="https://www.sonpura.es/img/2022.01%209.jpg" alt="Canapés y Bases en Paz Marés Barcelona" loading="lazy">
+                    </div>
+                    <div class="dcard-body">
+                        <span class="dcard-tag">Descanso</span>
+                        <h3>Canapés / Bases</h3>
+                        <p>Aliadas perfectas para complementar tu descanso. Fabricadas con materiales de alta calidad y diseños para todos los gustos, te proporcionarán alta practicidad y un diseño personal para tu dormitorio.</p>
+                        <a href="#colchones" class="dcard-link">Ver sección →</a>
+                    </div>
+                </div>
+
+                <!-- Cabeceros -->
+                <div class="descanso-extra-card reveal" style="transition-delay:0.2s;">
+                    <div class="dcard-img">
+                        <img src="https://www.sonpura.es/img/2022.01%207.jpg" alt="Cabeceros en Paz Marés Barcelona" loading="lazy">
+                    </div>
+                    <div class="dcard-body">
+                        <span class="dcard-tag">Descanso</span>
+                        <h3>Cabeceros</h3>
+                        <p>El toque final que aportará la distinción que deseas a tu descanso. Nuestra colección proporcionará un salto de calidad a la estética y confort de tu dormitorio, creando un espacio acogedor y reconfortable.</p>
+                        <a href="#colchones" class="dcard-link">Ver sección →</a>
+                    </div>
+                </div>
+
+                <!-- Sillones y Sofás Cama -->
+                <div class="descanso-extra-card reveal" style="transition-delay:0.3s;">
+                    <div class="dcard-img">
+                        <img src="public/photos_webp/Seccion Colchones/Verticales/vista-general-2.webp" alt="Sillones y Sofás Cama en Paz Marés Barcelona" loading="lazy">
+                    </div>
+                    <div class="dcard-body">
+                        <span class="dcard-tag">Descanso</span>
+                        <h3>Sillones y Sofás Cama</h3>
+                        <p>Completa tu espacio de descanso con nuestra selección de sillones y sofás cama. Comodidad y estilo para cada rincón de tu hogar, con opciones para todos los gustos y medidas.</p>
+                        <a href="#colchones" class="dcard-link">Ver sección →</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- PACKS PROMO -->
+    <section id="packs" class="packs-promo">
+        <div class="packs-promo-card reveal">
+            <div class="packs-promo-inner">
+                <div>
+                    <span class="packs-promo-label">&#10024; Promoción</span>
+                    <h3>Packs Base + Colchón</h3>
+                    <p>La combinación perfecta al mejor precio. Nuestros packs incluyen base y colchón en una propuesta integral pensada para tu descanso. Pregunta por nuestras opciones disponibles y la promoción vigente — ¡te sorprenderá!</p>
+                </div>
+                <div class="packs-promo-cta">
+                    <a href="tel:609428878" class="cta-btn">Consultar Promoción</a>
+                    <small>Entrega e instalación en Barcelona</small>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===========================
+         COMPLEMENTOS DE DESCANSO
+    =========================== -->
+    <section id="complementos" class="complementos-section">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-badge">Complementos</span>
+                <h2 style="margin-top:12px;">Complementos de Descanso</h2>
+                <p>Todo lo que necesitas para completar y proteger tu descanso, en una sola tienda.</p>
+            </div>
+            <div class="complementos-grid">
+
+                <!-- Almohadas -->
+                <div class="complemento-card complemento-card--photo reveal">
+                    <div class="complemento-photo">
+                        <img src="https://velfont.com/wp-content/uploads/FOTO-3_850x400.png" alt="Almohadas Velfont" loading="lazy">
+                    </div>
+                    <h3>Almohadas</h3>
+                    <p>Colección de almohadas personalizadas que se adaptan a la forma de tu cuello y cabeza, proporcionando un alto nivel de confort en tu descanso. Entra y elige la que más se adapte a tu postura.</p>
+                </div>
+
+                <!-- Protectores Velfont -->
+                <div class="complemento-card complemento-card--photo reveal" style="transition-delay:0.1s;">
+                    <div class="complemento-photo">
+                        <img src="https://velfont.com/wp-content/uploads/productos_proteccion_dist-2.jpg" alt="Protectores de Colchón Velfont" loading="lazy">
+                    </div>
+                    <h3>Protectores de Colchón &middot; Velfont</h3>
+                    <p>La protección del descanso es nuestra especialidad. En <strong>Velfont</strong> ofrecemos la más completa y extensa colección del mercado: fundas de colchón, protectores impermeables, protectores acolchados y cubrecolchones. Te ayudamos a entender su función para que puedas elegir la opción más adecuada a tus necesidades y preferencias personales.</p>
+                </div>
+
+                <!-- Nórdicos -->
+                <div class="complemento-card complemento-card--photo reveal" style="transition-delay:0.2s;">
+                    <div class="complemento-photo">
+                        <img src="https://velfont.com/wp-content/uploads/productos_nordicos_dist.jpg" alt="Nórdicos Velfont" loading="lazy">
+                    </div>
+                    <h3>Nórdicos</h3>
+                    <p>Especialistas en nórdicos, especialistas en tu descanso. Con una amplia gama de acabados y materia prima, nuestra colección de edredones nórdicos cubre todas las necesidades térmicas y de descanso. Por su gran capacidad de recuperación, volumen, ligereza y elevado poder térmico, nuestros nórdicos proporcionan un descanso cálido y placentero.</p>
+                </div>
+
+                <!-- Ropa de Cama -->
+                <div class="complemento-card complemento-card--photo reveal" style="transition-delay:0.3s;">
+                    <div class="complemento-photo">
+                        <img src="https://velfont.com/wp-content/uploads/584066_sabana_bajera_respira_impermeable_F_1.jpg" alt="Ropa de Cama Velfont" loading="lazy">
+                    </div>
+                    <h3>Ropa de Cama</h3>
+                    <p>La elegancia y calidad al servicio de tu descanso. Nuestra selección exclusiva en los mejores materiales:</p>
+                    <ul>
+                        <li>Sábanas de 300 hilos Blancas</li>
+                        <li>Fundas de almohada de 300 hilos Blancas</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ===========================
+         HISTORIA / SELECCIÓN SECTION
+    =========================== -->
+    <section class="historia-section section-padding">
+        <div class="container">
+            <div class="historia-layout">
+                <!-- Galería Izquierda (3 fotos escalonadas) -->
+                <div class="historia-gallery reveal">
+                    <div class="historia-img img-up">
+                        <img src="public/photos_webp/Seccion Colchones/Verticales/karibian.webp" alt="Vista colchón Paz Marés Barcelona" loading="lazy">
+                    </div>
+                    <div class="historia-img img-down">
+                        <img src="public/photos_webp/Seccion Colchones/Verticales/sonpura.webp" alt="Detalle colchón de calidad Barcelona" loading="lazy">
+                    </div>
+                    <div class="historia-img img-up">
+                        <img src="public/photos_webp/Seccion Colchones/Verticales/vista-general-2.webp" alt="Colchón premium Paz Marés Sarrià" loading="lazy">
+                    </div>
+                </div>
+
+                <!-- Texto Derecha -->
+                <div class="historia-text reveal" style="transition-delay: 0.2s;">
+                    <span class="section-badge" style="background: rgba(11, 192, 223, 0.2); color: #0bc0df;">Nuestra Selección</span>
+                    <h2>Cada colchón,<br>una historia de descanso</h2>
+                    <div class="historia-divider"></div>
+                    <p>No somos un catálogo sin alma. Probamos personalmente cada modelo que entra en nuestra tienda. Nuestra regla de oro es sencilla: <strong>solo vendemos lo que nosotros mismos dormiríamos</strong>.</p>
+                    <p>Acércate y descubre por qué la elección de los materiales, el tipo de muelle o la firmeza pueden cambiar por completo tus mañanas.</p>
+                    <a href="#contacto" class="cta-btn" style="margin-top: 20px; display: inline-block;">Ven a probarlos</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===========================
+         MOBILIARIO SECTION
+    =========================== -->
+    <section id="mobiliario" class="mobiliario-section">
         <div class="container">
             <div class="colchones-layout">
 
-                <!-- FOTOS: foto vertical grande + 2 horizontales -->
-                <div class="colchones-photos reveal">
-                    <div class="photo-card photo-main">
-                        <img src="public/photos_webp/Seccion Colchones/karibian-sonpura.webp"
-                             alt="Colchones Karibian y Sonpura en Paz Marés Barcelona" loading="lazy">
-                    </div>
-                    <div class="photo-card">
-                        <img src="public/photos_webp/Seccion Colchones/karibian.webp"
-                             alt="Colchón Karibian - Paz Marés" loading="lazy">
-                    </div>
-                    <div class="photo-card">
-                        <img src="public/photos_webp/Seccion Colchones/sonpura.webp"
-                             alt="Colchón Sonpura - Paz Marés" loading="lazy">
-                    </div>
-                </div>
-
                 <!-- TEXTO -->
-                <div class="colchones-text reveal" style="transition-delay:0.15s;">
-                    <span class="section-badge">Descanso Premium</span>
-                    <h2>Karibian & Sonpura<br><span style="font-size:0.7em; color:var(--text-light); font-weight:400;">Las Mejores Marcas de Colchones</span></h2>
-                    <p>Trabajamos con <strong>Karibian</strong> y <strong>Sonpura</strong>, dos marcas españolas de referencia en descanso de calidad. Muelles ensacados, viscoelástica de alta densidad y materiales certificados para que duermas como nunca.</p>
-                    <ul class="store-list">
-                        <li><strong>Karibian:</strong> Tecnología y confort desde 1988</li>
-                        <li><strong>Sonpura:</strong> Innovación en descanso saludable</li>
-                        <li>Bases tapizadas, canapés y cabeceros a medida</li>
-                        <li>Desde 300€ hasta colchones de alta gama</li>
-                        <li>Entrega e instalación en Barcelona</li>
-                    </ul>
-                    <a href="tel:609428878" class="cta-btn">Consultar Modelos</a>
+                <div class="colchones-text reveal">
+                    <span class="section-badge">Mobiliario Juvenil</span>
+                    <h2>Dormitorios Juveniles<br><span style="font-size:0.7em; color:var(--text-light); font-weight:400;">Catálogo Stay Young · Marca ANTAIX</span></h2>
+                    <p>Ofrecemos soluciones prácticas y actuales pensadas para el bienestar y el estilo de tus hijos, con una cuidada selección de muebles y accesorios que transforman cualquier habitación juvenil. Trabajamos solo con la marca <strong>ANTAIX</strong>, único catálogo <em>Stay Young</em>.</p>
+                    <div class="mobiliario-highlights">
+                        <div class="mobiliario-hl-item">
+                            <div class="mobiliario-hl-icon">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                            </div>
+                            <div>
+                                <strong>Habitaciones Juveniles e Infantiles</strong>
+                                <p>Ideas y soluciones completas para cada etapa, desde la cuna hasta la adolescencia.</p>
+                            </div>
+                        </div>
+                        <div class="mobiliario-hl-item">
+                            <div class="mobiliario-hl-icon">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                            </div>
+                            <div>
+                                <strong>Pequeños Despachos Integrados</strong>
+                                <p>Zonas de estudio y trabajo incorporadas en el mismo espacio, optimizando cada metro.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="https://antaix.com/" target="_blank" class="cta-btn">Ver Catálogo ANTAIX</a>
+                </div>
+
+                <!-- FOTOS -->
+                <div class="colchones-photos colchones-photos--single reveal" style="transition-delay:0.15s;">
+                    <div class="photo-card photo-main" style="grid-column:1/-1; height:420px;">
+                        <img src="public/photos_ai/habitacion_decorada.jfif"
+                             alt="Habitación juvenil decorada ANTAIX en Paz Marés Barcelona" loading="lazy">
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- VERTICALES STRIP -->
-    <section style="background: var(--primary); padding: 80px 0; overflow: hidden;">
+    <!-- FEATURES COMPACT -->
+    <section id="servicios" class="features-compact-section">
         <div class="container">
-            <div style="display: grid; grid-template-columns: 1.5fr 1.5fr 1.5fr 2fr; gap: 20px; height: 420px; align-items: stretch;">
-                <div class="photo-card reveal">
-                    <img src="public/photos_webp/Seccion Colchones/Verticales/karibian.webp" alt="Vista colchon Paz Mares Barcelona" loading="lazy">
+            <div class="features-compact-header reveal">
+                <h2>La Diferencia Paz Marés</h2>
+                <p>Más de 56 años de compromiso con las familias de Barcelona.</p>
+            </div>
+            <div class="features-compact-strip reveal">
+                <div class="fci-item">
+                    <div class="fci-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                    </div>
+                    <div class="fci-text">
+                        <h4>Asesoramiento Personalizado</h4>
+                        <p>Dedicamos el tiempo necesario para encontrar la solución perfecta para tu descanso.</p>
+                    </div>
                 </div>
-                <div class="photo-card reveal" style="transition-delay:0.1s; margin-top:40px; height:calc(100% - 40px);">
-                    <img src="public/photos_webp/Seccion Colchones/Verticales/sonpura.webp" alt="Detalle colchon de calidad Barcelona" loading="lazy">
+                <div class="fci-item">
+                    <div class="fci-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="15" y1="9" x2="15.01" y2="9"></line></svg>
+                    </div>
+                    <div class="fci-text">
+                        <h4>Servicio Integral</h4>
+                        <p>Desde el asesoramiento hasta la entrega e instalación en tu hogar.</p>
+                    </div>
                 </div>
-                <div class="photo-card reveal" style="transition-delay:0.2s;">
-                    <img src="public/photos_webp/Seccion Colchones/Verticales/vista-general-2.webp" alt="Colchon premium Paz Mares Sarria" loading="lazy">
-                </div>
-                <div class="reveal" style="transition-delay:0.3s; display:flex; flex-direction:column; justify-content:center; padding:30px 25px;">
-                    <p style="color:var(--accent); font-size:0.8rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; margin-bottom:18px;">Nuestra Selección</p>
-                    <h3 style="color:white; font-size:2.2rem; line-height:1.25; margin-bottom:22px; font-weight:700;">Cada colchón,<br>una historia<br>de descanso</h3>
-                    <p style="color:rgba(255,255,255,0.75); line-height:1.8; font-size:1rem;">Probamos personalmente cada modelo. Solo vendemos lo que nosotros mismos dormiríamos.</p>
+                <div class="fci-item">
+                    <div class="fci-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+                    </div>
+                    <div class="fci-text">
+                        <h4>Selección Rigurosa</h4>
+                        <p>Solo las marcas que probamos y validamos personalmente llegan a nuestra tienda.</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- FEATURES SECTION -->
-    <section id="servicios" class="section-padding features">
+    <!-- JUGUETES / PELUCHES -->
+    <section id="juguetes" class="juguetes-hero-section">
+        <!-- Slideshow de fondo -->
+        <div class="juguetes-slides">
+            <div class="juguetes-slide active" style="background-image:url('public/photos_webp/Seecion Peluches/Vertical/Jellycat.webp')"></div>
+            <div class="juguetes-slide" style="background-image:url('public/photos_webp/Seecion Peluches/IMG_5040.webp')"></div>
+            <div class="juguetes-slide" style="background-image:url('public/photos_webp/Seecion Peluches/IMG_5047.webp')"></div>
+            <div class="juguetes-slide" style="background-image:url('public/photos_webp/Seecion Peluches/IMG_5044.webp')"></div>
+            <div class="juguetes-slide" style="background-image:url('public/photos_webp/Seecion Peluches/IMG_5050.webp')"></div>
+        </div>
+        <!-- Overlay oscuro sobre el fondo -->
+        <div class="juguetes-overlay"></div>
+        <!-- Contenido centrado -->
+        <div class="container juguetes-hero-inner reveal">
+            <span class="jellycat-badge">Juguetes &amp; Peluches · Toda la familia</span>
+            <h2>Tienda de juguetes<br>para <em>toda la familia</em></h2>
+            <p>Somos distribuidores oficiales de <strong>Jellycat</strong> (toda la colección) y <strong>Bon Ton Toys</strong> — solo <em>Peanuts</em> y <em>MIFFY</em>. Además, encontrarás juguetes educativos, de imitación y libros pensados para las primeras etapas de la infancia, en varios idiomas.</p>
+            <div class="juguetes-hero-tags">
+                <span>&#x1F430; Jellycat Oficial</span>
+                <span>&#x1F43E; Bon Ton Toys</span>
+                <span>&#x1F9E9; Educativos</span>
+                <span>&#x1F4DA; Libros</span>
+            </div>
+            <a href="tel:609428878" class="cta-btn">Ver Stock Disponible</a>
+        </div>
+        <!-- Dots indicadores -->
+        <div class="juguetes-dots" id="juguetesDots"></div>
+    </section>
+
+    <!-- ===========================
+         JUGUETES: Educativos, Imitación, Libros
+    =========================== -->
+    <section class="juguetes-extra-section">
         <div class="container">
             <div class="section-header reveal">
-                <h2>La Diferencia Paz Marés</h2>
-                <p>Cuatro décadas de compromiso con el descanso de calidad en Barcelona.</p>
+                <span class="section-badge">Más juguetes</span>
+                <h2 style="margin-top:12px;">Toda nuestra selección</h2>
+                <p>Juguetes y libros pensados para el desarrollo y la imaginación de los más pequeños.</p>
             </div>
+            <div class="juguetes-extra-grid">
 
-            <div class="features-grid">
-                <!-- Feature 1 -->
-                <div class="feature-card reveal" style="transition-delay: 0.1s;">
-                    <div class="icon-box">
-                        <!-- SVG Icon Star -->
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                    </div>
-                    <h3>Asesoramiento Personalizado</h3>
-                    <p>Cada cliente es único. Dedicamos el tiempo necesario para entender tus necesidades reales y encontrar la solución perfecta para tu descanso.</p>
+                <!-- Juguetes Educativos -->
+                <div class="juguete-cat-card reveal">
+                    <span class="jcat-emoji">&#x1F9E9;</span>
+                    <h3>Juguetes Educativos</h3>
+                    <p>Estimulan el aprendizaje y el desarrollo de habilidades cognitivas, sociales y motoras en los niños a través del juego.</p>
                 </div>
 
-                <!-- Feature 2 -->
-                <div class="feature-card reveal" style="transition-delay: 0.2s;">
-                    <div class="icon-box">
-                        <!-- SVG Icon Smile -->
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="15" y1="9" x2="15.01" y2="9"></line></svg>
-                    </div>
-                    <h3>Servicio Integral</h3>
-                    <p>Desde el asesoramiento inicial hasta la entrega e instalación en tu hogar. Un acompañamiento completo que no termina con la compra.</p>
+                <!-- Juguetes de Imitación -->
+                <div class="juguete-cat-card reveal" style="transition-delay:0.1s;">
+                    <span class="jcat-emoji">&#x1F373;</span>
+                    <h3>Juguetes de Imitación</h3>
+                    <p>Permite a los niños recrear situaciones de la vida real mediante el juego simbólico, favoreciendo su aprendizaje y desarrollo social.</p>
                 </div>
 
-                <!-- Feature 3 -->
-                <div class="feature-card reveal" style="transition-delay: 0.3s;">
-                    <div class="icon-box">
-                        <!-- SVG Icon Tag -->
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
-                    </div>
-                    <h3>Selección Rigurosa</h3>
-                    <p>Solo trabajamos con marcas que cumplen nuestros estándares de calidad. Karibian, Sonpura, Jellycat... cada producto está probado y validado por nosotros.</p>
+                <!-- Libros -->
+                <div class="juguete-cat-card reveal" style="transition-delay:0.2s;">
+                    <span class="jcat-emoji">&#x1F4DA;</span>
+                    <h3>Libros Infantiles</h3>
+                    <p>Pensados para las primeras etapas de la infancia, fomentan la imaginación, el aprendizaje y el desarrollo del lenguaje desde edades tempranas, en varios idiomas.</p>
                 </div>
+
             </div>
         </div>
     </section>
@@ -1015,7 +2535,7 @@
         <div class="container">
             <div class="section-header reveal">
                 <h2>Lo que dicen nuestros clientes</h2>
-                <p class="intro">Valoracion media de 4.8 estrellas en Google</p>
+                <p class="intro">Valoración media de 4.8 estrellas en Google</p>
             </div>
             <div class="reviews-container reveal">
                 <div class="review-card">
@@ -1037,114 +2557,6 @@
                     <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
                     <p class="review-text">"Compramos un canape, un colchon y un cabecero. No podria haber ido mejor. Productos de calidad y maxima flexibilidad para adaptarse a nuestra reforma. Lo recomiendo a cualquiera."</p>
                     <p class="reviewer">Manuel</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- JELLYCAT / PELUCHES -->
-    <section id="peluches" class="jellycat-section">
-        <div class="container">
-            <div class="jellycat-layout">
-                <div class="reveal">
-                    <span class="jellycat-badge">Distribuidor Oficial Jellycat</span>
-                    <h2 style="font-size:2.8rem; color:#3D1C5E; line-height:1.15; margin-bottom:18px;">
-                        Los Peluches<br>mas Mimosos<br><em style="font-style:italic; color:#E91E8C;">del Mundo</em>
-                    </h2>
-                    <p style="color:#6B4C7A; font-size:1.05rem; line-height:1.75; margin-bottom:25px;">
-                        Somos distribuidores oficiales de <strong>Jellycat</strong>, la marca de peluches
-                        mas adorada y coleccionada. Cada pieza es unica, increiblemente suave
-                        y pensada para durar toda la vida.
-                    </p>
-                    <div class="jellycat-features">
-                        <div class="jellycat-feature-item">
-                            <div class="emoji">&#x1F430;</div>
-                            <h4>Bunnies Clasicos</h4>
-                            <p>El icono eterno, en todos los tamanos</p>
-                        </div>
-                        <div class="jellycat-feature-item">
-                            <div class="emoji">&#x1F338;</div>
-                            <h4>Ediciones Especiales</h4>
-                            <p>Colecciones exclusivas de temporada</p>
-                        </div>
-                        <div class="jellycat-feature-item">
-                            <div class="emoji">&#x1F381;</div>
-                            <h4>Regalo Perfecto</h4>
-                            <p>Para bebes, ninos y coleccionistas</p>
-                        </div>
-                        <div class="jellycat-feature-item">
-                            <div class="emoji">&#x2728;</div>
-                            <h4>Stock Renovado</h4>
-                            <p>Siempre hay novedades en tienda</p>
-                        </div>
-                    </div>
-                    <a href="tel:609428878" class="cta-btn" style="background:linear-gradient(135deg,#E91E8C,#C2185B); box-shadow:0 4px 20px rgba(233,30,140,0.35);">Ver Stock Disponible</a>
-                </div>
-                <div class="jellycat-photos reveal" style="transition-delay:0.15s;">
-                    <div class="photo-card">
-                        <img src="public/photos_webp/Seecion Peluches/Vertical/Jellycat.webp" alt="Peluches Jellycat en tienda Paz Mares Barcelona" loading="lazy">
-                    </div>
-                    <div class="photo-card jellycat-rotating" data-images='["public/photos_webp/Seecion Peluches/IMG_5040.webp","public/photos_webp/Seecion Peluches/IMG_5047.webp","public/photos_webp/Seecion Peluches/IMG_5048.webp","public/photos_webp/Seecion Peluches/IMG_5049.webp"]'>
-                        <img src="public/photos_webp/Seecion Peluches/IMG_5040.webp" alt="Coleccion Jellycat disponible en Paz Mares" loading="lazy">
-                    </div>
-                    <div class="photo-card jellycat-rotating" data-images='["public/photos_webp/Seecion Peluches/IMG_5044.webp","public/photos_webp/Seecion Peluches/IMG_5050.webp","public/photos_webp/Seecion Peluches/IMG_5051.webp","public/photos_webp/Seecion Peluches/IMG_5052.webp"]'>
-                        <img src="public/photos_webp/Seecion Peluches/IMG_5044.webp" alt="Peluche Jellycat premium suave" loading="lazy">
-                    </div>
-                    <div class="photo-card jellycat-rotating" data-images='["public/photos_webp/Seecion Peluches/IMG_5014.webp","public/photos_webp/Seecion Peluches/IMG_5043.webp","public/photos_webp/Seecion Peluches/IMG_5053.webp"]'>
-                        <img src="public/photos_webp/Seecion Peluches/IMG_5014.webp" alt="Surtido peluches Jellycat Sarria Barcelona" loading="lazy">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CATEGORIES GRID -->
-    <section id="tienda" class="categories-section">
-        <div class="container">
-            <div class="section-header reveal">
-                <h2>Todo lo que Necesitas</h2>
-                <p>Descubre cada rincon de nuestra tienda, llena de productos seleccionados con mimo y criterio.</p>
-            </div>
-            <div class="categories-grid">
-                <div class="category-card reveal">
-                    <img src="public/photos_webp/Seccion Cojines/foto-bonita-cojines.webp" alt="Cojines decorativos y textil hogar Paz Mares Barcelona" loading="lazy">
-                    <div class="category-overlay">
-                        <span class="cat-badge">Textil</span>
-                        <h3>Cojines &amp; Textil</h3>
-                        <p>El toque calido y definitivo para tu dormitorio perfecto</p>
-                    </div>
-                </div>
-                <div class="category-card reveal" style="transition-delay:0.1s;">
-                    <img src="public/photos_webp/Seccion Juguetes/Juguetes-1.webp" alt="Juguetes seleccionados puericultura Paz Mares Barcelona" loading="lazy">
-                    <div class="category-overlay">
-                        <span class="cat-badge">Puericultura</span>
-                        <h3>Juguetes</h3>
-                        <p>Los mejores juguetes, elegidos con criterio para los mas pequenos</p>
-                    </div>
-                </div>
-                <div class="category-card reveal" style="transition-delay:0.2s;">
-                    <img src="public/photos_webp/Seccion Libros/IMG_5058.webp" alt="Libros infantiles y cuentos tienda Paz Mares" loading="lazy">
-                    <div class="category-overlay">
-                        <span class="cat-badge">Literatura</span>
-                        <h3>Libros</h3>
-                        <p>Cuentos, albumes ilustrados e historias para todas las edades</p>
-                    </div>
-                </div>
-                <div class="category-card cat-vitrina reveal" style="transition-delay:0.1s;">
-                    <img src="public/photos_webp/Seccion Vitrina/IMG_5062.webp" alt="Vitrina de productos especiales y novedades Paz Mares" loading="lazy">
-                    <div class="category-overlay">
-                        <span class="cat-badge">Descubrelo</span>
-                        <h3>La Vitrina</h3>
-                        <p>Productos especiales y novedades - siempre hay algo de lo que enamorarse</p>
-                    </div>
-                </div>
-                <div class="category-card cat-libros reveal" style="transition-delay:0.2s;">
-                    <img src="public/photos_webp/Seecion Peluches/IMG_5043.webp" alt="Mas peluches Jellycat y otros en tienda Paz Mares" loading="lazy">
-                    <div class="category-overlay">
-                        <span class="cat-badge">Jellycat y Mas</span>
-                        <h3>Peluches</h3>
-                        <p>La mayor seleccion de peluches premium de Barcelona</p>
-                    </div>
                 </div>
             </div>
         </div>
@@ -1183,11 +2595,18 @@
                         </div>
                         <div class="info-text">
                             <h4>Horario</h4>
-                            <p>Lunes a Sábado: 10:00 - 14:00, 16:30 - 20:30</p>
+                            <p>Lunes a Viernes: 10:00&ndash;13:30 y 17:00&ndash;20:00</p>
+                            <p>Sábados: 10:30&ndash;13:30</p>
                         </div>
                     </div>
 
-                    <a href="https://www.google.com/maps/dir//C.+de+Muntaner,+541,+Sarri%C3%A0-Sant+Gervasi,+08022+Barcelona/@41.4045424,2.1358248,17z" target="_blank" class="cta-btn" style="display:inline-block; margin-top: 20px;">Cómo llegar</a>
+                    <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:20px;">
+                        <a href="https://www.google.com/maps/dir//C.+de+Muntaner,+541,+Sarri%C3%A0-Sant+Gervasi,+08022+Barcelona/@41.4045424,2.1358248,17z" target="_blank" class="cta-btn">Cómo llegar</a>
+                        <a href="https://www.instagram.com/pazmares?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="cta-btn" style="background:linear-gradient(135deg,#833ab4,#fd1d1d,#f77737); box-shadow:0 4px 14px rgba(131,58,180,0.35); display:inline-flex; align-items:center; gap:8px;">
+                            <img src="public/logo/instagram.jfif" alt="Instagram" style="height:20px; border-radius:4px;">
+                            @pazmares
+                        </a>
+                    </div>
                 </div>
 
                 <div class="map-wrapper reveal" style="transition-delay: 0.2s;">
@@ -1201,9 +2620,17 @@
     <!-- FOOTER -->
     <footer>
         <div class="container footer-content">
-            <h4 style="margin-bottom: 10px; color: var(--primary);">Paz Marés</h4>
-            <p>© 2023 Paz Marés. Todos los derechos reservados.</p>
-            <p style="margin-top: 10px; font-size: 0.8rem;">Diseñado para el descanso.</p>
+            <a href="#inicio" class="logo" style="display:inline-block; margin-bottom:16px;">
+                <img src="public/logo/logo.png" alt="Paz Marés" style="height:18px; display:block;">
+            </a>
+            <p>© 2025 Paz Marés. Todos los derechos reservados.</p>
+            <p style="margin-top:8px; font-size:0.85rem;">C/ de Muntaner, 541, 08022 Barcelona &nbsp;·&nbsp; <a href="tel:609428878" style="color:var(--accent);">609 42 88 78</a></p>
+            <p style="margin-top:8px; font-size:0.82rem;">
+                <a href="https://www.instagram.com/pazmares?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" style="display:inline-flex; align-items:center; gap:6px; color:var(--accent); font-weight:600;">
+                    <img src="public/logo/instagram.jfif" alt="Instagram" style="height:16px; border-radius:3px;">
+                    @pazmares
+                </a>
+            </p>
         </div>
     </footer>
 
@@ -1230,10 +2657,9 @@
                 observer.observe(el);
             });
 
-            // 2. Mouse Move Parallax Effect
+            // 2. Mouse Move Parallax Effect (shapes only, no hero image tilt)
             const hero = document.querySelector('.hero');
             const shapes = document.querySelectorAll('.mouse-shape');
-            const heroImg = document.getElementById('heroImg');
 
             document.addEventListener('mousemove', (e) => {
                 const x = e.clientX / window.innerWidth;
@@ -1247,21 +2673,7 @@
                     shape.style.transform = `translate(${moveX}px, ${moveY}px)`;
                 });
 
-                // Subtle tilt effect on Hero Image
-                if (heroImg && window.innerWidth > 968) {
-                    const rotateX = (y - 0.5) * 10; // -5 to 5 degrees
-                    const rotateY = (x - 0.5) * 10; // -5 to 5 degrees
-                    // Using transform3d for performance
-                    heroImg.style.transform = `perspective(1000px) rotateX(${-rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
-                }
             });
-
-            // Reset Hero Image on mouse leave
-            if(hero) {
-                hero.addEventListener('mouseleave', () => {
-                    if (heroImg) heroImg.style.transform = `perspective(1000px) rotateX(0) rotateY(0) scale(1)`;
-                });
-            }
 
             // 3. Jellycat Image Rotation
             const rotatingCards = document.querySelectorAll('.jellycat-rotating');
@@ -1280,7 +2692,57 @@
                 }, 8000 + Math.random() * 3000); // Random interval between 8-11 seconds
             });
 
-            // 4. Auto-scroll Testimonials with Pause on Hover
+            // 3b. Floating Offer Card
+            (function() {
+                const card = document.getElementById('offerCard');
+                const closeBtn = document.getElementById('offerClose');
+                const cta = document.getElementById('offerCta');
+                if (!card) return;
+                let shown = false;
+
+                window.addEventListener('scroll', () => {
+                    if (!shown && window.scrollY > 300) {
+                        shown = true;
+                        card.classList.add('visible');
+                    }
+                });
+
+                closeBtn.addEventListener('click', () => {
+                    card.classList.add('dismissed');
+                });
+
+                cta.addEventListener('click', () => {
+                    card.classList.add('dismissed');
+                });
+            })();
+
+            // 4. Juguetes Hero Slideshow
+            (function() {
+                const slides = document.querySelectorAll('.juguetes-slide');
+                const dotsContainer = document.getElementById('juguetesDots');
+                if (!slides.length) return;
+
+                let current = 0;
+
+                slides.forEach((_, i) => {
+                    const dot = document.createElement('div');
+                    dot.className = 'juguetes-dot' + (i === 0 ? ' active' : '');
+                    dot.addEventListener('click', () => goTo(i));
+                    dotsContainer.appendChild(dot);
+                });
+
+                function goTo(n) {
+                    slides[current].classList.remove('active');
+                    dotsContainer.children[current].classList.remove('active');
+                    current = (n + slides.length) % slides.length;
+                    slides[current].classList.add('active');
+                    dotsContainer.children[current].classList.add('active');
+                }
+
+                setInterval(() => goTo(current + 1), 4500);
+            })();
+
+            // 5. Auto-scroll Testimonials with Pause on Hover
             const reviewsContainer = document.querySelector('.reviews-container');
             if (reviewsContainer) {
                 let scrollInterval;
@@ -1333,5 +2795,44 @@
             });
         });
     </script>
+    <!-- FLOATING OFFER CARD -->
+    <div class="offer-card" id="offerCard">
+        <div class="offer-card-header">
+            <span>&#10024; Oferta de la semana</span>
+            <button class="offer-card-close" id="offerClose" title="Cerrar">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+        </div>
+        <div class="offer-card-body">
+            <h4>Pack Colch&oacute;n Sonpura<br>+ Caner&eacute; Tapizado</h4>
+            <p>Colch&oacute;n de muelles ensacados 150&times;190 + base tapizada a juego. Entrega e instalaci&oacute;n incluidas.</p>
+            <div class="offer-price-row">
+                <span class="offer-price-new">899&euro;</span>
+                <span class="offer-price-old">1.190&euro;</span>
+                <span class="offer-badge">-24%</span>
+            </div>
+            <a href="#contacto" class="offer-card-cta" id="offerCta">Consultar disponibilidad</a>
+            <p class="offer-card-fine">V&aacute;lido hasta fin de existencias</p>
+        </div>
+    </div>
+
+    <!-- FLOATING CONTACT MENU -->
+    <div class="floating-menu-container">
+        <div class="floating-items">
+            <a href="mailto:info@pazmares.com" class="float-btn email-btn" title="Enviar Email">
+                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            </a>
+            <a href="tel:609428878" class="float-btn phone-btn" title="Llamar">
+                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+            </a>
+            <a href="https://wa.me/34609428878" target="_blank" class="float-btn whatsapp-btn" title="WhatsApp">
+                <svg viewBox="0 0 24 24" width="26" height="26" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+            </a>
+        </div>
+        <div class="float-btn main-btn">
+            <svg class="icon-chat" viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+        </div>
+    </div>
+
 </body>
 </html>
