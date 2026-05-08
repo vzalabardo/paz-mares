@@ -98,7 +98,8 @@
             z-index: 1000;
             background: #ffffff;
             backdrop-filter: none;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
+            border-bottom: 3px solid #13C1E1;
+            box-shadow: 0 2px 16px rgba(19,193,225,0.12);
             transition: var(--transition);
         }
 
@@ -123,33 +124,27 @@
             padding: 8px 18px;
             border-radius: 6px;
             line-height: 1;
+            box-shadow: 0 2px 14px rgba(19,193,225,0.45);
         }
 
         .nav-links {
             display: flex;
-            gap: 30px;
+            gap: 8px;
         }
 
         .nav-links a {
-            font-weight: 500;
-            color: var(--text-main);
-            font-size: 0.95rem;
-            position: relative;
+            font-weight: 600;
+            color: #13C1E1;
+            font-size: 0.88rem;
+            background: none;
+            padding: 7px 14px;
+            border-radius: 6px;
+            letter-spacing: 0.02em;
+            transition: color 0.2s ease;
         }
 
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--accent);
-            transition: var(--transition);
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
+        .nav-links a:hover {
+            color: #0ba8c4;
         }
 
         .cta-btn {
@@ -939,6 +934,7 @@
             display: block;
             padding: 4px 0;
             font-size: 0.875rem;
+            background: none;
             color: var(--text-main);
             font-weight: 400;
             transition: color 0.18s, padding-left 0.18s;
@@ -1085,6 +1081,14 @@
             grid-template-columns: repeat(2, 1fr);
             gap: 28px;
             margin-top: 48px;
+        }
+
+        .descanso-extra-card:last-child:nth-child(odd) {
+            grid-column: 1 / -1;
+            max-width: calc(50% - 14px);
+            margin-left: auto;
+            margin-right: auto;
+            width: 100%;
         }
 
         .descanso-extra-card {
@@ -2032,12 +2036,14 @@
                                 <h5>Colchones</h5>
                                 <ul>
                                     <li><a href="#colchones">Muelles Ensacados</a></li>
-                                    <li><a href="#colchones">Tecnología HR</a></li>
+                                    <li><a href="#colchones">Viscoelástico</a></li>
                                     <li><a href="#colchones">Látex</a></li>
                                 </ul>
                                 <h5>Sillones y Sofás Cama</h5>
                                 <ul><li><a href="#colchones">Ver modelos</a></li></ul>
                                 <h5>Canapés / Bases</h5>
+                                <ul><li><a href="#colchones">Ver modelos</a></li></ul>
+                                <h5>Somier Articulado</h5>
                                 <ul><li><a href="#colchones">Ver modelos</a></li></ul>
                                 <h5>Cabeceros</h5>
                                 <ul><li><a href="#colchones">Ver colección</a></li></ul>
@@ -2048,7 +2054,7 @@
                                 <h5>Complementos</h5>
                                 <ul>
                                     <li><a href="#complementos">Almohadas</a></li>
-                                    <li><a href="#complementos">Protectores de colchón (Velfont)</a></li>
+                                    <li><a href="#complementos">Protectores de colchón</a></li>
                                     <li><a href="#complementos">Nórdicos</a></li>
                                 </ul>
                                 <h5>Ropa de Cama</h5>
@@ -2115,7 +2121,7 @@
         <div class="container">
             <div class="hero-content reveal">
                 <h1>Calidad y Confort <br><span>Para tu Descanso</span></h1>
-                <p>Especialistas en descanso, mobiliario juvenil y juguetes en el corazón de Sarrià-Sant Gervasi. Más de 56 años cuidando a las familias de Barcelona.</p>
+                <p>Especialistas en descanso, mobiliario juvenil y juguetes en el corazón de Sarrià-Sant Gervasi. Cuidando a las familias de Barcelona desde 1969.</p>
                 <div style="display: flex; gap: 15px; flex-wrap: wrap;">
                     <a href="#contacto" class="cta-btn">Visítanos</a>
                     <a href="#descanso" style="padding: 12px 24px; border: 1px solid rgba(255,255,255,0.6); border-radius: 50px; color: white; font-weight: 600;">Ver Productos</a>
@@ -2199,6 +2205,7 @@
                     <a href="#colchones" class="descanso-pill">Colchones</a>
                     <a href="#colchones" class="descanso-pill">Canapés / Bases</a>
                     <a href="#colchones" class="descanso-pill">Cabeceros</a>
+                    <a href="#colchones" class="descanso-pill">Somier Articulado</a>
                     <a href="#complementos" class="descanso-pill">Complementos</a>
                     <a href="#colchones" class="descanso-pill">Sillones y Sofás Cama</a>
                 </div>
@@ -2226,7 +2233,7 @@
                     <div class="dcard-body">
                         <span class="dcard-tag">Descanso</span>
                         <h3>Colchones</h3>
-                        <p>Extensa colección de colchones de muelles ensacados y tecnología HR que te harán disfrutar como nunca de tu descanso, incluyendo las principales marcas del mercado y opciones en Látex.</p>
+                        <p>Extensa colección de colchones de muelles ensacados, Viscoelástico y Látex que te harán disfrutar como nunca de tu descanso, incluyendo las principales marcas del mercado.</p>
                         <a href="#colchones" class="dcard-link">Ver sección →</a>
                     </div>
                 </div>
@@ -2240,6 +2247,19 @@
                         <span class="dcard-tag">Descanso</span>
                         <h3>Canapés / Bases</h3>
                         <p>Aliadas perfectas para complementar tu descanso. Fabricadas con materiales de alta calidad y diseños para todos los gustos, te proporcionarán alta practicidad y un diseño personal para tu dormitorio.</p>
+                        <a href="#colchones" class="dcard-link">Ver sección →</a>
+                    </div>
+                </div>
+
+                <!-- Somier Articulado -->
+                <div class="descanso-extra-card reveal" style="transition-delay:0.15s;">
+                    <div class="dcard-img">
+                        <img src="https://www.sonpura.es/img/cms/Titan_shooting.jpg" alt="Somier Articulado en Paz Marés Barcelona" loading="lazy">
+                    </div>
+                    <div class="dcard-body">
+                        <span class="dcard-tag">Descanso</span>
+                        <h3>Somier Articulado</h3>
+                        <p>Comodidad y versatilidad en un solo producto. Nuestros somieres articulados permiten ajustar la posición del cuerpo para un descanso personalizado, mejorando la circulación y aliviando tensiones musculares.</p>
                         <a href="#colchones" class="dcard-link">Ver sección →</a>
                     </div>
                 </div>
@@ -2281,7 +2301,7 @@
                 <div>
                     <span class="packs-promo-label">&#10024; Promoción</span>
                     <h3>Packs Base + Colchón</h3>
-                    <p>La combinación perfecta al mejor precio. Nuestros packs incluyen base y colchón en una propuesta integral pensada para tu descanso. Pregunta por nuestras opciones disponibles y la promoción vigente — ¡te sorprenderá!</p>
+                    <p>La combinación perfecta al mejor precio. Nuestros packs incluyen base y colchón en una propuesta integral pensada para tu descanso. Pregunta por nuestras opciones disponibles y la promoción vigente. ¡Te sorprenderá!</p>
                 </div>
                 <div class="packs-promo-cta">
                     <a href="tel:609428878" class="cta-btn">Consultar Promoción</a>
@@ -2317,7 +2337,7 @@
                     <div class="complemento-photo">
                         <img src="https://velfont.com/wp-content/uploads/productos_proteccion_dist-2.jpg" alt="Protectores de Colchón Velfont" loading="lazy">
                     </div>
-                    <h3>Protectores de Colchón &middot; Velfont</h3>
+                    <h3>Protectores de Colchón</h3>
                     <p>La protección del descanso es nuestra especialidad. En <strong>Velfont</strong> ofrecemos la más completa y extensa colección del mercado: fundas de colchón, protectores impermeables, protectores acolchados y cubrecolchones. Te ayudamos a entender su función para que puedas elegir la opción más adecuada a tus necesidades y preferencias personales.</p>
                 </div>
 
@@ -2340,6 +2360,7 @@
                     <ul>
                         <li>Sábanas de 300 hilos Blancas</li>
                         <li>Fundas de almohada de 300 hilos Blancas</li>
+                        <li>A medida</li>
                     </ul>
                 </div>
 
@@ -2480,11 +2501,12 @@
         <div class="container juguetes-hero-inner reveal">
             <span class="jellycat-badge">Juguetes &amp; Peluches · Toda la familia</span>
             <h2>Tienda de juguetes<br>para <em>toda la familia</em></h2>
-            <p>Somos distribuidores oficiales de <strong>Jellycat</strong> (toda la colección) y <strong>Bon Ton Toys</strong> — solo <em>Peanuts</em> y <em>MIFFY</em>. Además, encontrarás juguetes educativos, de imitación y libros pensados para las primeras etapas de la infancia, en varios idiomas.</p>
+            <p>Somos distribuidores oficiales de <strong>Jellycat</strong> (toda la colección) y <strong>Bon Ton Toys</strong> — <em>Peanuts</em> y <em>MIFFY</em>. Además, encontrarás juguetes educativos, de imitación y libros pensados para las primeras etapas de la infancia, en varios idiomas.</p>
             <div class="juguetes-hero-tags">
                 <span>&#x1F430; Jellycat Oficial</span>
                 <span>&#x1F43E; Bon Ton Toys</span>
                 <span>&#x1F9E9; Educativos</span>
+                <span>&#x1F373; Imitación</span>
                 <span>&#x1F4DA; Libros</span>
             </div>
             <a href="tel:609428878" class="cta-btn">Ver Stock Disponible</a>
@@ -2586,6 +2608,16 @@
                         <div class="info-text">
                             <h4>Teléfono</h4>
                             <p><a href="tel:609428878">609 42 88 78</a></p>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                        </div>
+                        <div class="info-text">
+                            <h4>Email</h4>
+                            <p><a href="mailto:pazmares2008@gmail.com" style="color:var(--accent);">pazmares2008@gmail.com</a></p>
                         </div>
                     </div>
 
