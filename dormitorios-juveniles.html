@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Paz Marés - Dormitorios Juveniles ANTAIX. Habitaciones completas: camas, escritorios, armarios y estanterías. Catálogo Stay Young en Barcelona.">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Dormitorios Juveniles ANTAIX | Paz Marés Barcelona</title>
+    <style>
+        /* RESET & BASE */
+        :root {
+            --primary: #1A365D;
+            --primary-light: #2C5282;
+            --accent: #0bc0df;
+            --accent-hover: #09a8c2;
+            --bg-light: #F7FAFC;
+            --bg-white: #FFFFFF;
+            --text-main: #2D3748;
+            --text-light: #718096;
+            --text-white: #FFFFFF;
+            --shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+            --shadow-hover: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+            --radius: 12px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text-main);
+            background: var(--bg-white);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        img { max-width: 100%; height: auto; display: block; }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* NAVBAR */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: #ffffff;
+            border-bottom: 3px solid #13C1E1;
+            box-shadow: 0 2px 16px rgba(19,193,225,0.12);
+            transition: var(--transition);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            display: inline-block;
+            background: #13C1E1;
+            color: #ffffff;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.0rem;
+            font-weight: 300;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            padding: 8px 18px;
+            border-radius: 6px;
+            line-height: 1;
+            box-shadow: 0 2px 14px rgba(19,193,225,0.45);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 8px;
+        }
+
+        .nav-links a {
+            font-weight: 600;
+            color: #13C1E1;
+            font-size: 0.88rem;
+            background: none;
+            padding: 7px 14px;
+            border-radius: 6px;
+            letter-spacing: 0.02em;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: #0ba8c4;
+        }
+
+        .cta-btn {
+            background-color: var(--accent);
+            color: var(--text-white);
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: var(--transition);
+            box-shadow: 0 4px 14px rgba(11, 192, 223, 0.4);
+        }
+
+        .cta-btn:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(11, 192, 223, 0.6);
+        }
+
+        /* BREADCRUMB */
+        .breadcrumb-section {
+            padding-top: 88px;
+            padding-bottom: 0;
+            background: transparent;
+        }
+
+        .breadcrumb {
+            display: inline-flex;
+            align-items: center;
+            gap: 0;
+            font-size: 0.78rem;
+            color: var(--text-light);
+            line-height: 1;
+        }
+
+        .breadcrumb a,
+        .breadcrumb span {
+            white-space: nowrap;
+        }
+
+        .breadcrumb a {
+            color: var(--text-light);
+            font-weight: 400;
+            transition: color 0.2s;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--accent);
+        }
+
+        .breadcrumb span.separator {
+            color: var(--text-light);
+            font-size: 0.78rem;
+            opacity: 0.5;
+            margin: 0 5px;
+        }
+
+        .breadcrumb span.current {
+            color: var(--text-main);
+            font-weight: 500;
+        }
+
+        /* PAGE HEADER */
+        .page-header {
+            padding: 24px 0 32px;
+            text-align: center;
+        }
+
+        .page-header .section-badge {
+            display: inline-block;
+            background: rgba(11, 192, 223, 0.1);
+            color: var(--accent);
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: 6px 16px;
+            border-radius: 50px;
+            margin-bottom: 16px;
+        }
+
+        .page-header h1 {
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 12px;
+            line-height: 1.2;
+        }
+
+        .page-header h1 span {
+            display: block;
+            font-size: 0.5em;
+            color: var(--text-light);
+            font-weight: 400;
+            margin-top: 8px;
+        }
+
+        .page-header p {
+            font-size: 1.05rem;
+            color: var(--text-light);
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        /* PRODUCTS GRID */
+        .products-section {
+            padding: 40px 0 80px;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+        }
+
+        /* PRODUCT CARD */
+        .product-card {
+            background: var(--bg-white);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(0,0,0,0.06);
+            transition: var(--transition);
+        }
+
+        .product-card:hover {
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-5px);
+        }
+
+        .product-card-img {
+            position: relative;
+            height: 220px;
+            overflow: hidden;
+            background: #f1f5f9;
+        }
+
+        .product-card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .product-card:hover .product-card-img img {
+            transform: scale(1.05);
+        }
+
+        .product-card-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(26, 54, 93, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .product-card:hover .product-card-overlay {
+            opacity: 1;
+        }
+
+        .product-card-overlay span {
+            color: #fff;
+            font-weight: 600;
+            font-size: 0.9rem;
+            padding: 10px 20px;
+            border: 2px solid #fff;
+            border-radius: 50px;
+        }
+
+        .product-card-body {
+            padding: 20px;
+        }
+
+        .product-card-body h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 16px;
+        }
+
+        /* SPECS */
+        .product-specs {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .spec-simple {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            color: var(--text-light);
+            padding: 6px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .spec-simple:last-child {
+            border-bottom: none;
+        }
+
+        .spec-simple strong {
+            color: var(--text-main);
+            font-size: 0.85rem;
+        }
+
+        .product-card-body .product-desc {
+            font-size: 0.82rem;
+            color: var(--text-light);
+            margin-bottom: 14px;
+            line-height: 1.5;
+        }
+
+        /* FILTER BAR */
+        .filter-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 40px;
+            padding: 0 10px;
+        }
+
+        .filter-btn {
+            padding: 8px 18px;
+            border: 1.5px solid rgba(26,54,93,0.2);
+            border-radius: 50px;
+            background: transparent;
+            color: var(--text-main);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+
+        .filter-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .filter-btn.active {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: #fff;
+        }
+
+        /* CATEGORY BADGE */
+        .category-badge {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: var(--accent);
+            background: rgba(11,192,223,0.08);
+            padding: 4px 10px;
+            border-radius: 20px;
+            margin-top: 8px;
+        }
+
+        /* PRODUCT CARD HIDE/SHOW */
+        .product-card.hidden {
+            display: none;
+        }
+
+        /* CATALOG LINK */
+        .catalog-link {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .catalog-link a {
+            display: inline-block;
+            padding: 14px 32px;
+            background: var(--primary);
+            color: #fff;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border-radius: 50px;
+            transition: var(--transition);
+        }
+
+        .catalog-link a:hover {
+            background: var(--primary-light);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        /* FOOTER */
+        .page-footer {
+            background: var(--primary);
+            color: rgba(255,255,255,0.7);
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .page-footer a {
+            color: #13C1E1;
+            font-weight: 600;
+        }
+
+        .page-footer p {
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 968px) {
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+
+            .nav-links { display: none; }
+
+            .page-header h1 { font-size: 1.8rem; }
+        }
+
+        @media (max-width: 600px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+                gap: 18px;
+            }
+
+            .product-card-img { height: 180px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">
+                    <img src="public/logo/logo.png" alt="Paz Marés" style="height:16px; display:block;">
+                </a>
+                <div class="nav-links">
+                    <a href="index.html">Inicio</a>
+                    <a href="index.html#descanso">Descanso</a>
+                    <a href="index.html#mobiliario">Mobiliario</a>
+                    <a href="index.html#juguetes">Juguetes</a>
+                    <a href="index.html#testimonios">Opiniones</a>
+                    <a href="index.html#contacto">Contacto</a>
+                </div>
+                <a href="tel:609428878" class="cta-btn">Llamar Ahora</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- BREADCRUMB -->
+    <section class="breadcrumb-section">
+        <div class="container">
+            <nav class="breadcrumb">
+                <a href="index.html">Inicio</a>
+                <span class="separator">/</span>
+                <a href="index.html#mobiliario">Mobiliario</a>
+                <span class="separator">/</span>
+                <span class="current">Dormitorios Juveniles</span>
+            </nav>
+        </div>
+    </section>
+
+    <!-- PAGE HEADER -->
+    <section class="page-header">
+        <div class="container">
+            <span class="section-badge">Catálogo Mobiliario Juvenil</span>
+            <h1>Dormitorios Juveniles ANTAIX
+                <span>Catálogo Stay Young &middot; Habitaciones Completas</span>
+            </h1>
+            <p>Soluciones completas para dormitorios juveniles: camas, escritorios, armarios y estanterías. Diseño funcional y moderno pensado para cada etapa.</p>
+        </div>
+    </section>
+
+    <!-- PRODUCTS GRID -->
+    <section class="products-section">
+        <div class="container">
+
+            <!-- FILTER BAR -->
+            <div class="filter-bar">
+                <button class="filter-btn active" data-filter="todos">Todos</button>
+                <button class="filter-btn" data-filter="armarios">Armarios</button>
+                <button class="filter-btn" data-filter="camas-nidos">Camas y Nidos</button>
+                <button class="filter-btn" data-filter="literas">Literas y Trenes</button>
+                <button class="filter-btn" data-filter="abatibles">Abatibles</button>
+                <button class="filter-btn" data-filter="estanterias">Estanterías</button>
+                <button class="filter-btn" data-filter="infantiles">Infantiles</button>
+                <button class="filter-btn" data-filter="zona-estudio">Zona Estudio</button>
+            </div>
+
+            <div class="products-grid">
+
+                <div class="product-card" data-categories="infantiles">
+                    <div class="product-card-img">
+                        <img src="https://antaix.com/wp-content/uploads/2024/11/ambiente_infantil_ANTAIX_33-uai-854x854.jpg" alt="Ambiente infantil con sofà Nutt y mesa infantil Mai - ANTAIX" loading="lazy">
+                        <div class="product-card-overlay"><span>Ver producto</span></div>
+                    </div>
+                    <div class="product-card-body">
+                        <h3>Ambiente infantil con sofà Nutt y mesa infantil Mai</h3>
+                        <span class="category-badge">Habitaciones Infantiles</span>
+                    </div>
+                </div>
+
+                <div class="product-card" data-categories="abatibles zona-estudio camas-nidos armarios">
+                    <div class="product-card-img">
+                        <img src="https://antaix.com/wp-content/uploads/2024/12/cama_abatible_ANTAIX_37-uai-918x918.jpg" alt="Ambiente juvenil con cama abatible horizontal y zona estudio - ANTAIX" loading="lazy">
+                        <div class="product-card-overlay"><span>Ver producto</span></div>
+                    </div>
+                    <div class="product-card-body">
+                        <h3>Ambiente juvenil con cama abatible horizontal y zona estudio</h3>
+                        <span class="category-badge">Abatibles</span>
+                    </div>
+                </div>
+
+                <div class="product-card" data-categories="camas-nidos armarios">
+                    <div class="product-card-img">
+                        <img src="https://antaix.com/wp-content/uploads/2024/12/habitacion_senior_cama_nett_50_ANTAIX-uai-1047x1047.jpg" alt="Ambiente sénior con una cama tapizada Nett - ANTAIX" loading="lazy">
+                        <div class="product-card-overlay"><span>Ver producto</span></div>
+                    </div>
+                    <div class="product-card-body">
+                        <h3>Ambiente sénior con una cama tapizada Nett</h3>
+                        <span class="category-badge">Camas y Nidos</span>
+                    </div>
+                </div>
+
+                <div class="product-card" data-categories="abatibles estanterias">
+                    <div class="product-card-img">
+                        <img src="https://antaix.com/wp-content/uploads/2024/12/ambiente_estudio_42_ANTAIX-uai-873x873.jpg" alt="Ambiente versátil con cama abatible vertical y estantería ADD - ANTAIX" loading="lazy">
+                        <div class="product-card-overlay"><span>Ver producto</span></div>
+                    </div>
+                    <div class="product-card-body">
+                        <h3>Ambiente versátil con cama abatible vertical y estantería ADD</h3>
+                        <span class="category-badge">Abatibles</span>
+                    </div>
+                </div>
+
+                <div class="product-card" data-categories="armarios">
+                    <div class="product-card-img">
+                        <img src="https://antaix.com/wp-content/uploads/2024/11/armario_cama_nido_ANTAIX_13-uai-756x756.jpg" alt="Armario altillo con arcón y estante bandeja - ANTAIX" loading="lazy">
+                        <div class="product-card-overlay"><span>Ver producto</span></div>
+                    </div>
+                    <div class="product-card-body">
+                        <h3>Armario altillo con arcón y estante bandeja</h3>
+                        <span class="category-badge">Armarios Juveniles</span>
+                    </div>
+                </div>
+
+                <div class="product-card" data-categories="armarios">
+                    <div class="product-card-img">
+                        <img src="https://antaix.com/wp-content/uploads/2024/11/armario_cama_juvenil_ANTAIX_2-uai-939x939.jpg" alt="Armario asimétrico - ANTAIX" loading="lazy">
+                        <div class="product-card-overlay"><span>Ver producto</span></div>
+                    </div>
+                    <div class="product-card-body">
+                        <h3>Armario asimétrico</h3>
+                        <span class="category-badge">Armarios Juveniles</span>
+                    </div>
+                </div>
+
+                <div class="product-card" data-categories="armarios">
+                    <div class="product-card-img">
+                        <img src="https://antaix.com/wp-content/uploads/2024/12/armario_complet_45_ANTAIX-uai-726x726.jpg" alt="Armario Complet 2 puertas con tirador uñero metal - ANTAIX" loading="lazy">
+                        <div class="product-card-overlay"><span>Ver producto</span></div>
+                    </div>
+                    <div class="product-card-body">
+                        <h3>Armario Complet 2 puertas con tirador uñero metal</h3>
+                        <span class="category-badge">Armarios Juveniles</span>
+                    </div>
+                </div>
+
+                <div class="product-card" data-categories="armarios">
+                    <div class="product-card-img">
+                        <img src="https://antaix.com/wp-content/uploads/2024/04/juvenil_2_armario_antaix_DETALLE-2-scaled-1-uai-1291x1291.jpg" alt="Armario Complet con puertas, cajones y cubo con partidor - ANTAIX" loading="lazy">
+                        <div class="product-card-overlay"><span>Ver producto</span></div>
+                    </div>
+                    <div class="product-card-body">
+                        <h3>Armario Complet con puertas, cajones y cubo con partidor</h3>
+                        <span class="category-badge">Armarios Juveniles</span>
+                    </div>
+                </div>
+
+                <div class="product-card" data-categories="armarios">
+                    <div class="product-card-img">
+                        <img src="https://antaix.com/wp-content/uploads/2024/11/armario_cajoneras_ANTAIX_14-uai-572x572.jpg" alt="Armario con cajones y libreria - ANTAIX" loading="lazy">
+                        <div class="product-card-overlay"><span>Ver producto</span></div>
+                    </div>
+                    <div class="product-card-body">
+                        <h3>Armario con cajones y librería</h3>
+                        <span class="category-badge">Armarios Juveniles</span>
+                    </div>
+                </div>
+
+                <div class="product-card" data-categories="armarios">
+                    <div class="product-card-img">
+                        <img src="https://antaix.com/wp-content/uploads/2024/11/armario_luz_ANTAIX_28-uai-615x615.jpg" alt="Armario con librería entre armarios y cajoneras interiores - ANTAIX" loading="lazy">
+                        <div class="product-card-overlay"><span>Ver producto</span></div>
+                    </div>
+                    <div class="product-card-body">
+                        <h3>Armario con librería entre armarios y cajoneras interiores</h3>
+                        <span class="category-badge">Armarios Juveniles</span>
+                    </div>
+                </div>
+
+                <div class="product-card" data-categories="armarios">
+                    <div class="product-card-img">
+                        <img src="https://antaix.com/wp-content/uploads/2024/11/armario_zapatero_ANTAIX_24-uai-525x525.jpg" alt="Armario con puerta Kale - ANTAIX" loading="lazy">
+                        <div class="product-card-overlay"><span>Ver producto</span></div>
+                    </div>
+                    <div class="product-card-body">
+                        <h3>Armario con puerta Kale</h3>
+                        <span class="category-badge">Armarios Juveniles</span>
+                    </div>
+                </div>
+
+                <div class="product-card" data-categories="armarios">
+                    <div class="product-card-img">
+                        <img src="https://antaix.com/wp-content/uploads/2024/11/armario_escritorio_ANTAIX_23-uai-619x619.jpg" alt="Armario con puerta Wik - ANTAIX" loading="lazy">
+                        <div class="product-card-overlay"><span>Ver producto</span></div>
+                    </div>
+                    <div class="product-card-body">
+                        <h3>Armario con puerta Wik</h3>
+                        <span class="category-badge">Armarios Juveniles</span>
+                    </div>
+                </div>
+
+                <div class="product-card" data-categories="armarios">
+                    <div class="product-card-img">
+                        <img src="https://antaix.com/wp-content/uploads/2024/04/juvenil_58_armario_antaix-1-scaled-1-uai-1707x1707.jpg" alt="Armario con puertas combinadas - ANTAIX" loading="lazy">
+                        <div class="product-card-overlay"><span>Ver producto</span></div>
+                    </div>
+                    <div class="product-card-body">
+                        <h3>Armario con puertas combinadas</h3>
+                        <span class="category-badge">Armarios Juveniles</span>
+                    </div>
+                </div>
+
+                <div class="product-card" data-categories="armarios">
+                    <div class="product-card-img">
+                        <img src="https://antaix.com/wp-content/uploads/2024/04/juvenil_57_armario_antaix-1-scaled-1-uai-1707x1707.jpg" alt="Armario con puertas combinadas y sobrecostados - ANTAIX" loading="lazy">
+                        <div class="product-card-overlay"><span>Ver producto</span></div>
+                    </div>
+                    <div class="product-card-body">
+                        <h3>Armario con puertas combinadas y sobrecostados</h3>
+                        <span class="category-badge">Armarios Juveniles</span>
+                    </div>
+                </div>
+
+                <div class="product-card" data-categories="armarios">
+                    <div class="product-card-img">
+                        <img src="https://antaix.com/wp-content/uploads/2024/04/juvenil_60_armario_vestidor_antaix-1-scaled-1-uai-1707x1707.jpg" alt="Armario con puertas combinadas y sobrecostados - ANTAIX" loading="lazy">
+                        <div class="product-card-overlay"><span>Ver producto</span></div>
+                    </div>
+                    <div class="product-card-body">
+                        <h3>Armario con puertas combinadas y sobrecostados (vestidor)</h3>
+                        <span class="category-badge">Armarios Juveniles</span>
+                    </div>
+                </div>
+
+                <div class="product-card" data-categories="armarios">
+                    <div class="product-card-img">
+                        <img src="https://antaix.com/wp-content/uploads/2024/11/Armario_juvenil_ANTAIX_20-uai-598x598.jpg" alt="Armario con puertas y cajones y escritorio extraíble - ANTAIX" loading="lazy">
+                        <div class="product-card-overlay"><span>Ver producto</span></div>
+                    </div>
+                    <div class="product-card-body">
+                        <h3>Armario con puertas y cajones y escritorio extraíble</h3>
+                        <span class="category-badge">Armarios Juveniles</span>
+                    </div>
+                </div>
+
+                <div class="product-card" data-categories="armarios">
+                    <div class="product-card-img">
+                        <img src="https://antaix.com/wp-content/uploads/2024/04/juvenil_28_armario_antaix-1-scaled-1-uai-1602x1602.jpg" alt="Armario con puertas, cajones, cubo Complet - ANTAIX" loading="lazy">
+                        <div class="product-card-overlay"><span>Ver producto</span></div>
+                    </div>
+                    <div class="product-card-body">
+                        <h3>Armario con puertas, cajones, cubo Complet con partidor y barra de colgar</h3>
+                        <span class="category-badge">Armarios Juveniles</span>
+                    </div>
+                </div>
+
+                <div class="product-card" data-categories="armarios">
+                    <div class="product-card-img">
+                        <img src="https://antaix.com/wp-content/uploads/2024/11/armario_altillo_ANTAIX_17-uai-614x614.jpg" alt="Armario con terminal Open - ANTAIX" loading="lazy">
+                        <div class="product-card-overlay"><span>Ver producto</span></div>
+                    </div>
+                    <div class="product-card-body">
+                        <h3>Armario con terminal Open</h3>
+                        <span class="category-badge">Armarios Juveniles</span>
+                    </div>
+                </div>
+
+                <div class="product-card" data-categories="armarios">
+                    <div class="product-card-img">
+                        <img src="https://antaix.com/wp-content/uploads/2024/04/juvenil_24_armario_antaix-1-scaled-1-uai-2462x2462.jpg" alt="Armario de 2 puertas batientes - ANTAIX" loading="lazy">
+                        <div class="product-card-overlay"><span>Ver producto</span></div>
+                    </div>
+                    <div class="product-card-body">
+                        <h3>Armario de 2 puertas batientes</h3>
+                        <span class="category-badge">Armarios Juveniles</span>
+                    </div>
+                </div>
+
+                <div class="product-card" data-categories="armarios literas">
+                    <div class="product-card-img">
+                        <img src="https://antaix.com/wp-content/uploads/2024/04/juvenil_50_armario_antaix-1-scaled-1.jpg" alt="Armario de 3 puertas correderas con iluminación led interior - ANTAIX" loading="lazy">
+                        <div class="product-card-overlay"><span>Ver producto</span></div>
+                    </div>
+                    <div class="product-card-body">
+                        <h3>Armario de 3 puertas correderas con iluminación led interior</h3>
+                        <span class="category-badge">Armarios Juveniles</span>
+                    </div>
+                </div>
+
+                <div class="product-card" data-categories="armarios">
+                    <div class="product-card-img">
+                        <img src="https://antaix.com/wp-content/uploads/2024/04/juvenil_13_armario_antaix-1-scaled-1-uai-2169x2169.jpg" alt="Armario de 4 puertas batientes - ANTAIX" loading="lazy">
+                        <div class="product-card-overlay"><span>Ver producto</span></div>
+                    </div>
+                    <div class="product-card-body">
+                        <h3>Armario de 4 puertas batientes</h3>
+                        <span class="category-badge">Armarios Juveniles</span>
+                    </div>
+                </div>
+
+                <div class="product-card" data-categories="armarios">
+                    <div class="product-card-img">
+                        <img src="https://antaix.com/wp-content/uploads/2024/04/juvenil_39_armario_antaix-1-scaled-1-uai-2150x2150.jpg" alt="Armario de 4 puertas batientes Rambla - ANTAIX" loading="lazy">
+                        <div class="product-card-overlay"><span>Ver producto</span></div>
+                    </div>
+                    <div class="product-card-body">
+                        <h3>Armario de 4 puertas batientes Rambla</h3>
+                        <span class="category-badge">Armarios Juveniles</span>
+                    </div>
+                </div>
+
+                <div class="product-card" data-categories="armarios">
+                    <div class="product-card-img">
+                        <img src="https://antaix.com/wp-content/uploads/2024/04/juvenil_23_armario_antaix-1-scaled-1-uai-1707x1707.jpg" alt="Armario de 4 puertas plegables - ANTAIX" loading="lazy">
+                        <div class="product-card-overlay"><span>Ver producto</span></div>
+                    </div>
+                    <div class="product-card-body">
+                        <h3>Armario de 4 puertas plegables</h3>
+                        <span class="category-badge">Armarios Juveniles</span>
+                    </div>
+                </div>
+
+                <div class="product-card" data-categories="armarios">
+                    <div class="product-card-img">
+                        <img src="https://antaix.com/wp-content/uploads/2024/04/juvenil_53_armario_antaix-1-scaled-1-uai-2312x2312.jpg" alt="Armario de puertas batientes y cajones con terminal Open - ANTAIX" loading="lazy">
+                        <div class="product-card-overlay"><span>Ver producto</span></div>
+                    </div>
+                    <div class="product-card-body">
+                        <h3>Armario de puertas batientes y cajones con terminal Open</h3>
+                        <span class="category-badge">Armarios Juveniles</span>
+                    </div>
+                </div>
+
+                <div class="product-card" data-categories="armarios">
+                    <div class="product-card-img">
+                        <img src="https://antaix.com/wp-content/uploads/2024/04/juvenil_56_armario_antaix-1-scaled-1-uai-1707x1707.jpg" alt="Armario de puertas batientes, cajones y cubo Complet con partidor - ANTAIX" loading="lazy">
+                        <div class="product-card-overlay"><span>Ver producto</span></div>
+                    </div>
+                    <div class="product-card-body">
+                        <h3>Armario de puertas batientes, cajones y cubo Complet con partidor</h3>
+                        <span class="category-badge">Armarios Juveniles</span>
+                    </div>
+                </div>
+
+                <!-- ESTANTERÍAS -->
+
+                <div class="product-card" data-categories="estanterias">
+                    <div class="product-card-img">
+                        <img src="https://antaix.com/wp-content/uploads/2024/12/estabteria_metalica_ANTAIX_40-uai-778x778.jpg" alt="Estantería Klim con montantes metálicos - ANTAIX" loading="lazy">
+                        <div class="product-card-overlay"><span>Ver producto</span></div>
+                    </div>
+                    <div class="product-card-body">
+                        <h3>Estantería Klim con montantes metálicos</h3>
+                        <span class="category-badge">Estanterías</span>
+                    </div>
+                </div>
+
+                <div class="product-card" data-categories="estanterias zona-estudio literas">
+                    <div class="product-card-img">
+                        <img src="https://antaix.com/wp-content/uploads/2024/12/estanteria_klim_zona_tranajo_47_ANTAIX-uai-552x552.jpg" alt="Estantería Klim con zona estudio - ANTAIX" loading="lazy">
+                        <div class="product-card-overlay"><span>Ver producto</span></div>
+                    </div>
+                    <div class="product-card-body">
+                        <h3>Estantería Klim con zona estudio</h3>
+                        <span class="category-badge">Estanterías</span>
+                    </div>
+                </div>
+
+                <div class="product-card" data-categories="estanterias">
+                    <div class="product-card-img">
+                        <img src="https://antaix.com/wp-content/uploads/2024/11/estanteria_metalica_ANTAIX_29-uai-747x747.jpg" alt="Estantería metálica Klim - ANTAIX" loading="lazy">
+                        <div class="product-card-overlay"><span>Ver producto</span></div>
+                    </div>
+                    <div class="product-card-body">
+                        <h3>Estantería metálica Klim</h3>
+                        <span class="category-badge">Estanterías</span>
+                    </div>
+                </div>
+
+                <div class="product-card" data-categories="estanterias">
+                    <div class="product-card-img">
+                        <img src="https://antaix.com/wp-content/uploads/2024/12/estanteria_metalica_36-uai-534x534.jpg" alt="Estantería metálica Klim - ANTAIX" loading="lazy">
+                        <div class="product-card-overlay"><span>Ver producto</span></div>
+                    </div>
+                    <div class="product-card-body">
+                        <h3>Estantería metálica Klim (composición)</h3>
+                        <span class="category-badge">Estanterías</span>
+                    </div>
+                </div>
+
+                <div class="product-card" data-categories="estanterias zona-estudio">
+                    <div class="product-card-img">
+                        <img src="https://antaix.com/wp-content/uploads/2024/04/libreria-puertas-bajas-faldon_30_antaix-uai-1231x1231.jpg" alt="Estantería para libros con puertas y mesa de oficina - ANTAIX" loading="lazy">
+                        <div class="product-card-overlay"><span>Ver producto</span></div>
+                    </div>
+                    <div class="product-card-body">
+                        <h3>Estantería para libros con puertas y mesa de oficina</h3>
+                        <span class="category-badge">Estanterías</span>
+                    </div>
+                </div>
+
+                <div class="product-card" data-categories="estanterias">
+                    <div class="product-card-img">
+                        <img src="https://antaix.com/wp-content/uploads/2024/11/habitacion_juvenil_ANTAIX_7-e1732109093542-uai-740x740.jpg" alt="Estantería Troya - ANTAIX" loading="lazy">
+                        <div class="product-card-overlay"><span>Ver producto</span></div>
+                    </div>
+                    <div class="product-card-body">
+                        <h3>Estantería Troya</h3>
+                        <span class="category-badge">Estanterías</span>
+                    </div>
+                </div>
+
+                <div class="product-card" data-categories="estanterias">
+                    <div class="product-card-img">
+                        <img src="https://antaix.com/wp-content/uploads/2024/04/juvenil_44_estanteria_antaix-scaled-1-uai-2486x2486.jpg" alt="Estantería Troya con huecos, puertas y escritorio - ANTAIX" loading="lazy">
+                        <div class="product-card-overlay"><span>Ver producto</span></div>
+                    </div>
+                    <div class="product-card-body">
+                        <h3>Estantería Troya con huecos, puertas y escritorio</h3>
+                        <span class="category-badge">Estanterías</span>
+                    </div>
+                </div>
+
+                <!-- HABITACIONES COMPLETAS -->
+
+                <div class="product-card" data-categories="literas estanterias">
+                    <div class="product-card-img">
+                        <img src="https://antaix.com/wp-content/uploads/2024/12/habitacion_litera_ANTAIX_36-uai-754x754.jpg" alt="Habitación dos camas tren y armario Block - ANTAIX" loading="lazy">
+                        <div class="product-card-overlay"><span>Ver producto</span></div>
+                    </div>
+                    <div class="product-card-body">
+                        <h3>Habitación dos camas tren y armario Block</h3>
+                        <span class="category-badge">Literas y Trenes</span>
+                    </div>
+                </div>
+
+                <div class="product-card" data-categories="abatibles estanterias">
+                    <div class="product-card-img">
+                        <img src="https://antaix.com/wp-content/uploads/2024/12/litera_doble_abatible_ANTAIX_40-uai-511x511.jpg" alt="Habitación estudio con cama abatible horizontal y escritorio pats Lys - ANTAIX" loading="lazy">
+                        <div class="product-card-overlay"><span>Ver producto</span></div>
+                    </div>
+                    <div class="product-card-body">
+                        <h3>Habitación estudio con cama abatible horizontal y escritorio pats Lys</h3>
+                        <span class="category-badge">Abatibles</span>
+                    </div>
+                </div>
+
+                <div class="product-card" data-categories="literas infantiles">
+                    <div class="product-card-img">
+                        <img src="https://antaix.com/wp-content/uploads/2024/11/literal_aramrio_extraible_ANTAIX_32-uai-939x939.jpg" alt="Habitación infantil cama superior y armario Block - ANTAIX" loading="lazy">
+                        <div class="product-card-overlay"><span>Ver producto</span></div>
+                    </div>
+                    <div class="product-card-body">
+                        <h3>Habitación infantil cama superior y armario Block</h3>
+                        <span class="category-badge">Habitaciones Infantiles</span>
+                    </div>
+                </div>
+
+                <div class="product-card" data-categories="infantiles">
+                    <div class="product-card-img">
+                        <img src="https://antaix.com/wp-content/uploads/2024/04/habitacion_infantil_19_cama_nido_antaix_DETALLE-scaled-1-uai-2099x2099.jpg" alt="Habitación infantil con cama nido, arcón-escritorio extraíble y armario - ANTAIX" loading="lazy">
+                        <div class="product-card-overlay"><span>Ver producto</span></div>
+                    </div>
+                    <div class="product-card-body">
+                        <h3>Habitación infantil con cama nido, arcón-escritorio extraíble y armario</h3>
+                        <span class="category-badge">Habitaciones Infantiles</span>
+                    </div>
+                </div>
+
+                <div class="product-card" data-categories="armarios">
+                    <div class="product-card-img">
+                        <img src="https://antaix.com/wp-content/uploads/2024/11/composicion_juvenil_ANTAIX_11-uai-949x949.jpg" alt="Habitación juvenil con arcón fuelle Complet y armario - ANTAIX" loading="lazy">
+                        <div class="product-card-overlay"><span>Ver producto</span></div>
+                    </div>
+                    <div class="product-card-body">
+                        <h3>Habitación juvenil con arcón fuelle Complet y armario con barra de colgar</h3>
+                        <span class="category-badge">Armarios Juveniles</span>
+                    </div>
+                </div>
+
+                <div class="product-card" data-categories="literas">
+                    <div class="product-card-img">
+                        <img src="https://antaix.com/wp-content/uploads/2024/11/ARMARIO_CAMA_JUVENIL_antaix_3-uai-939x939.jpg" alt="Habitación juvenil con armario altillo y escritorio Muse - ANTAIX" loading="lazy">
+                        <div class="product-card-overlay"><span>Ver producto</span></div>
+                    </div>
+                    <div class="product-card-body">
+                        <h3>Habitación juvenil con armario altillo y escritorio Muse</h3>
+                        <span class="category-badge">Literas y Trenes</span>
+                    </div>
+                </div>
+
+                <div class="product-card" data-categories="armarios">
+                    <div class="product-card-img">
+                        <img src="https://antaix.com/wp-content/uploads/2024/11/habitacion_juvenil_ANTAIX_20-uai-939x939.jpg" alt="Habitación juvenil con cabezal con luz y armario con escritorio extraíble - ANTAIX" loading="lazy">
+                        <div class="product-card-overlay"><span>Ver producto</span></div>
+                    </div>
+                    <div class="product-card-body">
+                        <h3>Habitación juvenil con cabezal con luz y armario con escritorio extraíble</h3>
+                        <span class="category-badge">Armarios Juveniles</span>
+                    </div>
+                </div>
+
+                <div class="product-card" data-categories="armarios camas-nidos">
+                    <div class="product-card-img">
+                        <img src="https://antaix.com/wp-content/uploads/2024/11/armario_rincon_ANTAIX_16-uai-754x754.jpg" alt="Habitación juvenil con cama Complet - ANTAIX" loading="lazy">
+                        <div class="product-card-overlay"><span>Ver producto</span></div>
+                    </div>
+                    <div class="product-card-body">
+                        <h3>Habitación juvenil con cama Complet</h3>
+                        <span class="category-badge">Camas y Nidos</span>
+                    </div>
+                </div>
+
+                <div class="product-card" data-categories="camas-nidos literas armarios">
+                    <div class="product-card-img">
+                        <img src="https://antaix.com/wp-content/uploads/2024/11/juvenil_ANTAIX_23-uai-689x689.jpg" alt="Habitación juvenil con cama elevable y galeria Dorso - ANTAIX" loading="lazy">
+                        <div class="product-card-overlay"><span>Ver producto</span></div>
+                    </div>
+                    <div class="product-card-body">
+                        <h3>Habitación juvenil con cama elevable y galería Dorso</h3>
+                        <span class="category-badge">Camas y Nidos</span>
+                    </div>
+                </div>
+
+                <div class="product-card" data-categories="zona-estudio literas armarios camas-nidos">
+                    <div class="product-card-img">
+                        <img src="https://antaix.com/wp-content/uploads/2024/11/habitacion_juvenil_ANTAIX_31-uai-891x891.jpg" alt="Habitación juvenil con cama nido arrastre - ANTAIX" loading="lazy">
+                        <div class="product-card-overlay"><span>Ver producto</span></div>
+                    </div>
+                    <div class="product-card-body">
+                        <h3>Habitación juvenil con cama nido arrastre</h3>
+                        <span class="category-badge">Camas y Nidos</span>
+                    </div>
+                </div>
+
+                <div class="product-card" data-categories="camas-nidos armarios">
+                    <div class="product-card-img">
+                        <img src="https://antaix.com/wp-content/uploads/2024/11/juvenil_armario_ANTAIX_18-uai-861x861.jpg" alt="Habitación juvenil con cama nido y armario asimétrico - ANTAIX" loading="lazy">
+                        <div class="product-card-overlay"><span>Ver producto</span></div>
+                    </div>
+                    <div class="product-card-body">
+                        <h3>Habitación juvenil con cama nido y armario asimétrico</h3>
+                        <span class="category-badge">Camas y Nidos</span>
+                    </div>
+                </div>
+
+                <div class="product-card" data-categories="armarios camas-nidos">
+                    <div class="product-card-img">
+                        <img src="https://antaix.com/wp-content/uploads/2024/11/habitacion_juvenil_-ANTAIX_17-uai-691x691.jpg" alt="Habitación juvenil con cama nido y mesita Kubo - ANTAIX" loading="lazy">
+                        <div class="product-card-overlay"><span>Ver producto</span></div>
+                    </div>
+                    <div class="product-card-body">
+                        <h3>Habitación juvenil con cama nido y mesita Kubo</h3>
+                        <span class="category-badge">Camas y Nidos</span>
+                    </div>
+                </div>
+
+                <div class="product-card" data-categories="zona-estudio estanterias camas-nidos">
+                    <div class="product-card-img">
+                        <img src="https://antaix.com/wp-content/uploads/2024/11/habitacion_juvenil_ANTAIX_7-e1732109093542-uai-740x740.jpg" alt="Habitación Juvenil con estanteria y zona estudio - ANTAIX" loading="lazy">
+                        <div class="product-card-overlay"><span>Ver producto</span></div>
+                    </div>
+                    <div class="product-card-body">
+                        <h3>Habitación Juvenil con estantería y zona estudio</h3>
+                        <span class="category-badge">Zona Estudio</span>
+                    </div>
+                </div>
+
+                <div class="product-card" data-categories="zona-estudio literas armarios">
+                    <div class="product-card-img">
+                        <img src="https://antaix.com/wp-content/uploads/2024/12/composicion_juvenil_litera_47_ANTAIX-uai-754x754.jpg" alt="Habitación juvenil con litera Mixed con cajones inferiores y guardamiedos - ANTAIX" loading="lazy">
+                        <div class="product-card-overlay"><span>Ver producto</span></div>
+                    </div>
+                    <div class="product-card-body">
+                        <h3>Habitación juvenil con litera Mixed con cajones inferiores y guardamiedos</h3>
+                        <span class="category-badge">Literas y Trenes</span>
+                    </div>
+                </div>
+
+                <div class="product-card" data-categories="camas-nidos zona-estudio estanterias">
+                    <div class="product-card-img">
+                        <img src="https://antaix.com/wp-content/uploads/2024/11/habitacion_juvenil_ANTAIX_22-uai-754x754.jpg" alt="Habitación juvenil con zona estudio y estantería - ANTAIX" loading="lazy">
+                        <div class="product-card-overlay"><span>Ver producto</span></div>
+                    </div>
+                    <div class="product-card-body">
+                        <h3>Habitación juvenil con zona estudio y estantería</h3>
+                        <span class="category-badge">Zona Estudio</span>
+                    </div>
+                </div>
+
+                <div class="product-card" data-categories="camas-nidos armarios">
+                    <div class="product-card-img">
+                        <img src="https://antaix.com/wp-content/uploads/2024/12/habitacion_doble_aro_miter_51_ANTAIX-uai-744x744.jpg" alt="Habitación juvenil doble con panel hueco con luz - ANTAIX" loading="lazy">
+                        <div class="product-card-overlay"><span>Ver producto</span></div>
+                    </div>
+                    <div class="product-card-body">
+                        <h3>Habitación juvenil doble con panel hueco con luz</h3>
+                        <span class="category-badge">Camas y Nidos</span>
+                    </div>
+                </div>
+
+                <div class="product-card" data-categories="abatibles zona-estudio estanterias">
+                    <div class="product-card-img">
+                        <img src="https://antaix.com/wp-content/uploads/2024/12/Det_33_01-uai-964x964.jpg" alt="Habitación para espacios pequeños con cama y zona estudio - ANTAIX" loading="lazy">
+                        <div class="product-card-overlay"><span>Ver producto</span></div>
+                    </div>
+                    <div class="product-card-body">
+                        <h3>Habitación para espacios pequeños con cama y zona estudio</h3>
+                        <span class="category-badge">Abatibles</span>
+                    </div>
+                </div>
+
+                <div class="product-card" data-categories="camas-nidos">
+                    <div class="product-card-img">
+                        <img src="https://antaix.com/wp-content/uploads/2024/04/juvenil_4_cama_nido_antaix-1-scaled-1-uai-1707x1707.jpg" alt="Juvenil con 2 camas nido alta y zona de estudio - ANTAIX" loading="lazy">
+                        <div class="product-card-overlay"><span>Ver producto</span></div>
+                    </div>
+                    <div class="product-card-body">
+                        <h3>Juvenil con 2 camas nido alta y zona de estudio</h3>
+                        <span class="category-badge">Camas y Nidos</span>
+                    </div>
+                </div>
+
+                <div class="product-card" data-categories="camas-nidos zona-estudio">
+                    <div class="product-card-img">
+                        <img src="https://antaix.com/wp-content/uploads/2024/04/juvenil_13_escritorio_antaix_DETALLE-1-scaled-1-uai-2227x2227.jpg" alt="Juvenil con 2 camas nido y arcón-escritorio extraíble - ANTAIX" loading="lazy">
+                        <div class="product-card-overlay"><span>Ver producto</span></div>
+                    </div>
+                    <div class="product-card-body">
+                        <h3>Juvenil con 2 camas nido y arcón-escritorio extraíble</h3>
+                        <span class="category-badge">Camas y Nidos</span>
+                    </div>
+                </div>
+
+                <div class="product-card" data-categories="camas-nidos armarios">
+                    <div class="product-card-img">
+                        <img src="https://antaix.com/wp-content/uploads/2024/04/juvenil_3_cama_nido_antaix_DETALLE-1-scaled-1-uai-1707x1707.jpg" alt="Juvenil con 2 camas nido y zona de estudio con armario - ANTAIX" loading="lazy">
+                        <div class="product-card-overlay"><span>Ver producto</span></div>
+                    </div>
+                    <div class="product-card-body">
+                        <h3>Juvenil con 2 camas nido y zona de estudio con armario</h3>
+                        <span class="category-badge">Camas y Nidos</span>
+                    </div>
+                </div>
+
+                <div class="product-card" data-categories="camas-nidos">
+                    <div class="product-card-img">
+                        <img src="https://antaix.com/wp-content/uploads/2024/04/juvenil_20_chifonier_antaix_DET-1-scaled-1-uai-2176x2176.jpg" alt="Juvenil con 2 camas, armario y puentes - ANTAIX" loading="lazy">
+                        <div class="product-card-overlay"><span>Ver producto</span></div>
+                    </div>
+                    <div class="product-card-body">
+                        <h3>Juvenil con 2 camas, armario y puentes</h3>
+                        <span class="category-badge">Camas y Nidos</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- CATALOG PDF LINK -->
+            <div class="catalog-link">
+                <a href="https://antaix.com/wp-content/uploads/2026/06/Catalogo_Stay_Young-.pdf" target="_blank" rel="noopener">Ver Catálogo Stay Young (PDF)</a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="page-footer">
+        <div class="container">
+            <p><a href="index.html">&larr; Volver a la web principal</a></p>
+            <p>Paz Marés &middot; C/ Vergós 44, 08017 Barcelona &middot; <a href="tel:609428878">609 42 88 78</a></p>
+            <p style="margin-top: 12px; font-size: 0.8rem; opacity: 0.6;">&copy; Paz Marés 2025. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- FILTER JS -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const productCards = document.querySelectorAll('.product-card');
+
+            filterBtns.forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    // Update active button
+                    filterBtns.forEach(function(b) { b.classList.remove('active'); });
+                    btn.classList.add('active');
+
+                    const filter = btn.getAttribute('data-filter');
+
+                    productCards.forEach(function(card) {
+                        if (filter === 'todos') {
+                            card.classList.remove('hidden');
+                        } else {
+                            const categories = card.getAttribute('data-categories') || '';
+                            if (categories.split(' ').indexOf(filter) !== -1) {
+                                card.classList.remove('hidden');
+                            } else {
+                                card.classList.add('hidden');
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
