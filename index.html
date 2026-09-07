@@ -1299,12 +1299,13 @@
 
         .descanso-intro-inner {
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: space-between;
-            gap: 60px;
+            text-align: center;
+            gap: 32px;
         }
 
-        .descanso-intro-left { flex: 1; }
+        .descanso-intro-left { max-width: 640px; }
 
         .descanso-intro-left h2 {
             font-size: 2.4rem;
@@ -1318,14 +1319,15 @@
             color: var(--text-light);
             line-height: 1.8;
             max-width: 520px;
+            margin: 0 auto;
         }
 
         .descanso-intro-pills {
-            flex-shrink: 0;
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
+            flex-wrap: wrap;
             gap: 10px;
-            min-width: 220px;
+            justify-content: center;
         }
 
         .descanso-pill {
@@ -1344,7 +1346,7 @@
             background: #0bc0df;
             color: white;
             border-color: #0bc0df;
-            transform: translateX(5px);
+            transform: translateY(-2px);
         }
 
         .descanso-pill::after { display: none !important; }
@@ -1742,134 +1744,6 @@
         }
 
         /* ========================
-           FLOATING OFFER CARD
-        ======================== */
-        .offer-card {
-            position: fixed;
-            bottom: 30px;
-            left: 30px;
-            width: 290px;
-            background: #ffffff;
-            border-radius: 18px;
-            box-shadow: 0 16px 48px rgba(0,0,0,0.18);
-            overflow: hidden;
-            z-index: 9998;
-            transform: translateY(120px);
-            opacity: 0;
-            transition: transform 0.5s cubic-bezier(0.175,0.885,0.32,1.1), opacity 0.5s ease;
-            pointer-events: none;
-        }
-
-        .offer-card.visible {
-            transform: translateY(0);
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        .offer-card.dismissed {
-            transform: translateY(120px);
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .offer-card-header {
-            background: linear-gradient(135deg, #1A365D 0%, #0bc0df 100%);
-            padding: 14px 18px 12px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .offer-card-header span {
-            font-size: 0.7rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: rgba(255,255,255,0.85);
-        }
-
-        .offer-card-close {
-            background: none;
-            border: none;
-            color: rgba(255,255,255,0.7);
-            cursor: pointer;
-            padding: 0;
-            line-height: 1;
-            transition: color 0.2s;
-        }
-
-        .offer-card-close:hover { color: white; }
-
-        .offer-card-body {
-            padding: 18px 20px 20px;
-        }
-
-        .offer-card-body h4 {
-            font-size: 1rem;
-            color: var(--primary);
-            margin-bottom: 6px;
-            line-height: 1.3;
-        }
-
-        .offer-card-body p {
-            font-size: 0.82rem;
-            color: var(--text-light);
-            line-height: 1.5;
-            margin-bottom: 14px;
-        }
-
-        .offer-price-row {
-            display: flex;
-            align-items: baseline;
-            gap: 10px;
-            margin-bottom: 16px;
-        }
-
-        .offer-price-new {
-            font-size: 1.9rem;
-            font-weight: 800;
-            color: #0bc0df;
-            line-height: 1;
-        }
-
-        .offer-price-old {
-            font-size: 1rem;
-            color: var(--text-light);
-            text-decoration: line-through;
-        }
-
-        .offer-badge {
-            background: #fee2e2;
-            color: #dc2626;
-            font-size: 0.7rem;
-            font-weight: 700;
-            padding: 3px 8px;
-            border-radius: 50px;
-            letter-spacing: 0.5px;
-        }
-
-        .offer-card-cta {
-            display: block;
-            text-align: center;
-            background: #1A365D;
-            color: white;
-            padding: 11px;
-            border-radius: 10px;
-            font-weight: 700;
-            font-size: 0.88rem;
-            transition: background 0.2s;
-        }
-
-        .offer-card-cta:hover { background: #0bc0df; }
-
-        .offer-card-fine {
-            font-size: 0.72rem;
-            color: var(--text-light);
-            text-align: center;
-            margin-top: 10px;
-        }
-
-        /* ========================
            FLOATING CONTACT MENU
         ======================== */
         .floating-menu-container {
@@ -2012,6 +1886,394 @@
             .category-card { height: 260px; }
             .cat-vitrina { grid-column: span 1; }
         }
+
+        /* ========================
+           PRODUCT MODAL
+        ======================== */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(4px);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0s linear 0.3s;
+        }
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 0.3s ease;
+        }
+        .modal-card {
+            background: #fff;
+            border-radius: 16px;
+            max-width: 560px;
+            width: 92%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 25px 80px rgba(0,0,0,0.3);
+            position: relative;
+            transform: translateY(30px) scale(0.95);
+            transition: transform 0.3s ease;
+        }
+        .modal-overlay.active .modal-card {
+            transform: translateY(0) scale(1);
+        }
+        .modal-close {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(0,0,0,0.06);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+            transition: background 0.2s;
+        }
+        .modal-close:hover { background: rgba(0,0,0,0.12); }
+        .modal-img {
+            width: 100%;
+            height: 320px;
+            object-fit: cover;
+            border-radius: 16px 16px 0 0;
+        }
+        .modal-img-placeholder {
+            width: 100%;
+            height: 320px;
+            border-radius: 16px 16px 0 0;
+            background: linear-gradient(135deg, #e2e8f0, #cbd5e1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            color: #64748b;
+            font-weight: 600;
+        }
+        .modal-body {
+            padding: 28px;
+        }
+        .modal-body h3 {
+            font-size: 1.4rem;
+            margin-bottom: 4px;
+        }
+        .modal-brand {
+            font-size: 0.82rem;
+            color: var(--accent);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+            display: block;
+        }
+        .modal-tech-badge {
+            display: inline-block;
+            background: rgba(11,192,223,0.12);
+            color: #0891b2;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin-bottom: 14px;
+        }
+        .modal-body p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        .modal-wa-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #25D366;
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: background 0.2s, transform 0.2s;
+            box-shadow: 0 4px 14px rgba(37,211,102,0.35);
+        }
+        .modal-wa-btn:hover {
+            background: #1fb855;
+            transform: translateY(-2px);
+        }
+
+        /* ========================
+           CURATED CATALOG CARDS
+        ======================== */
+        .catalog-subsection {
+            margin-top: 56px;
+        }
+        .catalog-subsection-header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+        .catalog-subsection-header h3 {
+            font-size: 1.5rem;
+            margin-bottom: 6px;
+        }
+        .catalog-subsection-header p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        /* Filter Tabs */
+        .filter-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 28px;
+        }
+        .filter-tab {
+            padding: 8px 20px;
+            border-radius: 50px;
+            border: 2px solid #e2e8f0;
+            background: #fff;
+            color: var(--text-main);
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .filter-tab:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+        .filter-tab.active {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: #fff;
+        }
+
+        /* Product Grid */
+        .catalog-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+        .catalog-card {
+            background: #fff;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+        .catalog-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 32px rgba(0,0,0,0.12);
+        }
+        .catalog-card-img {
+            position: relative;
+            height: 220px;
+            overflow: hidden;
+        }
+        .catalog-card-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(26,54,93,0.85);
+            color: #fff;
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            padding: 4px 10px;
+            border-radius: 6px;
+            z-index: 2;
+            text-transform: uppercase;
+            backdrop-filter: blur(4px);
+        }
+        .catalog-card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+        .catalog-card:hover .catalog-card-img img {
+            transform: scale(1.06);
+        }
+        .catalog-card-img .img-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            color: #64748b;
+            font-weight: 600;
+            text-align: center;
+            padding: 12px;
+        }
+        .catalog-card-body {
+            padding: 16px 18px 20px;
+        }
+        .catalog-card-body h4 {
+            font-size: 1rem;
+            margin-bottom: 2px;
+        }
+        .card-brand {
+            font-size: 0.72rem;
+            color: var(--accent);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+        .card-tech {
+            display: inline-block;
+            margin-top: 8px;
+            background: rgba(11,192,223,0.1);
+            color: #0891b2;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 16px;
+        }
+        .catalog-card-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(26,54,93,0.55);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .catalog-card-img:hover .catalog-card-overlay {
+            opacity: 1;
+        }
+        .catalog-card-overlay span {
+            background: #fff;
+            color: var(--primary);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.82rem;
+        }
+
+        /* Color Selector */
+        .color-selector {
+            display: flex;
+            gap: 6px;
+            margin-top: 10px;
+        }
+        .color-dot {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: border-color 0.2s, transform 0.2s;
+        }
+        .color-dot:hover, .color-dot.active {
+            border-color: var(--accent);
+            transform: scale(1.15);
+        }
+
+        /* Banner CTA inside sections */
+        .catalog-banner {
+            text-align: center;
+            margin-top: 40px;
+            padding: 36px 24px;
+            background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+            border-radius: 16px;
+            border: 1px solid rgba(11,192,223,0.15);
+        }
+        .catalog-banner p {
+            font-size: 1.05rem;
+            color: var(--text-main);
+            max-width: 600px;
+            margin: 0 auto 20px;
+            line-height: 1.6;
+        }
+        .catalog-banner strong {
+            color: var(--primary);
+        }
+
+        /* ========================
+           MOBILIARIO COMPOSICIONES
+        ======================== */
+        .mob-comp-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+        .mob-comp {
+            background: var(--bg-white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        .mob-comp-img img {
+            width: 100%;
+            height: 260px;
+            object-fit: cover;
+            display: block;
+        }
+        .mob-comp-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+        }
+        .mob-comp-num {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            flex-shrink: 0;
+            line-height: 1;
+        }
+        .mob-comp-thumb {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 0;
+        }
+        .mob-comp-thumb img {
+            max-height: 110px;
+            width: 100%;
+            object-fit: contain;
+            display: block;
+        }
+        @media (max-width: 968px) {
+            .mob-comp-grid { grid-template-columns: 1fr; }
+            .mob-comp-img img { height: 320px; }
+            .mob-comp-thumb img { max-height: 130px; }
+        }
+        @media (max-width: 600px) {
+            .mob-comp-img img { height: 220px; }
+        }
+
+        /* Responsive catalog */
+        @media (max-width: 968px) {
+            .catalog-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 18px;
+            }
+        }
+        @media (max-width: 600px) {
+            .catalog-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+            .catalog-card-img { height: 200px; }
+            .modal-img, .modal-img-placeholder { height: 240px; }
+        }
     </style>
 </head>
 <body>
@@ -2025,84 +2287,9 @@
                 </a>
                 <div class="nav-links">
                     <a href="#inicio">Inicio</a>
-
-                    <!-- DESCANSO MEGA MENU -->
-                    <div class="nav-item">
-                        <a href="#descanso">Descanso
-                            <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                        </a>
-                        <div class="dropdown multi-col">
-                            <div class="dropdown-col">
-                                <h5>Colchones</h5>
-                                <ul>
-                                    <li><a href="colchones.html">Muelles Ensacados</a></li>
-                                    <li><a href="colchones.html">Viscoelástico</a></li>
-                                    <li><a href="colchones.html">Látex</a></li>
-                                </ul>
-                                <h5>Sillones y Sofás Cama</h5>
-                                <ul><li><a href="#colchones">Ver modelos</a></li></ul>
-                                <h5>Canapés / Bases</h5>
-                                <ul><li><a href="canapes-bases.html">Ver modelos</a></li></ul>
-                                <h5>Somier Articulado</h5>
-                                <ul><li><a href="#colchones">Ver modelos</a></li></ul>
-                                <h5>Cabeceros</h5>
-                                <ul><li><a href="cabeceros.html">Ver colección</a></li></ul>
-                                <h5>Packs</h5>
-                                <ul><li><a href="#packs">Base + Colchón</a></li></ul>
-                            </div>
-                            <div class="dropdown-col">
-                                <h5>Complementos</h5>
-                                <ul>
-                                    <li><a href="#complementos">Almohadas</a></li>
-                                    <li><a href="#complementos">Protectores de colchón</a></li>
-                                    <li><a href="#complementos">Nórdicos</a></li>
-                                </ul>
-                                <h5>Ropa de Cama</h5>
-                                <ul>
-                                    <li><a href="#complementos">Sábanas 300 hilos blancas</a></li>
-                                    <li><a href="#complementos">Fundas almohada 300 hilos</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- MOBILIARIO DROPDOWN -->
-                    <div class="nav-item">
-                        <a href="#mobiliario">Mobiliario
-                            <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                        </a>
-                        <div class="dropdown">
-                            <div class="dropdown-col">
-                                <h5>Dormitorios Juveniles</h5>
-                                <ul>
-                                    <li><a href="dormitorios-juveniles.html">Marca ANTAIX</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- JUGUETES DROPDOWN -->
-                    <div class="nav-item">
-                        <a href="#juguetes">Juguetes
-                            <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                        </a>
-                        <div class="dropdown">
-                            <div class="dropdown-col">
-                                <h5>Peluches</h5>
-                                <ul>
-                                    <li><a href="#juguetes">Jellycat</a></li>
-                                    <li><a href="#juguetes">Bon Ton Toys</a></li>
-                                </ul>
-                                <h5>Más categorías</h5>
-                                <ul>
-                                    <li><a href="#juguetes">Educativos</a></li>
-                                    <li><a href="#juguetes">Imitación</a></li>
-                                    <li><a href="#juguetes">Libros</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
+                    <a href="#descanso">Descanso</a>
+                    <a href="#mobiliario">Mobiliario</a>
+                    <a href="#juguetes">Juguetes</a>
                     <a href="#testimonios">Opiniones</a>
                     <a href="#contacto">Contacto</a>
                 </div>
@@ -2202,94 +2389,458 @@
                 </div>
 
                 <div class="descanso-intro-pills">
-                    <a href="colchones.html" class="descanso-pill">Colchones</a>
-                    <a href="canapes-bases.html" class="descanso-pill">Canapés / Bases</a>
-                    <a href="cabeceros.html" class="descanso-pill">Cabeceros</a>
-                    <a href="#colchones" class="descanso-pill">Somier Articulado</a>
+                    <a href="#sec-colchones" class="descanso-pill">Colchones</a>
+                    <a href="#sec-canapes" class="descanso-pill">Canapés / Bases</a>
+                    <a href="#sec-cabeceros" class="descanso-pill">Cabeceros</a>
+                    <a href="#sec-somieres" class="descanso-pill">Somieres</a>
+                    <a href="#sec-sillones" class="descanso-pill">Sillones</a>
                     <a href="#complementos" class="descanso-pill">Complementos</a>
-                    <a href="#colchones" class="descanso-pill">Sillones y Sofás Cama</a>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- ===========================
-         DESCANSO EXTRA: Colchones, Canapés, Cabeceros, Sillones
+         CATÁLOGO CURADO: COLCHONES
     =========================== -->
-    <section id="colchones" class="descanso-extra-section">
+    <section id="sec-colchones" class="descanso-extra-section">
         <div class="container">
-            <div class="section-header reveal">
-                <span class="section-badge">Todo para tu dormitorio</span>
-                <h2 style="margin-top:12px;">Nuestra selección de descanso</h2>
-                <p>Colchones, canapés, cabeceros y sillones: todo lo que necesitas para tu dormitorio ideal.</p>
+            <div class="catalog-subsection-header reveal">
+                <span class="section-badge">Colchones</span>
+                <h3>Nuestra selección con las mejores tecnologías de descanso</h3>
+                <p>Firmeza, transpirabilidad y confort para cada necesidad.</p>
             </div>
-            <div class="descanso-extra-grid">
 
-                <!-- Colchones -->
-                <div class="descanso-extra-card reveal">
-                    <div class="dcard-img">
-                        <img src="https://www.sonpura.es/img/cms/Titan_shooting.jpg" alt="Colchones en Paz Marés Barcelona" loading="lazy">
+            <div class="filter-tabs reveal" data-filter-group="colchones">
+                <button class="filter-tab active" data-filter="todos">Todos</button>
+                <button class="filter-tab" data-filter="muelles">Muelles Ensacados</button>
+                <button class="filter-tab" data-filter="visco">Viscoelástico</button>
+                <button class="filter-tab" data-filter="latex">Látex</button>
+            </div>
+
+            <div class="catalog-grid" id="colchones-grid">
+                <!-- Royal -->
+                <div class="catalog-card reveal" data-category="muelles"
+                     data-modal='{"name":"Royal","brand":"Sonpura","tech":"Multisac Micro","img":"https://www.sonpura.es/11001-sonpura/colchon-royal.jpg","desc":"Colchón de muelles ensacados con tecnología Multisac Micro. Núcleo de micromuelles independientes que proporcionan una adaptabilidad excepcional punto por punto, máxima transpirabilidad y un soporte firme pero acogedor."}'>
+                    <div class="catalog-card-img">
+                        <span class="catalog-card-badge">Muelles Ensacados</span>
+                        <img src="https://www.sonpura.es/11001-sonpura/colchon-royal.jpg" alt="Colchón Royal - Sonpura" loading="lazy">
+                        <div class="catalog-card-overlay"><span>Ver Detalles</span></div>
                     </div>
-                    <div class="dcard-body">
-                        <span class="dcard-tag">Descanso</span>
-                        <h3>Colchones</h3>
-                        <p>Extensa colección de colchones de muelles ensacados, Viscoelástico y Látex que te harán disfrutar como nunca de tu descanso, incluyendo las principales marcas del mercado.</p>
-                        <a href="colchones.html" class="dcard-link">Ver sección →</a>
+                    <div class="catalog-card-body">
+                        <span class="card-brand">Sonpura</span>
+                        <h4>Royal</h4>
                     </div>
                 </div>
 
-                <!-- Canapés / Bases -->
-                <div class="descanso-extra-card reveal" style="transition-delay:0.1s;">
-                    <div class="dcard-img">
-                        <img src="https://www.sonpura.es/img/2022.01%209.jpg" alt="Canapés y Bases en Paz Marés Barcelona" loading="lazy">
+                <!-- Indra -->
+                <div class="catalog-card reveal" data-category="muelles" style="transition-delay:0.08s"
+                     data-modal='{"name":"Indra","brand":"Sonpura","tech":"Multisac Advanced","img":"https://www.sonpura.es/12564-sonpura/colchon-indra.jpg","desc":"Colchón de muelles ensacados con tecnología Multisac Advanced. Sistema avanzado de muelles ensacados que ofrece un equilibrio perfecto entre firmeza y adaptabilidad, con capas de confort de alta densidad."}'>
+                    <div class="catalog-card-img">
+                        <span class="catalog-card-badge">Muelles Ensacados</span>
+                        <img src="https://www.sonpura.es/12564-sonpura/colchon-indra.jpg" alt="Colchón Indra - Sonpura" loading="lazy">
+                        <div class="catalog-card-overlay"><span>Ver Detalles</span></div>
                     </div>
-                    <div class="dcard-body">
-                        <span class="dcard-tag">Descanso</span>
-                        <h3>Canapés / Bases</h3>
-                        <p>Aliadas perfectas para complementar tu descanso. Fabricadas con materiales de alta calidad y diseños para todos los gustos, te proporcionarán alta practicidad y un diseño personal para tu dormitorio.</p>
-                        <a href="canapes-bases.html" class="dcard-link">Ver sección →</a>
-                    </div>
-                </div>
-
-                <!-- Somier Articulado -->
-                <div class="descanso-extra-card reveal" style="transition-delay:0.15s;">
-                    <div class="dcard-img">
-                        <img src="https://www.sonpura.es/img/cms/Titan_shooting.jpg" alt="Somier Articulado en Paz Marés Barcelona" loading="lazy">
-                    </div>
-                    <div class="dcard-body">
-                        <span class="dcard-tag">Descanso</span>
-                        <h3>Somier Articulado</h3>
-                        <p>Comodidad y versatilidad en un solo producto. Nuestros somieres articulados permiten ajustar la posición del cuerpo para un descanso personalizado, mejorando la circulación y aliviando tensiones musculares.</p>
-                        <a href="#colchones" class="dcard-link">Ver sección →</a>
+                    <div class="catalog-card-body">
+                        <span class="card-brand">Sonpura</span>
+                        <h4>Indra</h4>
                     </div>
                 </div>
 
-                <!-- Cabeceros -->
-                <div class="descanso-extra-card reveal" style="transition-delay:0.2s;">
-                    <div class="dcard-img">
-                        <img src="https://www.sonpura.es/img/2022.01%207.jpg" alt="Cabeceros en Paz Marés Barcelona" loading="lazy">
+                <!-- Golden -->
+                <div class="catalog-card reveal" data-category="muelles" style="transition-delay:0.16s"
+                     data-modal='{"name":"Golden","brand":"Sonpura","tech":"Multisac System","img":"https://www.sonpura.es/12411-sonpura/colchon-golden-50-de-descuento.jpg","desc":"Colchón de muelles ensacados con tecnología Multisac System. Sistema de muelles ensacados de última generación con zonas de confort diferenciadas para un descanso óptimo en cualquier postura."}'>
+                    <div class="catalog-card-img">
+                        <span class="catalog-card-badge">Muelles Ensacados</span>
+                        <img src="https://www.sonpura.es/12411-sonpura/colchon-golden-50-de-descuento.jpg" alt="Colchón Golden - Sonpura" loading="lazy">
+                        <div class="catalog-card-overlay"><span>Ver Detalles</span></div>
                     </div>
-                    <div class="dcard-body">
-                        <span class="dcard-tag">Descanso</span>
-                        <h3>Cabeceros</h3>
-                        <p>El toque final que aportará la distinción que deseas a tu descanso. Nuestra colección proporcionará un salto de calidad a la estética y confort de tu dormitorio, creando un espacio acogedor y reconfortable.</p>
-                        <a href="cabeceros.html" class="dcard-link">Ver sección →</a>
-                    </div>
-                </div>
-
-                <!-- Sillones y Sofás Cama -->
-                <div class="descanso-extra-card reveal" style="transition-delay:0.3s;">
-                    <div class="dcard-img">
-                        <img src="public/photos_webp/Seccion Colchones/Verticales/vista-general-2.webp" alt="Sillones y Sofás Cama en Paz Marés Barcelona" loading="lazy">
-                    </div>
-                    <div class="dcard-body">
-                        <span class="dcard-tag">Descanso</span>
-                        <h3>Sillones y Sofás Cama</h3>
-                        <p>Completa tu espacio de descanso con nuestra selección de sillones y sofás cama. Comodidad y estilo para cada rincón de tu hogar, con opciones para todos los gustos y medidas.</p>
-                        <a href="#colchones" class="dcard-link">Ver sección →</a>
+                    <div class="catalog-card-body">
+                        <span class="card-brand">Sonpura</span>
+                        <h4>Golden</h4>
                     </div>
                 </div>
 
+                <!-- Spirit -->
+                <div class="catalog-card reveal" data-category="visco" style="transition-delay:0.08s"
+                     data-modal='{"name":"Spirit","brand":"Sonpura","tech":"Multiadapt","img":"https://www.sonpura.es/11109-sonpura/colchon-spirit.jpg","desc":"Colchón viscoelástico con tecnología Multiadapt. Espuma viscoelástica de alta densidad que se adapta a la forma de tu cuerpo, distribuyendo la presión uniformemente y eliminando los puntos de tensión para un descanso reparador."}'>
+                    <div class="catalog-card-img">
+                        <span class="catalog-card-badge">Viscoelástico</span>
+                        <img src="https://www.sonpura.es/11109-sonpura/colchon-spirit.jpg" alt="Colchón Spirit - Sonpura" loading="lazy">
+                        <div class="catalog-card-overlay"><span>Ver Detalles</span></div>
+                    </div>
+                    <div class="catalog-card-body">
+                        <span class="card-brand">Sonpura</span>
+                        <h4>Spirit</h4>
+                    </div>
+                </div>
+
+                <!-- Naturalia Grand Standing -->
+                <div class="catalog-card reveal" data-category="latex" style="transition-delay:0.16s"
+                     data-modal='{"name":"Naturalia Grand Standing","brand":"Econatur","tech":"Látex Natural","img":"https://poligon.es/wp-content/uploads/2024/04/OK-Grand-Standing-2025-scaled.jpg","desc":"Colchón de látex natural de alta gama. Fabricado con látex 100% natural, ofrece una elasticidad excepcional, máxima transpirabilidad y propiedades hipoalergénicas. El confort natural en estado puro."}'>
+                    <div class="catalog-card-img">
+                        <span class="catalog-card-badge">Látex Natural</span>
+                        <img src="https://poligon.es/wp-content/uploads/2024/04/OK-Grand-Standing-2025-scaled.jpg" alt="Colchón Naturalia Grand Standing - Econatur" loading="lazy">
+                        <div class="catalog-card-overlay"><span>Ver Detalles</span></div>
+                    </div>
+                    <div class="catalog-card-body">
+                        <span class="card-brand">Econatur</span>
+                        <h4>Naturalia Grand Standing</h4>
+                    </div>
+                </div>
+
+                <!-- Bamboo Látex -->
+                <div class="catalog-card reveal" data-category="latex" style="transition-delay:0.24s"
+                     data-modal='{"name":"Bamboo Látex","brand":"Karibian","tech":"Látex + Bambú","img":"https://sleeper.es/wp-content/uploads/2023/12/Bamboo-Ciclograma-scaled.jpg","desc":"Colchón de látex con tejido de fibra de bambú. Combina la elasticidad del látex con las propiedades termoreguladoras y antibacterianas del bambú, creando un microclima ideal para el descanso."}'>
+                    <div class="catalog-card-img">
+                        <span class="catalog-card-badge">Látex + Bambú</span>
+                        <img src="https://sleeper.es/wp-content/uploads/2023/12/Bamboo-Ciclograma-scaled.jpg" alt="Colchón Bamboo Látex - Karibian" loading="lazy">
+                        <div class="catalog-card-overlay"><span>Ver Detalles</span></div>
+                    </div>
+                    <div class="catalog-card-body">
+                        <span class="card-brand">Karibian</span>
+                        <h4>Bamboo Látex</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="catalog-banner reveal">
+                <p><strong>Más de 30 modelos en exposición.</strong> Visítanos en nuestra tienda de Sarrià para probar la firmeza y confort de las mejores marcas.</p>
+                <a href="https://wa.me/34609428878?text=Hola%2C%20me%20gustar%C3%ADa%20consultar%20disponibilidad%20de%20colchones" class="cta-btn" target="_blank">Consultar disponibilidad</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===========================
+         CATÁLOGO CURADO: CANAPÉS / BASES
+    =========================== -->
+    <section id="sec-canapes" class="descanso-extra-section" style="padding-top:40px; background: var(--bg-light);">
+        <div class="container">
+            <div class="catalog-subsection-header reveal">
+                <span class="section-badge">Canapés y Bases</span>
+                <h3>Canapés abatibles, bases tapizadas y más</h3>
+                <p>Multimarca: la mejor selección de Sonpura y Nosolopatas para cada necesidad.</p>
+            </div>
+
+            <div class="filter-tabs reveal" data-filter-group="canapes">
+                <button class="filter-tab active" data-filter="todos">Todos</button>
+                <button class="filter-tab" data-filter="abatible-madera">Abatibles Madera</button>
+                <button class="filter-tab" data-filter="abatible-tapizado">Abatibles Tapizados</button>
+            </div>
+
+            <div class="catalog-grid" id="canapes-grid">
+                <!-- Gran Store -->
+                <div class="catalog-card reveal" data-category="abatible-madera"
+                     data-modal='{"name":"Gran Store","brand":"Sonpura","tech":"Abatible Madera","img":"https://www.sonpura.es/12342-sonpura/gran-store.jpg","desc":"Canapé abatible de madera premium. Tapa exclusiva con canto recto, sistema de refuerzo con largueros y travesaños, fondo textil de 12 mm y patas esquineras de madera maciza. Gran capacidad de almacenaje. Desde 777 €."}'
+                     data-color-images='{"Ártico":"https://www.sonpura.es/12342-sonpura/gran-store.jpg","Blanco":"https://www.sonpura.es/12332-sonpura/gran-store.jpg","Natural":"https://www.sonpura.es/12334-sonpura/gran-store.jpg","Nórdico":"https://www.sonpura.es/12346-sonpura/gran-store.jpg","Nogal":"https://www.sonpura.es/12345-sonpura/gran-store.jpg"}'>
+                    <div class="catalog-card-img">
+                        <span class="catalog-card-badge">Abatible Madera</span>
+                        <img src="https://www.sonpura.es/12342-sonpura/gran-store.jpg" alt="Canapé Gran Store - Sonpura" loading="lazy">
+                        <div class="catalog-card-overlay"><span>Ver Detalles</span></div>
+                    </div>
+                    <div class="catalog-card-body">
+                        <span class="card-brand">Sonpura</span>
+                        <h4>Gran Store</h4>
+                        <div class="color-selector">
+                            <div class="color-dot active" style="background:#E8F0F4;" title="Ártico"></div>
+                            <div class="color-dot" style="background:#F5F0E8;" title="Blanco"></div>
+                            <div class="color-dot" style="background:#C9B896;" title="Natural"></div>
+                            <div class="color-dot" style="background:#D4C5B0;" title="Nórdico"></div>
+                            <div class="color-dot" style="background:#6B4C3B;" title="Nogal"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Level -->
+                <div class="catalog-card reveal" data-category="abatible-madera" style="transition-delay:0.08s"
+                     data-modal='{"name":"Level","brand":"Sonpura","tech":"Abatible Madera","img":"https://www.sonpura.es/12370/level.jpg","desc":"Canapé abatible Level. Tapa de canto recto con diseño suspendido, tejido 3D antideslizante, estructura metálica anticorrosión, patas esquineras de madera maciza y fondo textil de 12 mm. Elegante y funcional. Desde 725 €."}'
+                     data-color-images='{"Ártico":"https://www.sonpura.es/12370/level.jpg","Blanco":"https://www.sonpura.es/12371/level.jpg","Natural":"https://www.sonpura.es/12372/level.jpg","Nórdico":"https://www.sonpura.es/12374/level.jpg","Nogal":"https://www.sonpura.es/12373/level.jpg"}'>
+                    <div class="catalog-card-img">
+                        <span class="catalog-card-badge">Abatible Madera</span>
+                        <img src="https://www.sonpura.es/12370/level.jpg" alt="Canapé Level Ártico - Sonpura" loading="lazy">
+                        <div class="catalog-card-overlay"><span>Ver Detalles</span></div>
+                    </div>
+                    <div class="catalog-card-body">
+                        <span class="card-brand">Sonpura</span>
+                        <h4>Level</h4>
+                        <div class="color-selector">
+                            <div class="color-dot active" style="background:#E8F0F4;" title="Ártico"></div>
+                            <div class="color-dot" style="background:#F5F0E8;" title="Blanco"></div>
+                            <div class="color-dot" style="background:#C9B896;" title="Natural"></div>
+                            <div class="color-dot" style="background:#D4C5B0;" title="Nórdico"></div>
+                            <div class="color-dot" style="background:#6B4C3B;" title="Nogal"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Siluet -->
+                <div class="catalog-card reveal" data-category="abatible-madera" style="transition-delay:0.16s"
+                     data-modal='{"name":"Siluet","brand":"Sonpura","tech":"Abatible Madera","img":"https://www.sonpura.es/12375/siluet.jpg","desc":"Canapé abatible Siluet. Innovación y diseño diferente con estructura metálica reforzada, tejido 3D, patas esquineras de madera maciza y gran capacidad de almacenaje. Desde 689 €."}'
+                     data-color-images='{"Ártico":"https://www.sonpura.es/12375/siluet.jpg","Blanco":"https://www.sonpura.es/12375/siluet.jpg","Natural":"https://www.sonpura.es/12380/siluet.jpg","Nórdico":"https://www.sonpura.es/12378/siluet.jpg","Nogal":"https://www.sonpura.es/12377/siluet.jpg"}'>
+                    <div class="catalog-card-img">
+                        <span class="catalog-card-badge">Abatible Madera</span>
+                        <img src="https://www.sonpura.es/12375/siluet.jpg" alt="Canapé Siluet Ártico - Sonpura" loading="lazy">
+                        <div class="catalog-card-overlay"><span>Ver Detalles</span></div>
+                    </div>
+                    <div class="catalog-card-body">
+                        <span class="card-brand">Sonpura</span>
+                        <h4>Siluet</h4>
+                        <div class="color-selector">
+                            <div class="color-dot active" style="background:#E8F0F4;" title="Ártico"></div>
+                            <div class="color-dot" style="background:#F5F0E8;" title="Blanco"></div>
+                            <div class="color-dot" style="background:#C9B896;" title="Natural"></div>
+                            <div class="color-dot" style="background:#D4C5B0;" title="Nórdico"></div>
+                            <div class="color-dot" style="background:#6B4C3B;" title="Nogal"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MONACO -->
+                <div class="catalog-card reveal" data-category="abatible-tapizado" style="transition-delay:0.08s"
+                     data-modal='{"name":"MONACO","brand":"Nosolopatas","tech":"Abatible Tapizado","img":"https://www.solopatas.com/wp-content/uploads/2026/02/PORTADA-CANAPE-MONACO-Y-CABEZAL-LONDRES-1024x1024.jpg.webp","desc":"Canapé abatible tapizado MONACO. A suelo de serie. Altura total +-34.5 cm, capacidad interior +-28 cm. Sistema montaje express. Opciones: apertura lateral, tapa partida, tapa TOP, somier tapizado, bisagra doble pistón, patas metálicas, apertura motorizada, guardapolvo, zócalo con ruedas y cubrebisagras."}'>
+                    <div class="catalog-card-img">
+                        <span class="catalog-card-badge">Abatible Tapizado</span>
+                        <img src="https://www.solopatas.com/wp-content/uploads/2026/02/PORTADA-CANAPE-MONACO-Y-CABEZAL-LONDRES-1024x1024.jpg.webp" alt="Canapé MONACO - Nosolopatas" loading="lazy">
+                        <div class="catalog-card-overlay"><span>Ver Detalles</span></div>
+                    </div>
+                    <div class="catalog-card-body">
+                        <span class="card-brand">Nosolopatas</span>
+                        <h4>MONACO</h4>
+                    </div>
+                </div>
+
+                <!-- OLIMPIA -->
+                <div class="catalog-card reveal" data-category="abatible-tapizado" style="transition-delay:0.16s"
+                     data-modal='{"name":"OLIMPIA","brand":"Nosolopatas","tech":"Abatible Tapizado","img":"https://www.solopatas.com/wp-content/uploads/2026/01/PORTADA-CANAPE-OLIMPIA-Y-CABEZAL-BOSTON-1024x1024.jpg.webp","desc":"Canapé abatible tapizado OLIMPIA. Con pata de madera de serie. Altura total +-34.5 cm, capacidad interior +-16 cm. Opciones: apertura lateral, tapa partida, tapa TOP, somier tapizado, tirador SLIM, bisagra doble pistón, a suelo, patas metálicas y cubrebisagras."}'>
+                    <div class="catalog-card-img">
+                        <span class="catalog-card-badge">Abatible Tapizado</span>
+                        <img src="https://www.solopatas.com/wp-content/uploads/2026/01/PORTADA-CANAPE-OLIMPIA-Y-CABEZAL-BOSTON-1024x1024.jpg.webp" alt="Canapé OLIMPIA - Nosolopatas" loading="lazy">
+                        <div class="catalog-card-overlay"><span>Ver Detalles</span></div>
+                    </div>
+                    <div class="catalog-card-body">
+                        <span class="card-brand">Nosolopatas</span>
+                        <h4>OLIMPIA</h4>
+                    </div>
+                </div>
+
+                <!-- VOLGA -->
+                <div class="catalog-card reveal" data-category="abatible-tapizado" style="transition-delay:0.24s"
+                     data-modal='{"name":"VOLGA","brand":"Nosolopatas","tech":"Abatible Tapizado","img":"https://www.solopatas.com/wp-content/uploads/2026/02/PORTADA-CANAPE-VOLGA-F-Y-CABEZAL-MERIDA-1024x1024.jpg.webp","desc":"Canapé abatible tapizado VOLGA. A suelo de serie. Altura total +-35 cm, capacidad interior +-25 cm. Sistema montaje express. Opciones: tapa partida, somier tapizado activo, piecero alto opcional, bisagra doble pistón, zócalo, leds, ruedas, patas metal, cubrebisagras y apertura motorizada."}'>
+                    <div class="catalog-card-img">
+                        <span class="catalog-card-badge">Abatible Tapizado</span>
+                        <img src="https://www.solopatas.com/wp-content/uploads/2026/02/PORTADA-CANAPE-VOLGA-F-Y-CABEZAL-MERIDA-1024x1024.jpg.webp" alt="Canapé VOLGA - Nosolopatas" loading="lazy">
+                        <div class="catalog-card-overlay"><span>Ver Detalles</span></div>
+                    </div>
+                    <div class="catalog-card-body">
+                        <span class="card-brand">Nosolopatas</span>
+                        <h4>VOLGA</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="catalog-banner reveal">
+                <p><strong>Todos los modelos disponibles en múltiples medidas y acabados.</strong> Ven a ver las opciones de color y tejido en nuestra tienda.</p>
+                <a href="https://wa.me/34609428878?text=Hola%2C%20me%20gustar%C3%ADa%20consultar%20sobre%20canap%C3%A9s%20y%20bases" class="cta-btn" target="_blank">Consultar disponibilidad</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===========================
+         CATÁLOGO CURADO: CABECEROS
+    =========================== -->
+    <section id="sec-cabeceros" class="descanso-extra-section" style="padding-top:40px;">
+        <div class="container">
+            <div class="catalog-subsection-header reveal">
+                <span class="section-badge">Cabeceros</span>
+                <h3>El toque de distinción para tu dormitorio</h3>
+                <p>Cabeceros tapizados en múltiples diseños, alturas y acabados.</p>
+            </div>
+
+            <div class="catalog-grid" id="cabeceros-grid" style="grid-template-columns: repeat(4, 1fr);">
+                <!-- Tachas 115 -->
+                <div class="catalog-card reveal"
+                     data-modal='{"name":"Tachas 115","brand":"Sonpura","tech":"Tapizado 115cm","img":"https://www.sonpura.es/12528-sonpura/tachas-115.jpg","desc":"Cabecero tapizado Tachas de 115 cm de altura. Diseño clásico con tachuelas decorativas que aportan un toque señorial. Disponible en múltiples tejidos y colores."}'>
+                    <div class="catalog-card-img">
+                        <span class="catalog-card-badge">Tapizado 115cm</span>
+                        <img src="https://www.sonpura.es/12528-sonpura/tachas-115.jpg" alt="Cabecero Tachas 115 - Sonpura" loading="lazy">
+                        <div class="catalog-card-overlay"><span>Ver Detalles</span></div>
+                    </div>
+                    <div class="catalog-card-body">
+                        <span class="card-brand">Sonpura</span>
+                        <h4>Tachas 115</h4>
+                    </div>
+                </div>
+
+                <!-- Cuadros 115 -->
+                <div class="catalog-card reveal" style="transition-delay:0.08s"
+                     data-modal='{"name":"Cuadros 115","brand":"Sonpura","tech":"Tapizado 115cm","img":"https://www.sonpura.es/12539-sonpura/cuadros-115.jpg","desc":"Cabecero tapizado Cuadros de 115 cm de altura. Diseño geométrico con capitoné en cuadros que crea un efecto visual moderno y sofisticado. Disponible en múltiples tejidos y colores."}'>
+                    <div class="catalog-card-img">
+                        <span class="catalog-card-badge">Tapizado 115cm</span>
+                        <img src="https://www.sonpura.es/12539-sonpura/cuadros-115.jpg" alt="Cabecero Cuadros 115 - Sonpura" loading="lazy">
+                        <div class="catalog-card-overlay"><span>Ver Detalles</span></div>
+                    </div>
+                    <div class="catalog-card-body">
+                        <span class="card-brand">Sonpura</span>
+                        <h4>Cuadros 115</h4>
+                    </div>
+                </div>
+
+                <!-- Paneles 115 -->
+                <div class="catalog-card reveal" style="transition-delay:0.16s"
+                     data-modal='{"name":"Paneles 115","brand":"Sonpura","tech":"Tapizado 115cm","img":"https://www.sonpura.es/12530-sonpura/paneles-115.jpg","desc":"Cabecero tapizado Paneles de 115 cm de altura. Líneas verticales limpias y contemporáneas que aportan verticalidad y elegancia al dormitorio. Disponible en múltiples tejidos y colores."}'>
+                    <div class="catalog-card-img">
+                        <span class="catalog-card-badge">Tapizado 115cm</span>
+                        <img src="https://www.sonpura.es/12530-sonpura/paneles-115.jpg" alt="Cabecero Paneles 115 - Sonpura" loading="lazy">
+                        <div class="catalog-card-overlay"><span>Ver Detalles</span></div>
+                    </div>
+                    <div class="catalog-card-body">
+                        <span class="card-brand">Sonpura</span>
+                        <h4>Paneles 115</h4>
+                    </div>
+                </div>
+
+                <!-- Botones 115 -->
+                <div class="catalog-card reveal" style="transition-delay:0.24s"
+                     data-modal='{"name":"Botones 115","brand":"Sonpura","tech":"Tapizado 115cm","img":"https://www.sonpura.es/12522-sonpura/botones-115.jpg","desc":"Cabecero tapizado Botones de 115 cm de altura. Capitoné clásico con botones que aporta un aire distinguido y atemporal al dormitorio. Disponible en múltiples tejidos y colores."}'>
+                    <div class="catalog-card-img">
+                        <span class="catalog-card-badge">Tapizado 115cm</span>
+                        <img src="https://www.sonpura.es/12522-sonpura/botones-115.jpg" alt="Cabecero Botones 115 - Sonpura" loading="lazy">
+                        <div class="catalog-card-overlay"><span>Ver Detalles</span></div>
+                    </div>
+                    <div class="catalog-card-body">
+                        <span class="card-brand">Sonpura</span>
+                        <h4>Botones 115</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="catalog-banner reveal">
+                <p><strong>Más de 14 modelos de cabeceros</strong> en alturas de 80 cm y 115 cm, con decenas de combinaciones de tejido y color. Ven a verlos en tienda.</p>
+                <a href="https://wa.me/34609428878?text=Hola%2C%20me%20gustar%C3%ADa%20ver%20opciones%20de%20cabeceros" class="cta-btn" target="_blank">Consultar disponibilidad</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===========================
+         CATÁLOGO CURADO: SOMIERES ARTICULADOS
+    =========================== -->
+    <section id="sec-somieres" class="descanso-extra-section" style="padding-top:40px; background: var(--bg-light);">
+        <div class="container">
+            <div class="catalog-subsection-header reveal">
+                <span class="section-badge">Somieres Articulados</span>
+                <h3>Descanso personalizado con posición regulable</h3>
+                <p>Somieres articulados de la marca Jover. Ajusta cabeza y pies para encontrar tu postura ideal.</p>
+            </div>
+
+            <div class="catalog-grid" id="somieres-grid" style="max-width:700px; margin:0 auto; grid-template-columns: repeat(2, 1fr);">
+                <!-- ORUS -->
+                <div class="catalog-card reveal"
+                     data-modal='{"name":"ORUS","brand":"Jover","tech":"Articulado Metálico","img":"https://somieresjover.com/wp-content/uploads/2025/05/orus-scaled.jpg","desc":"Somier articulado metálico ORUS. Estructura de acero con láminas de haya, motor eléctrico con mando inalámbrico. Regulación independiente de cabeza y pies. Silencioso, duradero y con máxima estabilidad."}'>
+                    <div class="catalog-card-img">
+                        <span class="catalog-card-badge">Articulado Metálico</span>
+                        <img src="https://somieresjover.com/wp-content/uploads/2025/05/orus-scaled.jpg" alt="Somier Articulado ORUS - Jover" loading="lazy">
+                        <div class="catalog-card-overlay"><span>Ver Detalles</span></div>
+                    </div>
+                    <div class="catalog-card-body">
+                        <span class="card-brand">Jover</span>
+                        <h4>ORUS</h4>
+                    </div>
+                </div>
+
+                <!-- CLASIC -->
+                <div class="catalog-card reveal" style="transition-delay:0.08s"
+                     data-modal='{"name":"CLASIC","brand":"Jover","tech":"Articulado Madera","img":"https://somieresjover.com/wp-content/uploads/2025/05/CLASSIC_BLANCO_FRESNO_01-scaled.jpg","desc":"Somier articulado de madera CLASIC. Estructura de haya vaporizada con láminas flexibles, motor eléctrico silencioso y mando inalámbrico. Estética cálida y natural con la misma funcionalidad que el modelo metálico."}'>
+                    <div class="catalog-card-img">
+                        <span class="catalog-card-badge">Articulado Madera</span>
+                        <img src="https://somieresjover.com/wp-content/uploads/2025/05/CLASSIC_BLANCO_FRESNO_01-scaled.jpg" alt="Somier Articulado CLASIC - Jover" loading="lazy">
+                        <div class="catalog-card-overlay"><span>Ver Detalles</span></div>
+                    </div>
+                    <div class="catalog-card-body">
+                        <span class="card-brand">Jover</span>
+                        <h4>CLASIC</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="catalog-banner reveal">
+                <p><strong>Pruébalos en nuestra tienda.</strong> Te asesoramos para elegir el somier articulado que mejor se adapte a tu colchón y necesidades.</p>
+                <a href="https://wa.me/34609428878?text=Hola%2C%20me%20interesan%20los%20somieres%20articulados%20Jover" class="cta-btn" target="_blank">Consultar disponibilidad</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===========================
+         CATÁLOGO CURADO: SILLONES Y SOFÁS CAMA
+    =========================== -->
+    <section id="sec-sillones" class="descanso-extra-section" style="padding-top:40px;">
+        <div class="container">
+            <div class="catalog-subsection-header reveal">
+                <span class="section-badge">Sillones y Sofás Cama</span>
+                <h3>Confort para cada rincón de tu hogar</h3>
+                <p>Sillones fijos, relax y sofás cama de la marca Moher.</p>
+            </div>
+
+            <div class="catalog-grid" id="sillones-grid" style="grid-template-columns: repeat(4, 1fr);">
+                <!-- Chicago -->
+                <div class="catalog-card reveal"
+                     data-modal='{"name":"Chicago","brand":"Moher","tech":"Sillón Fijo","img":"https://mohermobiliario.com/wp-content/uploads/2024/12/Chicago-1.png","desc":"Sillón fijo Chicago. Diseño clásico y atemporal con estructura de madera maciza y relleno de espuma de alta densidad. Tapizado en tela o piel sintética de alta calidad. Ideal como butaca de lectura o complemento del salón."}'>
+                    <div class="catalog-card-img">
+                        <span class="catalog-card-badge">Sillón Fijo</span>
+                        <img src="https://mohermobiliario.com/wp-content/uploads/2024/12/Chicago-1.png" alt="Sillón Chicago - Moher" loading="lazy">
+                        <div class="catalog-card-overlay"><span>Ver Detalles</span></div>
+                    </div>
+                    <div class="catalog-card-body">
+                        <span class="card-brand">Moher</span>
+                        <h4>Chicago</h4>
+                    </div>
+                </div>
+
+                <!-- Nordic -->
+                <div class="catalog-card reveal" style="transition-delay:0.08s"
+                     data-modal='{"name":"Nordic","brand":"Moher","tech":"Sillón Relax","img":"https://mohermobiliario.com/wp-content/uploads/2024/12/Nordic-1.png","desc":"Sillón relax Nordic. Mecanismo reclinable manual o eléctrico con reposapiés integrado. Diseño nórdico con líneas limpias y tapizado suave. Perfecto para el máximo confort en tu espacio de descanso."}'>
+                    <div class="catalog-card-img">
+                        <span class="catalog-card-badge">Sillón Relax</span>
+                        <img src="https://mohermobiliario.com/wp-content/uploads/2024/12/Nordic-1.png" alt="Sillón Nordic Relax - Moher" loading="lazy">
+                        <div class="catalog-card-overlay"><span>Ver Detalles</span></div>
+                    </div>
+                    <div class="catalog-card-body">
+                        <span class="card-brand">Moher</span>
+                        <h4>Nordic</h4>
+                    </div>
+                </div>
+
+                <!-- Boston -->
+                <div class="catalog-card reveal" style="transition-delay:0.16s"
+                     data-modal='{"name":"Boston","brand":"Moher","tech":"Sillón Relax","img":"https://mohermobiliario.com/wp-content/uploads/2024/12/Boston.png","desc":"Sillón relax Boston. Mecanismo reclinable de alta resistencia con posiciones intermedias. Respaldo alto ergonómico y relleno de fibra siliconada para máxima comodidad. Disponible en varios tapizados."}'>
+                    <div class="catalog-card-img">
+                        <span class="catalog-card-badge">Sillón Relax</span>
+                        <img src="https://mohermobiliario.com/wp-content/uploads/2024/12/Boston.png" alt="Sillón Boston Relax - Moher" loading="lazy">
+                        <div class="catalog-card-overlay"><span>Ver Detalles</span></div>
+                    </div>
+                    <div class="catalog-card-body">
+                        <span class="card-brand">Moher</span>
+                        <h4>Boston</h4>
+                    </div>
+                </div>
+
+                <!-- Fantasy -->
+                <div class="catalog-card reveal" style="transition-delay:0.24s"
+                     data-modal='{"name":"Fantasy","brand":"Moher","tech":"Sofá Cama","img":"https://mohermobiliario.com/wp-content/uploads/2026/03/Fantasy-derecha-grande-3.png","desc":"Sofá cama Fantasy. Sistema de apertura fácil con colchón integrado de espuma HR. Perfecto para optimizar el espacio en habitaciones de invitados o salones. Diseño moderno y funcional."}'>
+                    <div class="catalog-card-img">
+                        <span class="catalog-card-badge">Sofá Cama</span>
+                        <img src="https://mohermobiliario.com/wp-content/uploads/2026/03/Fantasy-derecha-grande-3.png" alt="Sofá Cama Fantasy - Moher" loading="lazy">
+                        <div class="catalog-card-overlay"><span>Ver Detalles</span></div>
+                    </div>
+                    <div class="catalog-card-body">
+                        <span class="card-brand">Moher</span>
+                        <h4>Fantasy</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="catalog-banner reveal">
+                <p><strong>Ven a probarlos.</strong> Nada sustituye a sentarte y comprobar el confort por ti mismo. Te esperamos en Sarrià.</p>
+                <a href="https://wa.me/34609428878?text=Hola%2C%20me%20interesan%20los%20sillones%20y%20sof%C3%A1s%20cama%20Moher" class="cta-btn" target="_blank">Pedir información</a>
             </div>
         </div>
     </section>
@@ -2404,43 +2955,65 @@
     =========================== -->
     <section id="mobiliario" class="mobiliario-section">
         <div class="container">
-            <div class="colchones-layout">
+            <div class="catalog-subsection-header reveal" style="margin-top:0;">
+                <span class="section-badge">Mobiliario Juvenil</span>
+                <h3>Dormitorios Juveniles · Catálogo Stay Young</h3>
+                <p>Composiciones destacadas de la marca <strong>ANTAIX</strong>. Soluciones a medida para cada etapa.</p>
+            </div>
 
-                <!-- TEXTO -->
-                <div class="colchones-text reveal">
-                    <span class="section-badge">Mobiliario Juvenil</span>
-                    <h2>Dormitorios Juveniles<br><span style="font-size:0.7em; color:var(--text-light); font-weight:400;">Catálogo Stay Young · Marca ANTAIX</span></h2>
-                    <p>Ofrecemos soluciones prácticas y actuales pensadas para el bienestar y el estilo de tus hijos, con una cuidada selección de muebles y accesorios que transforman cualquier habitación juvenil. Trabajamos solo con la marca <strong>ANTAIX</strong>, único catálogo <em>Stay Young</em>.</p>
-                    <div class="mobiliario-highlights">
-                        <div class="mobiliario-hl-item">
-                            <div class="mobiliario-hl-icon">
-                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-                            </div>
-                            <div>
-                                <strong>Habitaciones Juveniles e Infantiles</strong>
-                                <p>Ideas y soluciones completas para cada etapa, desde la cuna hasta la adolescencia.</p>
-                            </div>
-                        </div>
-                        <div class="mobiliario-hl-item">
-                            <div class="mobiliario-hl-icon">
-                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-                            </div>
-                            <div>
-                                <strong>Pequeños Despachos Integrados</strong>
-                                <p>Zonas de estudio y trabajo incorporadas en el mismo espacio, optimizando cada metro.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <a href="dormitorios-juveniles.html" class="cta-btn">Ver Catálogo ANTAIX</a>
+            <div class="mob-comp-grid">
+            <!-- Composición 01 -->
+            <div class="mob-comp reveal">
+                <div class="mob-comp-img">
+                    <img src="public/photos/Seccion Mobiliario/Comp1/principal1.JPG" alt="Composición juvenil 01 - ANTAIX Stay Young" loading="lazy">
                 </div>
-
-                <!-- FOTOS -->
-                <div class="colchones-photos colchones-photos--single reveal" style="transition-delay:0.15s;">
-                    <div class="photo-card photo-main" style="grid-column:1/-1; height:420px;">
-                        <img src="public/photos_ai/habitacion_decorada.jfif"
-                             alt="Habitación juvenil decorada ANTAIX en Paz Marés Barcelona" loading="lazy">
+                <div class="mob-comp-info">
+                    <span class="mob-comp-num">01</span>
+                    <div class="mob-comp-thumb">
+                        <img src="public/photos/Seccion Mobiliario/Comp1/plano1.JPG" alt="Plano composición 01" loading="lazy">
+                    </div>
+                    <div class="mob-comp-thumb">
+                        <img src="public/photos/Seccion Mobiliario/Comp1/colores1.JPG" alt="Acabados y tiradores composición 01" loading="lazy">
                     </div>
                 </div>
+            </div>
+
+            <!-- Composición 02 -->
+            <div class="mob-comp reveal" style="transition-delay:0.1s">
+                <div class="mob-comp-img">
+                    <img src="public/photos/Seccion Mobiliario/Comp2/principal2.JPG" alt="Composición juvenil 02 - ANTAIX Stay Young" loading="lazy">
+                </div>
+                <div class="mob-comp-info">
+                    <span class="mob-comp-num">02</span>
+                    <div class="mob-comp-thumb">
+                        <img src="public/photos/Seccion Mobiliario/Comp2/plano2.JPG" alt="Plano composición 02" loading="lazy">
+                    </div>
+                    <div class="mob-comp-thumb">
+                        <img src="public/photos/Seccion Mobiliario/Comp2/colores2.JPG" alt="Acabados y tiradores composición 02" loading="lazy">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Composición 03 -->
+            <div class="mob-comp reveal" style="transition-delay:0.15s">
+                <div class="mob-comp-img">
+                    <img src="public/photos/Seccion Mobiliario/Comp3/principal3.JPG" alt="Composición juvenil 03 - ANTAIX Stay Young" loading="lazy">
+                </div>
+                <div class="mob-comp-info">
+                    <span class="mob-comp-num">03</span>
+                    <div class="mob-comp-thumb">
+                        <img src="public/photos/Seccion Mobiliario/Comp3/plano3.JPG" alt="Plano composición 03" loading="lazy">
+                    </div>
+                    <div class="mob-comp-thumb">
+                        <img src="public/photos/Seccion Mobiliario/Comp3/colores3.JPG" alt="Acabados y tiradores composición 03" loading="lazy">
+                    </div>
+                </div>
+            </div>
+            </div>
+
+            <div class="catalog-banner reveal">
+                <p><strong>Disponemos de más de 50 composiciones personalizables</strong> en nuestro catálogo técnico de tienda. Ven con tus medidas y diseñamos el dormitorio ideal para tus hijos.</p>
+                <a href="https://wa.me/34609428878?text=Hola%2C%20me%20gustar%C3%ADa%20pedir%20presupuesto%20para%20un%20dormitorio%20juvenil%20ANTAIX" class="cta-btn" target="_blank">Pedir presupuesto personalizado</a>
             </div>
         </div>
     </section>
@@ -2648,6 +3221,26 @@
         </div>
     </section>
 
+    <!-- PRODUCT MODAL -->
+    <div class="modal-overlay" id="productModal">
+        <div class="modal-card">
+            <button class="modal-close" id="modalClose">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+            <div id="modalImgWrap"></div>
+            <div class="modal-body">
+                <span class="modal-brand" id="modalBrand"></span>
+                <h3 id="modalName"></h3>
+                <span class="modal-tech-badge" id="modalTech"></span>
+                <p id="modalDesc"></p>
+                <a class="modal-wa-btn" id="modalWa" href="#" target="_blank">
+                    <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                    Consultar por WhatsApp
+                </a>
+            </div>
+        </div>
+    </div>
+
     <!-- FOOTER -->
     <footer>
         <div class="container footer-content">
@@ -2722,30 +3315,6 @@
                     }, 750);
                 }, 8000 + Math.random() * 3000); // Random interval between 8-11 seconds
             });
-
-            // 3b. Floating Offer Card
-            (function() {
-                const card = document.getElementById('offerCard');
-                const closeBtn = document.getElementById('offerClose');
-                const cta = document.getElementById('offerCta');
-                if (!card) return;
-                let shown = false;
-
-                window.addEventListener('scroll', () => {
-                    if (!shown && window.scrollY > 300) {
-                        shown = true;
-                        card.classList.add('visible');
-                    }
-                });
-
-                closeBtn.addEventListener('click', () => {
-                    card.classList.add('dismissed');
-                });
-
-                cta.addEventListener('click', () => {
-                    card.classList.add('dismissed');
-                });
-            })();
 
             // 4. Juguetes Hero Slideshow
             (function() {
@@ -2826,26 +3395,120 @@
             });
         });
     </script>
-    <!-- FLOATING OFFER CARD -->
-    <div class="offer-card" id="offerCard">
-        <div class="offer-card-header">
-            <span>&#10024; Oferta de la semana</span>
-            <button class="offer-card-close" id="offerClose" title="Cerrar">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-            </button>
-        </div>
-        <div class="offer-card-body">
-            <h4>Pack Colch&oacute;n Sonpura<br>+ Caner&eacute; Tapizado</h4>
-            <p>Colch&oacute;n de muelles ensacados 150&times;190 + base tapizada a juego. Entrega e instalaci&oacute;n incluidas.</p>
-            <div class="offer-price-row">
-                <span class="offer-price-new">899&euro;</span>
-                <span class="offer-price-old">1.190&euro;</span>
-                <span class="offer-badge">-24%</span>
-            </div>
-            <a href="#contacto" class="offer-card-cta" id="offerCta">Consultar disponibilidad</a>
-            <p class="offer-card-fine">V&aacute;lido hasta fin de existencias</p>
-        </div>
-    </div>
+
+    <!-- CATALOG INTERACTIVE JS -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // === PRODUCT MODAL ===
+        var modal = document.getElementById('productModal');
+        var modalClose = document.getElementById('modalClose');
+        var modalImgWrap = document.getElementById('modalImgWrap');
+        var modalBrand = document.getElementById('modalBrand');
+        var modalName = document.getElementById('modalName');
+        var modalTech = document.getElementById('modalTech');
+        var modalDesc = document.getElementById('modalDesc');
+        var modalWa = document.getElementById('modalWa');
+
+        function openModal(data) {
+            if (data.img) {
+                modalImgWrap.innerHTML = '<img class="modal-img" src="' + data.img + '" alt="' + data.name + '">';
+            } else {
+                modalImgWrap.innerHTML = '<div class="modal-img-placeholder">' + data.brand + ' ' + data.name + '</div>';
+            }
+            modalBrand.textContent = data.brand;
+            modalName.textContent = data.name;
+            modalTech.textContent = data.tech;
+            modalDesc.textContent = data.desc;
+            var waMsg = encodeURIComponent('Hola, me interesa el producto ' + data.name + ' de ' + data.brand + '. ¿Podrían darme más información?');
+            modalWa.href = 'https://wa.me/34609428878?text=' + waMsg;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        modalClose.addEventListener('click', closeModal);
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) closeModal();
+        });
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        // Attach modal to all catalog cards
+        document.querySelectorAll('.catalog-card[data-modal]').forEach(function(card) {
+            card.addEventListener('click', function() {
+                try {
+                    var data = JSON.parse(this.getAttribute('data-modal'));
+                    openModal(data);
+                } catch(err) { console.error('Modal data error', err); }
+            });
+        });
+
+        // === FILTER TABS ===
+        document.querySelectorAll('.filter-tabs').forEach(function(tabGroup) {
+            var grid = tabGroup.nextElementSibling;
+            while (grid && !grid.classList.contains('catalog-grid')) {
+                grid = grid.nextElementSibling;
+            }
+            if (!grid) return;
+
+            tabGroup.querySelectorAll('.filter-tab').forEach(function(tab) {
+                tab.addEventListener('click', function() {
+                    tabGroup.querySelectorAll('.filter-tab').forEach(function(t) { t.classList.remove('active'); });
+                    tab.classList.add('active');
+                    var filter = tab.getAttribute('data-filter');
+
+                    grid.querySelectorAll('.catalog-card').forEach(function(card) {
+                        if (filter === 'todos') {
+                            card.style.display = '';
+                        } else {
+                            card.style.display = card.getAttribute('data-category') === filter ? '' : 'none';
+                        }
+                    });
+                });
+            });
+        });
+
+        // === COLOR DOTS (visual feedback + image swap) ===
+        document.querySelectorAll('.color-selector').forEach(function(selector) {
+            selector.querySelectorAll('.color-dot').forEach(function(dot) {
+                dot.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    selector.querySelectorAll('.color-dot').forEach(function(d) { d.classList.remove('active'); });
+                    dot.classList.add('active');
+
+                    var card = dot.closest('.catalog-card');
+                    if (!card) return;
+                    var colorImagesAttr = card.getAttribute('data-color-images');
+                    if (!colorImagesAttr) return;
+                    try {
+                        var colorImages = JSON.parse(colorImagesAttr);
+                        var colorName = dot.getAttribute('title');
+                        var newSrc = colorImages[colorName];
+                        if (!newSrc) return;
+                        var img = card.querySelector('.catalog-card-img img');
+                        if (img) {
+                            img.src = newSrc;
+                            img.alt = card.querySelector('h4').textContent + ' ' + colorName + ' - Sonpura';
+                        }
+                        var modalData = card.getAttribute('data-modal');
+                        if (modalData) {
+                            try {
+                                var md = JSON.parse(modalData);
+                                md.img = newSrc;
+                                card.setAttribute('data-modal', JSON.stringify(md));
+                            } catch(err2) {}
+                        }
+                    } catch(err) {}
+                });
+            });
+        });
+    });
+    </script>
 
     <!-- FLOATING CONTACT MENU -->
     <div class="floating-menu-container">
