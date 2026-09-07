@@ -928,6 +928,17 @@
 
         .dropdown-col ul {
             margin-bottom: 2px;
+            list-style: none;
+        }
+
+        /* Puente invisible para no perder el hover al bajar al dropdown */
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: -12px;
+            right: -12px;
+            height: 26px;
         }
 
         .dropdown-col ul li a {
@@ -2287,7 +2298,23 @@
                 </a>
                 <div class="nav-links">
                     <a href="#inicio">Inicio</a>
-                    <a href="#descanso">Descanso</a>
+                    <div class="nav-item">
+                        <a href="#descanso">Descanso
+                            <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </a>
+                        <div class="dropdown">
+                            <div class="dropdown-col">
+                                <ul>
+                                    <li><a href="#sec-colchones">Colchones</a></li>
+                                    <li><a href="#sec-canapes">Canapés / Bases</a></li>
+                                    <li><a href="#sec-cabeceros">Cabeceros</a></li>
+                                    <li><a href="#sec-somieres">Somieres</a></li>
+                                    <li><a href="#sec-sillones">Sillones</a></li>
+                                    <li><a href="#complementos">Complementos</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                     <a href="#mobiliario">Mobiliario</a>
                     <a href="#juguetes">Juguetes</a>
                     <a href="#testimonios">Opiniones</a>
@@ -2477,10 +2504,10 @@
 
                 <!-- Naturalia Grand Standing -->
                 <div class="catalog-card reveal" data-category="latex" style="transition-delay:0.16s"
-                     data-modal='{"name":"Naturalia Grand Standing","brand":"Econatur","tech":"Látex Natural","img":"https://poligon.es/wp-content/uploads/2024/04/OK-Grand-Standing-2025-scaled.jpg","desc":"Colchón de látex natural de alta gama. Fabricado con látex 100% natural, ofrece una elasticidad excepcional, máxima transpirabilidad y propiedades hipoalergénicas. El confort natural en estado puro."}'>
+                     data-modal='{"name":"Naturalia Grand Standing","brand":"Econatur","tech":"Látex Natural","img":"public/photos/Seccion Colchones/naturalia-grand-standing.jpg","desc":"Colchón de látex natural de alta gama. Fabricado con látex 100% natural, ofrece una elasticidad excepcional, máxima transpirabilidad y propiedades hipoalergénicas. El confort natural en estado puro."}'>
                     <div class="catalog-card-img">
                         <span class="catalog-card-badge">Látex Natural</span>
-                        <img src="https://poligon.es/wp-content/uploads/2024/04/OK-Grand-Standing-2025-scaled.jpg" alt="Colchón Naturalia Grand Standing - Econatur" loading="lazy">
+                        <img src="public/photos/Seccion Colchones/naturalia-grand-standing.jpg" alt="Colchón Naturalia Grand Standing - Econatur" loading="lazy">
                         <div class="catalog-card-overlay"><span>Ver Detalles</span></div>
                     </div>
                     <div class="catalog-card-body">
