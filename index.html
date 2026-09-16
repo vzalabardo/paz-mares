@@ -446,12 +446,13 @@
                 scroll-snap-type: x mandatory;
                 -webkit-overflow-scrolling: touch;
                 gap: 16px;
-                padding-bottom: 12px;
+                padding: 0 5vw 12px 5vw;
                 scrollbar-width: none;
             }
             .reviews-container::-webkit-scrollbar { display: none; }
             .review-card {
-                min-width: 85vw;
+                min-width: 90vw;
+                max-width: 90vw;
                 scroll-snap-align: center;
                 flex-shrink: 0;
             }
@@ -650,9 +651,10 @@
 
             /* Badge always one line on mobile */
             .catalog-card-badge {
-                font-size: 0.58rem;
-                padding: 3px 8px;
+                font-size: 0.52rem;
+                padding: 3px 6px;
                 white-space: nowrap;
+                letter-spacing: 0.3px;
             }
 
             /* Catalog banner buttons: smaller text on mobile */
@@ -660,6 +662,11 @@
                 font-size: 0.78rem;
                 padding: 10px 18px;
                 white-space: nowrap;
+            }
+
+            /* Hide hero scroll arrow on mobile */
+            .hero-scroll {
+                display: none;
             }
 
             /* Mobile Menu Toggle would go here, kept simple for Single Page request */
@@ -3446,7 +3453,8 @@
 
                 function goToReview(idx) {
                     cur = idx % cards.length;
-                    cards[cur].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                    const cardLeft = cards[cur].offsetLeft - rc.offsetLeft;
+                    rc.scrollTo({ left: cardLeft - (rc.clientWidth - cards[cur].offsetWidth) / 2, behavior: 'smooth' });
                     Array.from(dotsBox.children).forEach((d, i) => d.classList.toggle('active', i === cur));
                 }
 
@@ -3500,7 +3508,8 @@
 
                 function goComp(idx) {
                     cur = idx % items.length;
-                    items[cur].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                    const itemLeft = items[cur].offsetLeft - grid.offsetLeft;
+                    grid.scrollTo({ left: itemLeft - (grid.clientWidth - items[cur].offsetWidth) / 2, behavior: 'smooth' });
                     Array.from(dotsBox.children).forEach((d, i) => d.classList.toggle('active', i === cur));
                 }
 
