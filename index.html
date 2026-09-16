@@ -403,19 +403,19 @@
         }
 
         .review-card {
-            background: rgba(255,255,255,0.08);
+            background: transparent;
             border: 1px solid rgba(255,255,255,0.12);
             padding: 32px;
             border-radius: 16px;
             display: flex;
             flex-direction: column;
             gap: 14px;
-            transition: transform 0.3s ease, background 0.3s ease;
+            transition: transform 0.3s ease, border 0.3s ease;
         }
 
         .review-card:hover {
             transform: translateY(-4px);
-            background: rgba(255,255,255,0.13);
+            border-color: rgba(255,255,255,0.25);
         }
 
         .stars {
@@ -445,16 +445,17 @@
                 overflow-x: auto;
                 scroll-snap-type: x mandatory;
                 -webkit-overflow-scrolling: touch;
-                gap: 16px;
-                padding: 0 5vw 12px 5vw;
+                gap: 0;
+                padding: 0;
                 scrollbar-width: none;
             }
             .reviews-container::-webkit-scrollbar { display: none; }
             .review-card {
-                min-width: 82vw;
-                max-width: 82vw;
+                min-width: 80%;
+                max-width: 80%;
                 scroll-snap-align: center;
                 flex-shrink: 0;
+                margin: 0 10%;
             }
         }
         .reviews-dots {
@@ -682,6 +683,7 @@
                 font-size: 3.5px;
                 padding: 1px 2px;
             }
+            
         }
 
         /* =====================
@@ -2359,14 +2361,16 @@
                 overflow-x: auto;
                 scroll-snap-type: x mandatory;
                 -webkit-overflow-scrolling: touch;
-                gap: 16px;
+                gap: 0;
+                padding: 0;
                 scrollbar-width: none;
             }
             .mob-comp-grid::-webkit-scrollbar { display: none; }
             .mob-comp {
-                min-width: 82vw;
+                min-width: 80%;
                 scroll-snap-align: center;
                 flex-shrink: 0;
+                margin: 0 10%;
             }
             .mob-comp-img img { height: 220px; }
         }
