@@ -445,17 +445,17 @@
                 overflow-x: auto;
                 scroll-snap-type: x mandatory;
                 -webkit-overflow-scrolling: touch;
-                gap: 0;
-                padding: 0;
+                gap: 12px;
+                padding: 8px 14%;
                 scrollbar-width: none;
             }
             .reviews-container::-webkit-scrollbar { display: none; }
             .review-card {
-                min-width: 80%;
-                max-width: 80%;
+                min-width: 70%;
+                max-width: 70%;
                 scroll-snap-align: center;
                 flex-shrink: 0;
-                margin: 0 10%;
+                padding: 20px;
             }
         }
         .reviews-dots {
@@ -2353,7 +2353,7 @@
         @media (max-width: 968px) and (min-width: 769px) {
             .mob-comp-grid { grid-template-columns: 1fr; }
             .mob-comp-img img { height: 320px; }
-            .mob-comp-thumb img { max-height: 130px; }
+            .mob-comp-thumb img { max-height: 110px; }
         }
         @media (max-width: 768px) {
             .mob-comp-grid {
@@ -2361,18 +2361,21 @@
                 overflow-x: auto;
                 scroll-snap-type: x mandatory;
                 -webkit-overflow-scrolling: touch;
-                gap: 0;
-                padding: 0;
+                gap: 12px;
+                padding: 8px 0;
                 scrollbar-width: none;
             }
             .mob-comp-grid::-webkit-scrollbar { display: none; }
             .mob-comp {
-                min-width: 80%;
+                min-width: 70%;
+                max-width: 70%;
                 scroll-snap-align: center;
                 flex-shrink: 0;
-                margin: 0 10%;
+                box-shadow: none;
+                border: none;
+                margin: 0 15%;
             }
-            .mob-comp-img img { height: 220px; }
+            .mob-comp-img img { height: 180px; }
         }
         .mob-comp-dots {
             display: none;
@@ -3513,56 +3516,104 @@
                 rc.addEventListener('mouseleave', () => { paused = false; });
             })();
 
-            // 6. Mob-Comp Carousel (mobile only)
+            // 6. Mob-Comp Circular Carousel (mobile only)
             (function() {
                 const grid = document.querySelector('.mob-comp-grid');
                 const dotsBox = document.getElementById('mobCompDots');
                 if (!grid || !dotsBox) return;
-                const items = grid.querySelectorAll('.mob-comp');
-                if (!items.length) return;
+                const realItems = Array.from(grid.querySelectorAll('.mob-comp'));
+                const count = realItems.length;
+                if (count < 2) return;
 
-                items.forEach((_, i) => {
-                    const d = document.createElement('span');
+                function isMobile() { return window.innerWidth <= 768; }
+
+                // Clone last before first, and first after last for infinite loop
+                const lastClone = realItems[count - 1].cloneNode(true);
+                const firstClone = realItems[0].cloneNode(true);
+                lastClone.setAttribute('data-clone', 'true');
+                firstClone.setAttribute('data-clone', 'true');
+                grid.insertBefore(lastClone, grid.firstChild);
+                grid.appendChild(firstClone);
+
+                const allSlides = Array.from(grid.querySelectorAll('.mob-comp'));
+                // allSlides: [cloneLast, real0, real1, real2, cloneFirst]
+
+                // Build dots for real items only
+                realItems.forEach(function(_, i) {
+                    var d = document.createElement('span');
                     if (i === 0) d.classList.add('active');
-                    d.addEventListener('click', () => goComp(i));
+                    d.addEventListener('click', function() { goComp(i); });
                     dotsBox.appendChild(d);
                 });
 
-                let cur = 0;
-                let paused = false;
+                var cur = 0;
+                var paused = false;
+                var jumping = false;
 
-                function goComp(idx) {
-                    cur = idx % items.length;
-                    const itemLeft = items[cur].offsetLeft - grid.offsetLeft;
-                    grid.scrollTo({ left: itemLeft - (grid.clientWidth - items[cur].offsetWidth) / 2, behavior: 'smooth' });
-                    Array.from(dotsBox.children).forEach((d, i) => d.classList.toggle('active', i === cur));
+                function scrollToSlide(slideIdx, smooth) {
+                    var target = allSlides[slideIdx];
+                    var left = target.offsetLeft - grid.offsetLeft - (grid.clientWidth - target.offsetWidth) / 2;
+                    grid.scrollTo({ left: left, behavior: smooth ? 'smooth' : 'auto' });
                 }
 
-                let scrollTimer;
-                grid.addEventListener('scroll', () => {
+                // On load, scroll to first real item (index 1)
+                requestAnimationFrame(function() {
+                    scrollToSlide(1, false);
+                });
+
+                function goComp(realIdx) {
+                    cur = ((realIdx % count) + count) % count;
+                    var slideIdx = cur + 1; // +1 for prepended clone
+                    scrollToSlide(slideIdx, true);
+                    Array.from(dotsBox.children).forEach(function(d, i) { d.classList.toggle('active', i === cur); });
+                }
+
+                // Detect scroll end, update dots, handle clone jumps
+                var scrollTimer;
+                grid.addEventListener('scroll', function() {
                     clearTimeout(scrollTimer);
-                    scrollTimer = setTimeout(() => {
-                        const cl = grid.scrollLeft + grid.clientWidth / 2;
-                        let closest = 0;
-                        items.forEach((c, i) => {
+                    scrollTimer = setTimeout(function() {
+                        if (jumping) return;
+                        var cl = grid.scrollLeft + grid.clientWidth / 2;
+                        var closest = 0;
+                        allSlides.forEach(function(c, i) {
                             if (Math.abs(c.offsetLeft + c.offsetWidth / 2 - cl) <
-                                Math.abs(items[closest].offsetLeft + items[closest].offsetWidth / 2 - cl)) {
+                                Math.abs(allSlides[closest].offsetLeft + allSlides[closest].offsetWidth / 2 - cl)) {
                                 closest = i;
                             }
                         });
-                        cur = closest;
-                        Array.from(dotsBox.children).forEach((d, i) => d.classList.toggle('active', i === cur));
-                    }, 80);
+
+                        // If on clone, jump to real counterpart
+                        if (closest === 0) {
+                            jumping = true;
+                            scrollToSlide(count, false); // jump to real last
+                            cur = count - 1;
+                            setTimeout(function() { jumping = false; }, 50);
+                        } else if (closest === allSlides.length - 1) {
+                            jumping = true;
+                            scrollToSlide(1, false); // jump to real first
+                            cur = 0;
+                            setTimeout(function() { jumping = false; }, 50);
+                        } else {
+                            cur = closest - 1;
+                        }
+                        Array.from(dotsBox.children).forEach(function(d, i) { d.classList.toggle('active', i === cur); });
+                    }, 150);
                 });
 
-                setInterval(() => {
-                    if (!paused && window.innerWidth <= 768) goComp(cur + 1);
+                // Auto-advance
+                setInterval(function() {
+                    if (!paused && isMobile()) {
+                        var nextSlide = cur + 2; // +1 real + 1 clone offset
+                        scrollToSlide(nextSlide, true);
+                        // After animation, the scroll handler will detect clone and jump
+                    }
                 }, 5000);
 
-                grid.addEventListener('touchstart', () => { paused = true; }, { passive: true });
-                grid.addEventListener('touchend', () => { setTimeout(() => { paused = false; }, 3000); }, { passive: true });
-                grid.addEventListener('mouseenter', () => { paused = true; });
-                grid.addEventListener('mouseleave', () => { paused = false; });
+                grid.addEventListener('touchstart', function() { paused = true; }, { passive: true });
+                grid.addEventListener('touchend', function() { setTimeout(function() { paused = false; }, 3000); }, { passive: true });
+                grid.addEventListener('mouseenter', function() { paused = true; });
+                grid.addEventListener('mouseleave', function() { paused = false; });
             })();
 
             // 7. Smooth Scrolling for Anchor Links
