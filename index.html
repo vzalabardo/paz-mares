@@ -220,7 +220,19 @@
         }
 
         .hero h1 span {
-            color: #0bc0df;
+            color: #3dd5f3;
+            text-shadow: 0 0 20px rgba(61,213,243,0.6);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+        }
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
         }
 
         .hero p {
@@ -2706,11 +2718,11 @@
 
         <div class="container">
             <div class="hero-content reveal">
-                <h1>Calidad y Confort <br><span>Para tu Descanso</span></h1>
+                <h1>Calidad y Confort<br><span>Para tu Descanso</span></h1>
                 <p>Especialistas en descanso, mobiliario juvenil y juguetes en el corazón de Sarrià-Sant Gervasi. Cuidando a las familias de Barcelona desde 1969.</p>
-                <div style="display: flex; gap: 15px; flex-wrap: wrap;">
-                    <a href="#contacto" class="cta-btn">Visítanos</a>
-                    <a href="#descanso" style="padding: 12px 24px; border: 1px solid rgba(255,255,255,0.6); border-radius: 50px; color: white; font-weight: 600;">Ver Productos</a>
+                <div style="display: flex; gap: 12px; flex-wrap: nowrap;">
+                    <a href="#contacto" class="cta-btn" style="white-space: nowrap;">Visítanos</a>
+                    <a href="#descanso" style="padding: 12px 24px; border: 1px solid rgba(255,255,255,0.6); border-radius: 50px; color: white; font-weight: 600; white-space: nowrap;">Ver Productos</a>
                 </div>
             </div>
         </div>
