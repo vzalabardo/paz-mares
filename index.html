@@ -2548,6 +2548,7 @@
         .comp-modal-close {
             position: absolute;
             top: 16px;
+            padding-bottom: 7px;
             right: 16px;
             font-size: 32px;
             font-weight: 300;
@@ -2571,67 +2572,78 @@
             width: 100%;
             height: 500px;
             overflow: hidden;
-            background: #f8f9fa;
+            background: #f1f5f9;
+            border-radius: 16px 16px 0 0;
         }
         .comp-modal-img img {
             width: 100%;
             height: 100%;
-            object-fit: contain;
+            object-fit: cover;
         }
         .comp-modal-body {
-            padding: 32px;
-        }
-        .comp-modal-body h3 {
-            font-size: 1.6rem;
-            color: var(--primary);
-            margin-bottom: 8px;
+            padding: 24px 32px 32px;
+            background: white;
+            border-radius: 0 0 16px 16px;
         }
         .comp-modal-num {
-            display: inline-block;
-            background: var(--accent);
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(26,54,93,0.9);
             color: white;
-            font-size: 0.85rem;
+            font-size: 1.2rem;
             font-weight: 700;
-            padding: 4px 12px;
-            border-radius: 20px;
-            margin-bottom: 16px;
+            padding: 8px 16px;
+            border-radius: 8px;
+            z-index: 5;
         }
         .comp-modal-thumbs {
             display: flex;
-            gap: 12px;
-            margin-top: 20px;
+            gap: 16px;
+            margin-top: 0;
         }
         .comp-modal-thumb {
             flex: 1;
-            height: 120px;
+            height: 140px;
             border-radius: 12px;
             overflow: hidden;
             cursor: pointer;
-            border: 2px solid transparent;
+            border: 3px solid transparent;
             transition: all 0.3s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
         .comp-modal-thumb:hover {
             border-color: var(--accent);
-            transform: scale(1.05);
+            transform: translateY(-4px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
         .comp-modal-thumb img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
+        .comp-modal-body h3 {
+            display: none;
+        }
         @media (max-width: 768px) {
             .comp-modal-content {
                 width: 95%;
-                margin: 5% auto;
+                margin: 3% auto;
             }
             .comp-modal-img {
-                height: 300px;
+                height: 400px;
             }
             .comp-modal-body {
                 padding: 20px;
             }
+            .comp-modal-num {
+                font-size: 1rem;
+                padding: 6px 12px;
+                top: 16px;
+                left: 16px;
+            }
             .comp-modal-thumbs {
-                flex-direction: column;
+                gap: 12px;
             }
             .comp-modal-thumb {
                 height: 100px;
@@ -4074,7 +4086,6 @@
             <div class="comp-modal-body">
                 <span class="comp-modal-num" id="compModalNum">01</span>
                 <h3>Composición Juvenil ANTAIX</h3>
-                <p>Solución completa para dormitorio juvenil con acabados personalizables.</p>
                 <div class="comp-modal-thumbs" id="compModalThumbs">
                     <!-- Thumbnails will be inserted here by JS -->
                 </div>
