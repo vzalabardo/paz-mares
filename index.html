@@ -446,16 +446,16 @@
                 scroll-snap-type: x mandatory;
                 -webkit-overflow-scrolling: touch;
                 gap: 12px;
-                padding: 8px 14%;
+                padding: 8px 5%;
                 scrollbar-width: none;
             }
             .reviews-container::-webkit-scrollbar { display: none; }
             .review-card {
-                min-width: 70%;
-                max-width: 70%;
+                min-width: 85%;
+                max-width: 85%;
                 scroll-snap-align: center;
                 flex-shrink: 0;
-                padding: 20px;
+                padding: 24px 20px;
             }
         }
         .reviews-dots {
@@ -643,11 +643,9 @@
                 display: none; /* Simple hidden for simplicity in single file */
             }
 
-            /* Navbar CTA smaller on mobile */
+            /* Hide navbar CTA on mobile */
             nav .cta-btn {
-                font-size: 0.72rem;
-                padding: 7px 14px;
-                white-space: nowrap;
+                display: none;
             }
 
             /* Badge always one line on mobile */
@@ -674,7 +672,113 @@
                 display: none;
             }
 
-            /* Mobile Menu Toggle would go here, kept simple for Single Page request */
+            /* Mobile Menu Button */
+            .mobile-menu-btn {
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+                background: none;
+                border: none;
+                cursor: pointer;
+                padding: 8px;
+                z-index: 1001;
+            }
+            .mobile-menu-btn span {
+                width: 24px;
+                height: 2px;
+                background: var(--primary);
+                transition: all 0.3s;
+                border-radius: 2px;
+            }
+            .mobile-menu-btn.active span:nth-child(1) {
+                transform: rotate(45deg) translate(7px, 7px);
+            }
+            .mobile-menu-btn.active span:nth-child(2) {
+                opacity: 0;
+            }
+            .mobile-menu-btn.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(7px, -7px);
+            }
+
+            /* Mobile Menu Overlay */
+            .mobile-menu {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                background: var(--bg-white);
+                z-index: 1000;
+                padding: 100px 30px 30px;
+                overflow-y: auto;
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+            }
+            .mobile-menu-close {
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                font-size: 36px;
+                font-weight: 300;
+                color: var(--primary);
+                background: none;
+                border: none;
+                cursor: pointer;
+                width: 44px;
+                height: 44px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50%;
+                transition: all 0.2s;
+            }
+            .mobile-menu-close:hover {
+                background: var(--bg-light);
+                transform: rotate(90deg);
+            }
+            .mobile-menu.active {
+                transform: translateX(0);
+            }
+            .mobile-menu-links {
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+            }
+            .mobile-menu-links a {
+                padding: 16px 20px;
+                font-size: 1.1rem;
+                font-weight: 600;
+                color: var(--primary);
+                border-radius: 12px;
+                transition: all 0.2s;
+                text-decoration: none;
+            }
+            .mobile-menu-links a:hover,
+            .mobile-menu-links a:active {
+                background: var(--bg-light);
+                color: var(--accent);
+            }
+            .mobile-menu .cta-btn {
+                color: white !important;
+            }
+
+            @media (min-width: 769px) {
+                .mobile-menu-btn {
+                    display: none !important;
+                }
+                .mobile-menu {
+                    display: none !important;
+                }
+            }
+            @media (max-width: 768px) {
+                .mobile-menu-btn {
+                    display: flex;
+                }
+                .mobile-menu {
+                    display: block;
+                }
+            }
         }
         
         /* Extra small screens (320px) */
@@ -2399,6 +2503,124 @@
             .mob-comp-dots { display: flex; }
         }
 
+        /* ========================
+           COMPOSITION MODAL
+        ======================== */
+        .comp-modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(4px);
+        }
+        .comp-modal-content {
+            position: relative;
+            background: var(--bg-white);
+            margin: 3% auto;
+            width: 90%;
+            max-width: 900px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.4);
+            animation: modalSlideIn 0.3s ease;
+        }
+        .comp-modal-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            font-size: 32px;
+            font-weight: 300;
+            color: white;
+            background: rgba(0,0,0,0.5);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.2s;
+        }
+        .comp-modal-close:hover {
+            background: rgba(0,0,0,0.8);
+            transform: scale(1.1);
+        }
+        .comp-modal-img {
+            width: 100%;
+            height: 500px;
+            overflow: hidden;
+            background: #f8f9fa;
+        }
+        .comp-modal-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        .comp-modal-body {
+            padding: 32px;
+        }
+        .comp-modal-body h3 {
+            font-size: 1.6rem;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+        .comp-modal-num {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            font-size: 0.85rem;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin-bottom: 16px;
+        }
+        .comp-modal-thumbs {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+        }
+        .comp-modal-thumb {
+            flex: 1;
+            height: 120px;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+        .comp-modal-thumb:hover {
+            border-color: var(--accent);
+            transform: scale(1.05);
+        }
+        .comp-modal-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        @media (max-width: 768px) {
+            .comp-modal-content {
+                width: 95%;
+                margin: 5% auto;
+            }
+            .comp-modal-img {
+                height: 300px;
+            }
+            .comp-modal-body {
+                padding: 20px;
+            }
+            .comp-modal-thumbs {
+                flex-direction: column;
+            }
+            .comp-modal-thumb {
+                height: 100px;
+            }
+        }
+
         /* Responsive catalog */
         @media (max-width: 968px) {
             .catalog-grid {
@@ -2425,6 +2647,11 @@
                 <a href="#inicio" class="logo">
                     <img src="public/logo/logo.png" alt="Paz Marés" style="height:16px; display:block;">
                 </a>
+                <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
                 <div class="nav-links">
                     <a href="#inicio">Inicio</a>
                     <div class="nav-item">
@@ -2453,6 +2680,22 @@
             </nav>
         </div>
     </header>
+
+    <!-- MOBILE MENU -->
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="mobile-menu-close" id="mobileMenuClose">&times;</button>
+        <div class="mobile-menu-links">
+            <a href="#inicio" class="mobile-menu-link">Inicio</a>
+            <a href="#quienes-somos" class="mobile-menu-link">Quiénes Somos</a>
+            <a href="#descanso" class="mobile-menu-link">Descanso</a>
+            <a href="#mobiliario" class="mobile-menu-link">Mobiliario Juvenil</a>
+            <a href="#juguetes" class="mobile-menu-link">Juguetes y Peluches</a>
+            <a href="#testimonios" class="mobile-menu-link">Opiniones</a>
+            <a href="#contacto" class="mobile-menu-link">Contacto</a>
+            
+            <a href="tel:609428878" class="cta-btn" style="margin-top: 20px; text-align: center;">Llamar Ahora</a>
+        </div>
+    </div>
 
     <!-- HERO SECTION -->
     <section id="inicio" class="hero">
@@ -3516,104 +3759,56 @@
                 rc.addEventListener('mouseleave', () => { paused = false; });
             })();
 
-            // 6. Mob-Comp Circular Carousel (mobile only)
+            // 6. Mob-Comp Carousel (mobile only)
             (function() {
                 const grid = document.querySelector('.mob-comp-grid');
                 const dotsBox = document.getElementById('mobCompDots');
                 if (!grid || !dotsBox) return;
-                const realItems = Array.from(grid.querySelectorAll('.mob-comp'));
-                const count = realItems.length;
-                if (count < 2) return;
+                const items = grid.querySelectorAll('.mob-comp');
+                if (!items.length) return;
 
-                function isMobile() { return window.innerWidth <= 768; }
-
-                // Clone last before first, and first after last for infinite loop
-                const lastClone = realItems[count - 1].cloneNode(true);
-                const firstClone = realItems[0].cloneNode(true);
-                lastClone.setAttribute('data-clone', 'true');
-                firstClone.setAttribute('data-clone', 'true');
-                grid.insertBefore(lastClone, grid.firstChild);
-                grid.appendChild(firstClone);
-
-                const allSlides = Array.from(grid.querySelectorAll('.mob-comp'));
-                // allSlides: [cloneLast, real0, real1, real2, cloneFirst]
-
-                // Build dots for real items only
-                realItems.forEach(function(_, i) {
-                    var d = document.createElement('span');
+                items.forEach((_, i) => {
+                    const d = document.createElement('span');
                     if (i === 0) d.classList.add('active');
-                    d.addEventListener('click', function() { goComp(i); });
+                    d.addEventListener('click', () => goComp(i));
                     dotsBox.appendChild(d);
                 });
 
-                var cur = 0;
-                var paused = false;
-                var jumping = false;
+                let cur = 0;
+                let paused = false;
 
-                function scrollToSlide(slideIdx, smooth) {
-                    var target = allSlides[slideIdx];
-                    var left = target.offsetLeft - grid.offsetLeft - (grid.clientWidth - target.offsetWidth) / 2;
-                    grid.scrollTo({ left: left, behavior: smooth ? 'smooth' : 'auto' });
+                function goComp(idx) {
+                    cur = idx % items.length;
+                    const itemLeft = items[cur].offsetLeft - grid.offsetLeft;
+                    grid.scrollTo({ left: itemLeft - (grid.clientWidth - items[cur].offsetWidth) / 2, behavior: 'smooth' });
+                    Array.from(dotsBox.children).forEach((d, i) => d.classList.toggle('active', i === cur));
                 }
 
-                // On load, scroll to first real item (index 1)
-                requestAnimationFrame(function() {
-                    scrollToSlide(1, false);
-                });
-
-                function goComp(realIdx) {
-                    cur = ((realIdx % count) + count) % count;
-                    var slideIdx = cur + 1; // +1 for prepended clone
-                    scrollToSlide(slideIdx, true);
-                    Array.from(dotsBox.children).forEach(function(d, i) { d.classList.toggle('active', i === cur); });
-                }
-
-                // Detect scroll end, update dots, handle clone jumps
-                var scrollTimer;
-                grid.addEventListener('scroll', function() {
+                let scrollTimer;
+                grid.addEventListener('scroll', () => {
                     clearTimeout(scrollTimer);
-                    scrollTimer = setTimeout(function() {
-                        if (jumping) return;
-                        var cl = grid.scrollLeft + grid.clientWidth / 2;
-                        var closest = 0;
-                        allSlides.forEach(function(c, i) {
+                    scrollTimer = setTimeout(() => {
+                        const cl = grid.scrollLeft + grid.clientWidth / 2;
+                        let closest = 0;
+                        items.forEach((c, i) => {
                             if (Math.abs(c.offsetLeft + c.offsetWidth / 2 - cl) <
-                                Math.abs(allSlides[closest].offsetLeft + allSlides[closest].offsetWidth / 2 - cl)) {
+                                Math.abs(items[closest].offsetLeft + items[closest].offsetWidth / 2 - cl)) {
                                 closest = i;
                             }
                         });
-
-                        // If on clone, jump to real counterpart
-                        if (closest === 0) {
-                            jumping = true;
-                            scrollToSlide(count, false); // jump to real last
-                            cur = count - 1;
-                            setTimeout(function() { jumping = false; }, 50);
-                        } else if (closest === allSlides.length - 1) {
-                            jumping = true;
-                            scrollToSlide(1, false); // jump to real first
-                            cur = 0;
-                            setTimeout(function() { jumping = false; }, 50);
-                        } else {
-                            cur = closest - 1;
-                        }
-                        Array.from(dotsBox.children).forEach(function(d, i) { d.classList.toggle('active', i === cur); });
-                    }, 150);
+                        cur = closest;
+                        Array.from(dotsBox.children).forEach((d, i) => d.classList.toggle('active', i === cur));
+                    }, 80);
                 });
 
-                // Auto-advance
-                setInterval(function() {
-                    if (!paused && isMobile()) {
-                        var nextSlide = cur + 2; // +1 real + 1 clone offset
-                        scrollToSlide(nextSlide, true);
-                        // After animation, the scroll handler will detect clone and jump
-                    }
+                setInterval(() => {
+                    if (!paused && window.innerWidth <= 768 && cur < items.length - 1) goComp(cur + 1);
                 }, 5000);
 
-                grid.addEventListener('touchstart', function() { paused = true; }, { passive: true });
-                grid.addEventListener('touchend', function() { setTimeout(function() { paused = false; }, 3000); }, { passive: true });
-                grid.addEventListener('mouseenter', function() { paused = true; });
-                grid.addEventListener('mouseleave', function() { paused = false; });
+                grid.addEventListener('touchstart', () => { paused = true; }, { passive: true });
+                grid.addEventListener('touchend', () => { setTimeout(() => { paused = false; }, 3000); }, { passive: true });
+                grid.addEventListener('mouseenter', () => { paused = true; });
+                grid.addEventListener('mouseleave', () => { paused = false; });
             })();
 
             // 7. Smooth Scrolling for Anchor Links
@@ -3648,6 +3843,90 @@
                 document.addEventListener('click', function(e) {
                     if (!floatingMenuContainer.contains(e.target)) {
                         floatingMenuContainer.classList.remove('active');
+                    }
+                });
+            }
+
+            // 9. Mobile Menu Toggle
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const mobileMenuClose = document.getElementById('mobileMenuClose');
+            const mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');
+
+            function closeMobileMenu() {
+                mobileMenuBtn.classList.remove('active');
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+
+            if (mobileMenuBtn && mobileMenu) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    mobileMenuBtn.classList.toggle('active');
+                    mobileMenu.classList.toggle('active');
+                    document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : 'auto';
+                });
+
+                // Close button
+                if (mobileMenuClose) {
+                    mobileMenuClose.addEventListener('click', closeMobileMenu);
+                }
+
+                // Close menu when clicking on a link
+                mobileMenuLinks.forEach(function(link) {
+                    link.addEventListener('click', closeMobileMenu);
+                });
+            }
+
+            // 10. Composition Modal
+            const compModal = document.getElementById('compModal');
+            const compModalClose = document.getElementById('compModalClose');
+            const compModalMainImg = document.getElementById('compModalMainImg');
+            const compModalNum = document.getElementById('compModalNum');
+            const compModalThumbs = document.getElementById('compModalThumbs');
+
+            if (compModal && compModalClose) {
+                // Open modal when clicking on composition cards
+                document.querySelectorAll('.mob-comp').forEach(function(card) {
+                    card.style.cursor = 'pointer';
+                    card.addEventListener('click', function() {
+                        const num = this.querySelector('.mob-comp-num').textContent;
+                        const mainImg = this.querySelector('.mob-comp-img img').src;
+                        const thumbs = this.querySelectorAll('.mob-comp-thumb img');
+                        
+                        compModalNum.textContent = num;
+                        compModalMainImg.src = mainImg;
+                        
+                        // Clear and populate thumbnails
+                        compModalThumbs.innerHTML = '';
+                        thumbs.forEach(function(thumb) {
+                            const thumbDiv = document.createElement('div');
+                            thumbDiv.className = 'comp-modal-thumb';
+                            const thumbImg = document.createElement('img');
+                            thumbImg.src = thumb.src;
+                            thumbImg.alt = thumb.alt;
+                            thumbDiv.appendChild(thumbImg);
+                            thumbDiv.addEventListener('click', function() {
+                                compModalMainImg.src = thumb.src;
+                            });
+                            compModalThumbs.appendChild(thumbDiv);
+                        });
+                        
+                        compModal.style.display = 'block';
+                        document.body.style.overflow = 'hidden';
+                    });
+                });
+
+                // Close modal
+                compModalClose.addEventListener('click', function() {
+                    compModal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                });
+
+                // Close when clicking outside
+                compModal.addEventListener('click', function(e) {
+                    if (e.target === compModal) {
+                        compModal.style.display = 'none';
+                        document.body.style.overflow = 'auto';
                     }
                 });
             }
@@ -3767,6 +4046,24 @@
         });
     });
     </script>
+
+    <!-- COMPOSITION MODAL -->
+    <div id="compModal" class="comp-modal">
+        <div class="comp-modal-content">
+            <span class="comp-modal-close" id="compModalClose">&times;</span>
+            <div class="comp-modal-img" id="compModalImg">
+                <img src="" alt="Composición" id="compModalMainImg">
+            </div>
+            <div class="comp-modal-body">
+                <span class="comp-modal-num" id="compModalNum">01</span>
+                <h3>Composición Juvenil ANTAIX</h3>
+                <p>Solución completa para dormitorio juvenil con acabados personalizables.</p>
+                <div class="comp-modal-thumbs" id="compModalThumbs">
+                    <!-- Thumbnails will be inserted here by JS -->
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- FLOATING CONTACT MENU -->
     <div class="floating-menu-container">
